@@ -61,7 +61,7 @@
     <Compile Include="DetectedLanguage.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LanguageComparer.cs" />
-    <Compile Include="Services\Translation\Enums\TranslateEnginesTypes.cs" />
+    <Compile Include="Services\Translation\Enums\EngineTypes.cs" />
     <Compile Include="Services\Translation\Enums\ResultTypes.cs" />
     <Compile Include="Services\Translation\Interfaces\ITranslateEngine.cs" />
     <Compile Include="Services\Translation\Interfaces\ITranslateResult.cs" />

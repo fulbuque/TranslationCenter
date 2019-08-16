@@ -22,14 +22,14 @@ namespace WpfTranslator.Services.Translation
             return _instance;
         }
 
-        public async Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params TranslateEnginesTypes[] translateEnginesTypes)
+        public async Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params EngineTypes[] translateEnginesTypes)
         {
             List<ITranslateResult> translateResults = new List<ITranslateResult>();
 
             if (!string.IsNullOrEmpty(text))
             {
                 if (!translateEnginesTypes?.Any() ?? false)
-                    translateEnginesTypes = new TranslateEnginesTypes[] { TranslateEnginesTypes.Bing };
+                    translateEnginesTypes = new EngineTypes[] { EngineTypes.Bing };
 
                 foreach (var translateEngineType in translateEnginesTypes)
                 {

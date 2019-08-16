@@ -5,20 +5,27 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using WpfTranslator.Services.Translation.Enums;
 using WpfTranslator.Services.Translation.Interfaces;
 
 namespace WpfTranslator.Services.Translation
 {
     public partial class TranslationService
     {
-        private class BingTranslageEngine : TranslateEngine
+        private class BingTranslateEngine : TranslateEngine
         {
-            public BingTranslageEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text) { }
+            public override string Name => this.GetType().Name;
+
+            public override EngineTypes EngineType => EngineTypes.Bing;
+
+            public override ResultTypes ResultType => ResultTypes.PlainText;
+
+            public BingTranslateEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text) { }
 
             internal override async Task<ITranslateResult> GetTranslate()
             {
                 var translatedText = await GetTranslateInternal();
-                return new TranslateResult(Enums.ResultTypes.PlainText, translatedText);
+                return new TranslateResult(this, translatedText);
             }
 
             private class Translation

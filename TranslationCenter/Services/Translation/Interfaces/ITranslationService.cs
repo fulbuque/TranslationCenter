@@ -6,6 +6,6 @@ namespace WpfTranslator.Services.Translation.Interfaces
 {
     public interface ITranslationService
     {
-        Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params TranslateEnginesTypes[] translateEnginesTypes);
+        Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params EngineTypes[] translateEnginesTypes);
     }
 }

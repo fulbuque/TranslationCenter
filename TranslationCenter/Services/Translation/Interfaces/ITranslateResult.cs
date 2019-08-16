@@ -4,7 +4,7 @@ namespace WpfTranslator.Services.Translation.Interfaces
 {
     public interface ITranslateResult
     {
-        ResultTypes Type { get; }
+        ITranslateEngine Source { get; }
 
         string Result { get; }
     }

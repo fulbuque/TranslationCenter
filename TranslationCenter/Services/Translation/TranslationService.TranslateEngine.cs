@@ -20,17 +20,23 @@ namespace WpfTranslator.Services.Translation
             public string IsoTo { get; }
             public string Text { get; }
 
+            public abstract string Name { get; }
+
+            public abstract EngineTypes EngineType { get; }
+
+            public abstract ResultTypes ResultType { get; }
+
             internal virtual async Task<ITranslateResult> GetTranslate()
             {
                 return null;
             }
 
-            internal static TranslateEngine GetEngine(TranslateEnginesTypes translateEngineType, string isoFrom, string isoTo, string text) 
+            internal static TranslateEngine GetEngine(EngineTypes translateEngineType, string isoFrom, string isoTo, string text) 
             {
                 Type engineType;
 
-                if (translateEngineType == TranslateEnginesTypes.Bing)
-                    engineType = typeof(BingTranslageEngine);
+                if (translateEngineType == EngineTypes.Bing)
+                    engineType = typeof(BingTranslateEngine);
                 else
                     throw new ArgumentOutOfRangeException("Invalid Translate Engine");
 

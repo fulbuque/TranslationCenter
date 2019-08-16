@@ -1,0 +1,15 @@
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\WpfTranslator.exe.config
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\WpfTranslator.exe
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\WpfTranslator.pdb
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csprojAssemblyReference.cache
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslateWindow.g.cs
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\App.g.cs
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator_MarkupCompile.cache
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator_MarkupCompile.lref
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslateWindow.baml
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator.g.resources
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator.Properties.Resources.resources
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csproj.GenerateResource.cache
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csproj.CoreCompileInputs.cache
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator.exe
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\WpfTranslator.pdb

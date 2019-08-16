@@ -7,13 +7,12 @@ namespace WpfTranslator.Services.Translation
     {
         private class TranslateResult : ITranslateResult
         {
-            public TranslateResult(ResultTypes type, string result)
+            public TranslateResult(ITranslateEngine source, string result)
             {
-                Type = type;
+                Source = source;
                 Result = result;
             }
-
-            public ResultTypes Type { get; }
+            public ITranslateEngine Source { get; }
 
             public string Result { get; }
         }
