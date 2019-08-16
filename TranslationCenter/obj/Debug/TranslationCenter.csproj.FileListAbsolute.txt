@@ -14,3 +14,4 @@ C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\
 C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.pdb
 C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\Resources\Translate_Icon.png
 C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter_Content.g.cs
+C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csprojAssemblyReference.cache

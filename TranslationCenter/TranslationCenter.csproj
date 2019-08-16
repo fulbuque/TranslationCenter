@@ -64,6 +64,7 @@
     <Compile Include="LanguageComparer.cs" />
     <Compile Include="Services\Translation\Enums\EngineTypes.cs" />
     <Compile Include="Services\Translation\Enums\ResultTypes.cs" />
+    <Compile Include="Services\Translation\Extensions\XElementExtensions.cs" />
     <Compile Include="Services\Translation\Interfaces\ITranslateEngine.cs" />
     <Compile Include="Services\Translation\Interfaces\ITranslateResult.cs" />
     <Compile Include="Services\Translation\Interfaces\ITranslationService.cs" />
@@ -71,6 +72,9 @@
       <DependentUpon>TranslationService.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\Translation\TranslationService.cs" />
+    <Compile Include="Services\Translation\TranslationService.LeoTranslateEngine.cs">
+      <DependentUpon>TranslationService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\Translation\TranslationService.TranslateEngine.cs">
       <DependentUpon>TranslationService.cs</DependentUpon>
     </Compile>

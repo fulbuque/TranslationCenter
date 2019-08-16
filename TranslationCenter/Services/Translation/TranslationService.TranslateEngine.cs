@@ -37,6 +37,8 @@ namespace TranslationCenter.Services.Translation
 
                 if (translateEngineType == EngineTypes.Bing)
                     engineType = typeof(BingTranslateEngine);
+                else if (translateEngineType == EngineTypes.Leo)
+                    engineType = typeof(LeoTranslateEngine);
                 else
                     throw new ArgumentOutOfRangeException("Invalid Translate Engine");
 

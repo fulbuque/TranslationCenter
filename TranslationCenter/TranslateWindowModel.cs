@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using TranslationCenter.Services.Translation;
+using TranslationCenter.Services.Translation.Enums;
 
 namespace TranslationCenter
 {
@@ -162,13 +163,6 @@ namespace TranslationCenter
             NotifyPropertyChanged(nameof(SelectedLanguages));
         }
 
-        //private class TranslateResult
-        //{
-        //    public int StatusCode { get; set; }
-        //    public DetectedLanguage DetectedLanguage { get; set; }
-        //    public Translation[] Translations { get; set; }
-        //}
-
         internal async void Translate()
         {
             if (!IsTranslateEnabled) return;
@@ -179,7 +173,13 @@ namespace TranslationCenter
             {
                 if (!_translationsDicionary.TryGetValue(iso, out var translatedText) || string.IsNullOrWhiteSpace(translatedText?.Text))
                 {
-                   var translateResults = await TranslationService.Instance.Translate(TranslateFrom.Iso, iso, Text);
+                    var engines = new EngineTypes[] 
+                    {
+                         //EngineTypes.Bing,
+                         EngineTypes.Leo
+                    };
+
+                    var translateResults = await TranslationService.Instance.Translate(TranslateFrom.Iso, iso, Text, engines);
                     //var translations = await TranslateInternal(TranslateFrom.Iso, Text, iso);
                     if (translateResults?.Any() ?? false)
                         _translationsDicionary[iso] = new Translation() { Text = translateResults.FirstOrDefault().Result };
@@ -191,54 +191,6 @@ namespace TranslationCenter
 
             SetTranslatedText(_currentIso);
         }
-
-        //private static async Task<Translation[]> TranslateInternal(string isoFrom, string text, string isoTo)
-        //{
-
-        //    /*
-        //    https://dict.leo.org/polnisch-deutsch/
-        //    https://dict.leo.org/portugiesisch-deutsch/
-        //    https://dict.leo.org/russisch-deutsch/
-        //    https://dict.leo.org/chinesisch-deutsch/
-        //    https://dict.leo.org/italienisch-deutsch/
-        //    https://dict.leo.org/spanisch-deutsch/
-        //    https://dict.leo.org/französisch-deutsch/
-        //    https://dict.leo.org/englisch-deutsch/
-        //    */
-        //    Translation[] translateResult = new Translation[] { };
-
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri("https://www.bing.com/ttranslatev3?isVertical=1&IG=504D0D4AC9C1430B92775346964CDE30&IID=translator.5026.4");
-        //        client.DefaultRequestHeaders.Accept.Clear();
-        //        client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-        //        var dict = new Dictionary<string, string>();
-        //        dict.Add("fromLang", isoFrom);
-        //        dict.Add("text", text);
-        //        dict.Add("to", isoTo);
-
-        //        var req = new HttpRequestMessage(HttpMethod.Post, client.BaseAddress) { Content = new FormUrlEncodedContent(dict) };
-
-        //        var response = await client.SendAsync(req);
-
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var responseText = await response.Content.ReadAsStringAsync();
-        //            try
-        //            {
-        //                var translateResults = new JavaScriptSerializer().Deserialize<TranslateResult[]>(responseText);
-        //                translateResult = translateResults?.SelectMany(i => i.Translations).ToArray();
-        //            }
-        //            catch (Exception)
-        //            {
-        //                //this.TranslationsResults = null;
-        //            }
-        //        }
-        //    }
-        //    return translateResult;
-        //}
-
 
         internal void SetTranslatedText(string iso)
         {
