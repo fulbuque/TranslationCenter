@@ -1,4 +1,4 @@
-﻿namespace WpfTranslator
+﻿namespace TranslationCenter
 {
     public class DetectedLanguage
     {

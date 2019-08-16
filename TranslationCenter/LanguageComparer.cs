@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WpfTranslator
+namespace TranslationCenter
 {
     public partial class TranslateWindowModel
     {

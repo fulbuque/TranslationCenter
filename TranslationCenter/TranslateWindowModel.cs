@@ -14,9 +14,9 @@ using System.Web.Script.Serialization;
 using System.Windows.Controls;
 using System.Windows.Threading;
 using System.Xml.Linq;
-using WpfTranslator.Services.Translation;
+using TranslationCenter.Services.Translation;
 
-namespace WpfTranslator
+namespace TranslationCenter
 {
     public partial class TranslateWindowModel : INotifyPropertyChanged
     {

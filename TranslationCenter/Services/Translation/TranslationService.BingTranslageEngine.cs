@@ -5,10 +5,10 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using WpfTranslator.Services.Translation.Enums;
-using WpfTranslator.Services.Translation.Interfaces;
+using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Interfaces;
 
-namespace WpfTranslator.Services.Translation
+namespace TranslationCenter.Services.Translation
 {
     public partial class TranslationService
     {

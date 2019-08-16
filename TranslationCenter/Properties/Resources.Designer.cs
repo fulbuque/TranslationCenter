@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfTranslator.Properties {
+namespace TranslationCenter.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace WpfTranslator.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfTranslator.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TranslationCenter.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,16 +61,12 @@ namespace WpfTranslator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &amp;lt;?xml version=&amp;apos;1.0&amp;apos; encoding=&amp;apos;UTF-8&amp;apos;?&amp;gt;
-        ///&amp;lt;countries&amp;gt;
-        ///  &amp;lt;country code=&amp;apos;af&amp;apos; handle=&amp;apos;afghanistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;4&amp;apos;&amp;gt;Afghanistan&amp;lt;/country&amp;gt;
-        ///  &amp;lt;country code=&amp;apos;al&amp;apos; handle=&amp;apos;albania&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;8&amp;apos;&amp;gt;Albania&amp;lt;/country&amp;gt;
-        ///  &amp;lt;country code=&amp;apos;dz&amp;apos; handle=&amp;apos;algeria&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;12&amp;apos;&amp;gt;Algeria&amp;lt;/country&amp;gt;
-        ///  &amp;lt;countr [rest of string was truncated]&quot;;.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string CountryListXml {
+        internal static System.Drawing.Bitmap Translate_Icon {
             get {
-                return ResourceManager.GetString("CountryListXml", resourceCulture);
+                object obj = ResourceManager.GetObject("Translate_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

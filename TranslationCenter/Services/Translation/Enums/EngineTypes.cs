@@ -1,4 +1,4 @@
-﻿namespace WpfTranslator.Services.Translation.Enums
+﻿namespace TranslationCenter.Services.Translation.Enums
 {
     public enum EngineTypes
     {

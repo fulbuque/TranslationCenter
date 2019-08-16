@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using static WpfTranslator.TranslateWindowModel;
+using static TranslationCenter.TranslateWindowModel;
 
-namespace WpfTranslator
+namespace TranslationCenter
 {
     public class Country
     {
