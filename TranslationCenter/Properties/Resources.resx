@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CountryListXml" xml:space="preserve">
+    <value>&amp;lt;?xml version=&amp;apos;1.0&amp;apos; encoding=&amp;apos;UTF-8&amp;apos;?&amp;gt;
+&amp;lt;countries&amp;gt;
+  &amp;lt;country code=&amp;apos;af&amp;apos; handle=&amp;apos;afghanistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;4&amp;apos;&amp;gt;Afghanistan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;al&amp;apos; handle=&amp;apos;albania&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;8&amp;apos;&amp;gt;Albania&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;dz&amp;apos; handle=&amp;apos;algeria&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;12&amp;apos;&amp;gt;Algeria&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;as&amp;apos; handle=&amp;apos;american-samoa&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;16&amp;apos;&amp;gt;American Samoa&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ad&amp;apos; handle=&amp;apos;andorra&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;20&amp;apos;&amp;gt;Andorra&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ao&amp;apos; handle=&amp;apos;angola&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;24&amp;apos;&amp;gt;Angola&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ai&amp;apos; handle=&amp;apos;anguilla&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;660&amp;apos;&amp;gt;Anguilla&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;aq&amp;apos; handle=&amp;apos;antarctica&amp;apos; continent=&amp;apos;antarctica&amp;apos; iso=&amp;apos;10&amp;apos;&amp;gt;Antarctica&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ag&amp;apos; handle=&amp;apos;antigua-and-barbuda&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;28&amp;apos;&amp;gt;Antigua And Barbuda&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ar&amp;apos; handle=&amp;apos;argentina&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;32&amp;apos;&amp;gt;Argentina&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;am&amp;apos; handle=&amp;apos;armenia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;51&amp;apos;&amp;gt;Armenia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;aw&amp;apos; handle=&amp;apos;aruba&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;533&amp;apos;&amp;gt;Aruba&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;au&amp;apos; handle=&amp;apos;australia&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;36&amp;apos;&amp;gt;Australia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;at&amp;apos; handle=&amp;apos;austria&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;40&amp;apos;&amp;gt;Austria&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;az&amp;apos; handle=&amp;apos;azerbaijan&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;31&amp;apos;&amp;gt;Azerbaijan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bs&amp;apos; handle=&amp;apos;bahamas&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;44&amp;apos;&amp;gt;Bahamas&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bh&amp;apos; handle=&amp;apos;bahrain&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;48&amp;apos;&amp;gt;Bahrain&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bd&amp;apos; handle=&amp;apos;bangladesh&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;50&amp;apos;&amp;gt;Bangladesh&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bb&amp;apos; handle=&amp;apos;barbados&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;52&amp;apos;&amp;gt;Barbados&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;by&amp;apos; handle=&amp;apos;belarus&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;112&amp;apos;&amp;gt;Belarus&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;be&amp;apos; handle=&amp;apos;belgium&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;56&amp;apos;&amp;gt;Belgium&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bz&amp;apos; handle=&amp;apos;belize&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;84&amp;apos;&amp;gt;Belize&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bj&amp;apos; handle=&amp;apos;benin&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;204&amp;apos;&amp;gt;Benin&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bm&amp;apos; handle=&amp;apos;bermuda&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;60&amp;apos;&amp;gt;Bermuda&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bt&amp;apos; handle=&amp;apos;bhutan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;64&amp;apos;&amp;gt;Bhutan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bo&amp;apos; handle=&amp;apos;bolivia&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;68&amp;apos;&amp;gt;Bolivia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ba&amp;apos; handle=&amp;apos;bosnia-and-herzegovina&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;70&amp;apos;&amp;gt;Bosnia And Herzegovina&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bw&amp;apos; handle=&amp;apos;botswana&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;72&amp;apos;&amp;gt;Botswana&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bv&amp;apos; handle=&amp;apos;bouvet-island&amp;apos; continent=&amp;apos;antarctica&amp;apos; iso=&amp;apos;74&amp;apos;&amp;gt;Bouvet Island&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;br&amp;apos; handle=&amp;apos;brazil&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;76&amp;apos;&amp;gt;Brazil&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;io&amp;apos; handle=&amp;apos;british-indian-ocean-continent&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;86&amp;apos;&amp;gt;British Indian Ocean continent&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bn&amp;apos; handle=&amp;apos;brunei-darussalam&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;96&amp;apos;&amp;gt;Brunei Darussalam&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bg&amp;apos; handle=&amp;apos;bulgaria&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;100&amp;apos;&amp;gt;Bulgaria&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bf&amp;apos; handle=&amp;apos;burkina-faso&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;854&amp;apos;&amp;gt;Burkina Faso&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;bi&amp;apos; handle=&amp;apos;burundi&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;108&amp;apos;&amp;gt;Burundi&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kh&amp;apos; handle=&amp;apos;cambodia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;116&amp;apos;&amp;gt;Cambodia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cm&amp;apos; handle=&amp;apos;cameroon&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;120&amp;apos;&amp;gt;Cameroon&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ca&amp;apos; handle=&amp;apos;canada&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;124&amp;apos;&amp;gt;Canada&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cv&amp;apos; handle=&amp;apos;cape-verde&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;132&amp;apos;&amp;gt;Cape Verde&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ky&amp;apos; handle=&amp;apos;cayman-islands&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;136&amp;apos;&amp;gt;Cayman Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cf&amp;apos; handle=&amp;apos;central-african-republic&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;140&amp;apos;&amp;gt;Central African Republic&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;td&amp;apos; handle=&amp;apos;chad&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;148&amp;apos;&amp;gt;Chad&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cl&amp;apos; handle=&amp;apos;chile&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;152&amp;apos;&amp;gt;Chile&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cn&amp;apos; handle=&amp;apos;china&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;156&amp;apos;&amp;gt;China&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cx&amp;apos; handle=&amp;apos;christmas-island&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;162&amp;apos;&amp;gt;Christmas Island&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cc&amp;apos; handle=&amp;apos;cocos-islands&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;166&amp;apos;&amp;gt;Cocos (Keeling) Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;co&amp;apos; handle=&amp;apos;colombia&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;170&amp;apos;&amp;gt;Colombia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;km&amp;apos; handle=&amp;apos;comoros&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;174&amp;apos;&amp;gt;Comoros&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cg&amp;apos; handle=&amp;apos;congo&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;178&amp;apos;&amp;gt;Congo&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ck&amp;apos; handle=&amp;apos;cook-islands&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;184&amp;apos;&amp;gt;Cook Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cr&amp;apos; handle=&amp;apos;costa-rica&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;188&amp;apos;&amp;gt;Costa Rica&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ci&amp;apos; handle=&amp;apos;cote-divoire&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;384&amp;apos;&amp;gt;Cote D&amp;apos;Ivoire&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;hr&amp;apos; handle=&amp;apos;croatia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;191&amp;apos;&amp;gt;Croatia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cu&amp;apos; handle=&amp;apos;cuba&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;192&amp;apos;&amp;gt;Cuba&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cy&amp;apos; handle=&amp;apos;cyprus&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;196&amp;apos;&amp;gt;Cyprus&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;cz&amp;apos; handle=&amp;apos;czech-republic&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;203&amp;apos;&amp;gt;Czech Republic&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;dk&amp;apos; handle=&amp;apos;denmark&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;208&amp;apos;&amp;gt;Denmark&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;dj&amp;apos; handle=&amp;apos;djibouti&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;262&amp;apos;&amp;gt;Djibouti&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;dm&amp;apos; handle=&amp;apos;dominica&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;212&amp;apos;&amp;gt;Dominica&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;do&amp;apos; handle=&amp;apos;dominican-republic&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;214&amp;apos;&amp;gt;Dominican Republic&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ec&amp;apos; handle=&amp;apos;ecuador&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;218&amp;apos;&amp;gt;Ecuador&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;eg&amp;apos; handle=&amp;apos;egypt&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;818&amp;apos;&amp;gt;Egypt&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sv&amp;apos; handle=&amp;apos;el-salvador&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;222&amp;apos;&amp;gt;El Salvador&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gq&amp;apos; handle=&amp;apos;equatorial-guinea&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;226&amp;apos;&amp;gt;Equatorial Guinea&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;er&amp;apos; handle=&amp;apos;eritrea&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;232&amp;apos;&amp;gt;Eritrea&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ee&amp;apos; handle=&amp;apos;estonia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;233&amp;apos;&amp;gt;Estonia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;et&amp;apos; handle=&amp;apos;ethiopia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;210&amp;apos;&amp;gt;Ethiopia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fk&amp;apos; handle=&amp;apos;falkland-islands&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;238&amp;apos;&amp;gt;Falkland Islands (Malvinas)&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fo&amp;apos; handle=&amp;apos;faroe-islands&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;234&amp;apos;&amp;gt;Faroe Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fj&amp;apos; handle=&amp;apos;fiji&amp;apos; continent=&amp;apos;melanesia&amp;apos; iso=&amp;apos;242&amp;apos;&amp;gt;Fiji&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fi&amp;apos; handle=&amp;apos;finland&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;246&amp;apos;&amp;gt;Finland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fr&amp;apos; handle=&amp;apos;france&amp;apos; continent=&amp;apos;europe&amp;apos; alt=&amp;apos;Francaise&amp;apos; iso=&amp;apos;250&amp;apos;&amp;gt;France&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fx&amp;apos; handle=&amp;apos;france-metropolitan&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;249&amp;apos;&amp;gt;France, Metropolitan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gf&amp;apos; handle=&amp;apos;french-guiana&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;254&amp;apos;&amp;gt;French Guiana&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pf&amp;apos; handle=&amp;apos;french-polynesia&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;258&amp;apos;&amp;gt;French Polynesia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tf&amp;apos; handle=&amp;apos;french-southern-territories&amp;apos; continent=&amp;apos;antarctica&amp;apos; iso=&amp;apos;260&amp;apos;&amp;gt;French Southern Territories&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ga&amp;apos; handle=&amp;apos;gabon&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;266&amp;apos;&amp;gt;Gabon&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gm&amp;apos; handle=&amp;apos;gambia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;270&amp;apos;&amp;gt;Gambia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ge&amp;apos; handle=&amp;apos;georgia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;268&amp;apos;&amp;gt;Georgia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;de&amp;apos; handle=&amp;apos;germany&amp;apos; continent=&amp;apos;europe&amp;apos; alt=&amp;apos;Deutschland&amp;apos; iso=&amp;apos;276&amp;apos;&amp;gt;Germany&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gh&amp;apos; handle=&amp;apos;ghana&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;288&amp;apos;&amp;gt;Ghana&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gi&amp;apos; handle=&amp;apos;gibraltar&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;292&amp;apos;&amp;gt;Gibraltar&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gr&amp;apos; handle=&amp;apos;greece&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;300&amp;apos;&amp;gt;Greece&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gl&amp;apos; handle=&amp;apos;greenland&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;304&amp;apos;&amp;gt;Greenland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gd&amp;apos; handle=&amp;apos;grenada&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;308&amp;apos;&amp;gt;Grenada&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gp&amp;apos; handle=&amp;apos;guadeloupe&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;312&amp;apos;&amp;gt;Guadeloupe&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gu&amp;apos; handle=&amp;apos;guam&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;316&amp;apos;&amp;gt;Guam&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gt&amp;apos; handle=&amp;apos;guatemala&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;320&amp;apos;&amp;gt;Guatemala&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gn&amp;apos; handle=&amp;apos;guinea&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;324&amp;apos;&amp;gt;Guinea&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gw&amp;apos; handle=&amp;apos;guinea-bissau&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;624&amp;apos;&amp;gt;Guinea-Bissau&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gy&amp;apos; handle=&amp;apos;guyana&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;328&amp;apos;&amp;gt;Guyana&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ht&amp;apos; handle=&amp;apos;haiti&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;332&amp;apos;&amp;gt;Haiti&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;hm&amp;apos; handle=&amp;apos;heard-island-and-mcdonald-islands&amp;apos; continent=&amp;apos;antarctica&amp;apos; iso=&amp;apos;334&amp;apos;&amp;gt;Heard Island and Mcdonald Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;hn&amp;apos; handle=&amp;apos;honduras&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;340&amp;apos;&amp;gt;Honduras&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;hk&amp;apos; handle=&amp;apos;hong-kong&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;344&amp;apos;&amp;gt;Hong Kong&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;hu&amp;apos; handle=&amp;apos;hungary&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;348&amp;apos;&amp;gt;Hungary&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;is&amp;apos; handle=&amp;apos;iceland&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;352&amp;apos;&amp;gt;Iceland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;in&amp;apos; handle=&amp;apos;india&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;356&amp;apos;&amp;gt;India&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;id&amp;apos; handle=&amp;apos;indonesia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;360&amp;apos;&amp;gt;Indonesia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ir&amp;apos; handle=&amp;apos;iran-islamic-republic-of&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;364&amp;apos;&amp;gt;Iran, Islamic Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;iq&amp;apos; handle=&amp;apos;iraq&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;368&amp;apos;&amp;gt;Iraq&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ie&amp;apos; handle=&amp;apos;ireland&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;372&amp;apos;&amp;gt;Ireland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;il&amp;apos; handle=&amp;apos;israel&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;376&amp;apos;&amp;gt;Israel&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;it&amp;apos; handle=&amp;apos;italy&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;380&amp;apos;&amp;gt;Italy&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;jm&amp;apos; handle=&amp;apos;jamaica&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;388&amp;apos;&amp;gt;Jamaica&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;jp&amp;apos; handle=&amp;apos;japan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;392&amp;apos;&amp;gt;Japan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;jo&amp;apos; handle=&amp;apos;jordan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;400&amp;apos;&amp;gt;Jordan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kz&amp;apos; handle=&amp;apos;kazakhstan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;398&amp;apos;&amp;gt;Kazakhstan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ke&amp;apos; handle=&amp;apos;kenya&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;404&amp;apos;&amp;gt;Kenya&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ki&amp;apos; handle=&amp;apos;kiribati&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;296&amp;apos;&amp;gt;Kiribati&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kp&amp;apos; handle=&amp;apos;korea-democratic-peoples-republic-of&amp;apos; continent=&amp;apos;asia&amp;apos; alt=&amp;apos;dprk&amp;apos; iso=&amp;apos;408&amp;apos;&amp;gt;Korea, Democratic People&amp;apos;S Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kr&amp;apos; handle=&amp;apos;korea-republic-of&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;410&amp;apos;&amp;gt;Korea, Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kw&amp;apos; handle=&amp;apos;kuwait&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;414&amp;apos;&amp;gt;Kuwait&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kg&amp;apos; handle=&amp;apos;kyrgyzstan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;417&amp;apos;&amp;gt;Kyrgyzstan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;la&amp;apos; handle=&amp;apos;lao-peoples-democratic-republic&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;418&amp;apos;&amp;gt;Lao People&amp;apos;s Democratic Republic&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lv&amp;apos; handle=&amp;apos;latvia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;428&amp;apos;&amp;gt;Latvia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lb&amp;apos; handle=&amp;apos;lebanon&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;422&amp;apos;&amp;gt;Lebanon&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ls&amp;apos; handle=&amp;apos;lesotho&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;426&amp;apos;&amp;gt;Lesotho&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lr&amp;apos; handle=&amp;apos;liberia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;430&amp;apos;&amp;gt;Liberia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ly&amp;apos; handle=&amp;apos;libyan-arab-jamahiriya&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;434&amp;apos;&amp;gt;Libyan Arab Jamahiriya&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;li&amp;apos; handle=&amp;apos;liechtenstein&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;438&amp;apos;&amp;gt;Liechtenstein&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lt&amp;apos; handle=&amp;apos;lithuania&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;440&amp;apos;&amp;gt;Lithuania&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lu&amp;apos; handle=&amp;apos;luxembourg&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;442&amp;apos;&amp;gt;Luxembourg&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mo&amp;apos; handle=&amp;apos;macau&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;446&amp;apos;&amp;gt;Macau&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mk&amp;apos; handle=&amp;apos;macedonia-the-former-yugoslav-republic-of&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;807&amp;apos;&amp;gt;Macedonia, The Former Yugoslav Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mg&amp;apos; handle=&amp;apos;madagascar&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;450&amp;apos;&amp;gt;Madagascar&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mw&amp;apos; handle=&amp;apos;malawi&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;454&amp;apos;&amp;gt;Malawi&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;my&amp;apos; handle=&amp;apos;malaysia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;458&amp;apos;&amp;gt;Malaysia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mv&amp;apos; handle=&amp;apos;maldives&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;462&amp;apos;&amp;gt;Maldives&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ml&amp;apos; handle=&amp;apos;mali&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;466&amp;apos;&amp;gt;Mali&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mt&amp;apos; handle=&amp;apos;malta&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;470&amp;apos;&amp;gt;Malta&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mh&amp;apos; handle=&amp;apos;marshall-islands&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;584&amp;apos;&amp;gt;Marshall Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mq&amp;apos; handle=&amp;apos;martinique&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;474&amp;apos;&amp;gt;Martinique&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mr&amp;apos; handle=&amp;apos;mauritania&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;478&amp;apos;&amp;gt;Mauritania&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mu&amp;apos; handle=&amp;apos;mauritius&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;480&amp;apos;&amp;gt;Mauritius&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;yt&amp;apos; handle=&amp;apos;mayotte&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;175&amp;apos;&amp;gt;Mayotte&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mx&amp;apos; handle=&amp;apos;mexico&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;484&amp;apos;&amp;gt;Mexico&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;fm&amp;apos; handle=&amp;apos;micronesia-federated-states-of&amp;apos; continent=&amp;apos;micronesia&amp;apos; iso=&amp;apos;583&amp;apos;&amp;gt;Micronesia, Federated States Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;md&amp;apos; handle=&amp;apos;moldova-republic-of&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;498&amp;apos;&amp;gt;Moldova, Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mc&amp;apos; handle=&amp;apos;monaco&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;492&amp;apos;&amp;gt;Monaco&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mn&amp;apos; handle=&amp;apos;mongolia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;496&amp;apos;&amp;gt;Mongolia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ms&amp;apos; handle=&amp;apos;montserrat&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;500&amp;apos;&amp;gt;Montserrat&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ma&amp;apos; handle=&amp;apos;morocco&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;504&amp;apos;&amp;gt;Morocco&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mz&amp;apos; handle=&amp;apos;mozambique&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;508&amp;apos;&amp;gt;Mozambique&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mm&amp;apos; handle=&amp;apos;myanmar&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;104&amp;apos;&amp;gt;Myanmar&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;na&amp;apos; handle=&amp;apos;namibia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;516&amp;apos;&amp;gt;Namibia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nr&amp;apos; handle=&amp;apos;nauru&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;520&amp;apos;&amp;gt;Nauru&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;np&amp;apos; handle=&amp;apos;nepal&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;524&amp;apos;&amp;gt;Nepal&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nl&amp;apos; handle=&amp;apos;netherlands&amp;apos; continent=&amp;apos;europe&amp;apos; alt=&amp;apos;Nederlands NL Holland&amp;apos; iso=&amp;apos;528&amp;apos;&amp;gt;Netherlands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;an&amp;apos; handle=&amp;apos;netherlands-antilles&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;530&amp;apos;&amp;gt;Netherlands Antilles&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nc&amp;apos; handle=&amp;apos;new-caledonia&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;540&amp;apos;&amp;gt;New Caledonia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nz&amp;apos; handle=&amp;apos;new-zealand&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;554&amp;apos;&amp;gt;New Zealand&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ni&amp;apos; handle=&amp;apos;nicaragua&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;558&amp;apos;&amp;gt;Nicaragua&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ne&amp;apos; handle=&amp;apos;niger&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;562&amp;apos;&amp;gt;Niger&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ng&amp;apos; handle=&amp;apos;nigeria&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;566&amp;apos;&amp;gt;Nigeria&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nu&amp;apos; handle=&amp;apos;niue&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;570&amp;apos;&amp;gt;Niue&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;nf&amp;apos; handle=&amp;apos;norfolk-island&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;574&amp;apos;&amp;gt;Norfolk Island&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;mp&amp;apos; handle=&amp;apos;northern-mariana-islands&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;580&amp;apos;&amp;gt;Northern Mariana Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;no&amp;apos; handle=&amp;apos;norway&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;578&amp;apos;&amp;gt;Norway&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;om&amp;apos; handle=&amp;apos;oman&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;512&amp;apos;&amp;gt;Oman&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pk&amp;apos; handle=&amp;apos;pakistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;586&amp;apos;&amp;gt;Pakistan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pw&amp;apos; handle=&amp;apos;palau&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;585&amp;apos;&amp;gt;Palau&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pa&amp;apos; handle=&amp;apos;panama&amp;apos; continent=&amp;apos;central america&amp;apos; iso=&amp;apos;591&amp;apos;&amp;gt;Panama&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pg&amp;apos; handle=&amp;apos;papua-new-guinea&amp;apos; continent=&amp;apos;melanesia&amp;apos; iso=&amp;apos;598&amp;apos;&amp;gt;Papua New Guinea&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;py&amp;apos; handle=&amp;apos;paraguay&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;600&amp;apos;&amp;gt;Paraguay&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pe&amp;apos; handle=&amp;apos;peru&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;604&amp;apos;&amp;gt;Peru&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ph&amp;apos; handle=&amp;apos;philippines&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;608&amp;apos;&amp;gt;Philippines&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pn&amp;apos; handle=&amp;apos;pitcairn&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;612&amp;apos;&amp;gt;Pitcairn&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pl&amp;apos; handle=&amp;apos;poland&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;616&amp;apos;&amp;gt;Poland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pt&amp;apos; handle=&amp;apos;portugal&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;620&amp;apos;&amp;gt;Portugal&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pr&amp;apos; handle=&amp;apos;puerto-rico&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;630&amp;apos;&amp;gt;Puerto Rico&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;qa&amp;apos; handle=&amp;apos;qatar&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;634&amp;apos;&amp;gt;Qatar&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;re&amp;apos; handle=&amp;apos;reunion&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;638&amp;apos;&amp;gt;Reunion&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ro&amp;apos; handle=&amp;apos;romania&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;642&amp;apos;&amp;gt;Romania&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ru&amp;apos; handle=&amp;apos;russian-federation&amp;apos; continent=&amp;apos;asia&amp;apos; alt=&amp;apos;Pocc&amp;apos; iso=&amp;apos;643&amp;apos;&amp;gt;Russian Federation&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;rw&amp;apos; handle=&amp;apos;rwanda&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;646&amp;apos;&amp;gt;Rwanda&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sh&amp;apos; handle=&amp;apos;saint-helena&amp;apos; continent=&amp;apos;none&amp;apos; iso=&amp;apos;654&amp;apos;&amp;gt;Saint Helena&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;kn&amp;apos; handle=&amp;apos;saint-kitts-and-nevis&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;659&amp;apos;&amp;gt;Saint Kitts And Nevis&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lc&amp;apos; handle=&amp;apos;saint-lucia&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;662&amp;apos;&amp;gt;Saint Lucia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;pm&amp;apos; handle=&amp;apos;saint-pierre-and-miquelon&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;666&amp;apos;&amp;gt;Saint Pierre And Miquelon&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;vc&amp;apos; handle=&amp;apos;saint-vincent-and-the-grenadines&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;670&amp;apos;&amp;gt;Saint Vincent And The Grenadines&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ws&amp;apos; handle=&amp;apos;samoa&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;882&amp;apos;&amp;gt;Samoa&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sm&amp;apos; handle=&amp;apos;san-marino&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;674&amp;apos;&amp;gt;San Marino&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;st&amp;apos; handle=&amp;apos;sao-tome-and-principe&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;678&amp;apos;&amp;gt;Sao Tome And Principe&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sa&amp;apos; handle=&amp;apos;saudi-arabia&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;682&amp;apos;&amp;gt;Saudi Arabia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sn&amp;apos; handle=&amp;apos;senegal&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;686&amp;apos;&amp;gt;Senegal&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sc&amp;apos; handle=&amp;apos;seychelles&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;690&amp;apos;&amp;gt;Seychelles&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sl&amp;apos; handle=&amp;apos;sierra-leone&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;694&amp;apos;&amp;gt;Sierra Leone&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sg&amp;apos; handle=&amp;apos;singapore&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;702&amp;apos;&amp;gt;Singapore&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sk&amp;apos; handle=&amp;apos;slovakia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;703&amp;apos;&amp;gt;Slovakia (Slovak Republic)&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;si&amp;apos; handle=&amp;apos;slovenia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;705&amp;apos;&amp;gt;Slovenia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sb&amp;apos; handle=&amp;apos;solomon-islands&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;90&amp;apos;&amp;gt;Solomon Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;so&amp;apos; handle=&amp;apos;somalia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;706&amp;apos;&amp;gt;Somalia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;za&amp;apos; handle=&amp;apos;south-africa&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;710&amp;apos;&amp;gt;South Africa&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;es&amp;apos; handle=&amp;apos;spain&amp;apos; continent=&amp;apos;europe&amp;apos; alt=&amp;apos;Espana&amp;apos; iso=&amp;apos;724&amp;apos;&amp;gt;Spain&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;lk&amp;apos; handle=&amp;apos;sri-lanka&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;144&amp;apos;&amp;gt;Sri Lanka&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sd&amp;apos; handle=&amp;apos;sudan&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;736&amp;apos;&amp;gt;Sudan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sr&amp;apos; handle=&amp;apos;suriname&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;740&amp;apos;&amp;gt;Suriname&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sj&amp;apos; handle=&amp;apos;svalbard-and-jan-mayen-islands&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;744&amp;apos;&amp;gt;Svalbard And Jan Mayen Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sz&amp;apos; handle=&amp;apos;swaziland&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;748&amp;apos;&amp;gt;Swaziland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;se&amp;apos; handle=&amp;apos;sweden&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;752&amp;apos;&amp;gt;Sweden&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ch&amp;apos; handle=&amp;apos;switzerland&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;756&amp;apos;&amp;gt;Switzerland&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;sy&amp;apos; handle=&amp;apos;syrian-arab-republic&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;760&amp;apos;&amp;gt;Syrian Arab Republic&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tw&amp;apos; handle=&amp;apos;taiwan-province-of-china&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;158&amp;apos;&amp;gt;Taiwan, Province Of China&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tj&amp;apos; handle=&amp;apos;tajikistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;762&amp;apos;&amp;gt;Tajikistan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tz&amp;apos; handle=&amp;apos;tanzania-united-republic-of&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;834&amp;apos;&amp;gt;Tanzania, United Republic Of&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;th&amp;apos; handle=&amp;apos;thailand&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;764&amp;apos;&amp;gt;Thailand&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tg&amp;apos; handle=&amp;apos;togo&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;768&amp;apos;&amp;gt;Togo&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tk&amp;apos; handle=&amp;apos;tokelau&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;772&amp;apos;&amp;gt;Tokelau&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;to&amp;apos; handle=&amp;apos;tonga&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;776&amp;apos;&amp;gt;Tonga&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tt&amp;apos; handle=&amp;apos;trinidad-and-tobago&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;780&amp;apos;&amp;gt;Trinidad And Tobago&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tn&amp;apos; handle=&amp;apos;tunisia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;788&amp;apos;&amp;gt;Tunisia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tr&amp;apos; handle=&amp;apos;turkey&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;792&amp;apos;&amp;gt;Turkey&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tm&amp;apos; handle=&amp;apos;turkmenistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;795&amp;apos;&amp;gt;Turkmenistan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tc&amp;apos; handle=&amp;apos;turks-and-caicos-islands&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;796&amp;apos;&amp;gt;Turks And Caicos Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;tv&amp;apos; handle=&amp;apos;tuvalu&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;798&amp;apos;&amp;gt;Tuvalu&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ug&amp;apos; handle=&amp;apos;uganda&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;800&amp;apos;&amp;gt;Uganda&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ua&amp;apos; handle=&amp;apos;ukraine&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;804&amp;apos;&amp;gt;Ukraine&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ae&amp;apos; handle=&amp;apos;united-arab-emirates&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;784&amp;apos;&amp;gt;United Arab Emirates&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;gb&amp;apos; handle=&amp;apos;united-kingdom&amp;apos; continent=&amp;apos;europe&amp;apos; alt=&amp;apos;England Scotland Wales GB UK Great Britain Britain Northern&amp;apos; boost=&amp;apos;3&amp;apos; iso=&amp;apos;826&amp;apos;&amp;gt;United Kingdom&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;us&amp;apos; handle=&amp;apos;united-states&amp;apos; continent=&amp;apos;north america&amp;apos; alt=&amp;apos;US America USA&amp;apos; boost=&amp;apos;2&amp;apos; iso=&amp;apos;840&amp;apos;&amp;gt;United States&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;um&amp;apos; handle=&amp;apos;united-states-minor-outlying-islands&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;581&amp;apos;&amp;gt;United States Minor Outlying Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;uy&amp;apos; handle=&amp;apos;uruguay&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;858&amp;apos;&amp;gt;Uruguay&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;uz&amp;apos; handle=&amp;apos;uzbekistan&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;860&amp;apos;&amp;gt;Uzbekistan&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;vu&amp;apos; handle=&amp;apos;vanuatu&amp;apos; continent=&amp;apos;australasia&amp;apos; iso=&amp;apos;548&amp;apos;&amp;gt;Vanuatu&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;va&amp;apos; handle=&amp;apos;vatican-city-state&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;336&amp;apos;&amp;gt;Vatican City State (Holy See)&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ve&amp;apos; handle=&amp;apos;venezuela&amp;apos; continent=&amp;apos;south america&amp;apos; iso=&amp;apos;862&amp;apos;&amp;gt;Venezuela&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;vn&amp;apos; handle=&amp;apos;vietnam&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;704&amp;apos;&amp;gt;Vietnam&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;vg&amp;apos; handle=&amp;apos;virgin-islands-uk&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;92&amp;apos;&amp;gt;Virgin Islands (British)&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;vi&amp;apos; handle=&amp;apos;virgin-islands-us&amp;apos; continent=&amp;apos;north america&amp;apos; iso=&amp;apos;850&amp;apos;&amp;gt;Virgin Islands (U.S.)&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;wf&amp;apos; handle=&amp;apos;wallis-and-futuna-islands&amp;apos; continent=&amp;apos;polynesia&amp;apos; iso=&amp;apos;876&amp;apos;&amp;gt;Wallis And Futuna Islands&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;eh&amp;apos; handle=&amp;apos;western-sahara&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;732&amp;apos;&amp;gt;Western Sahara&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;ye&amp;apos; handle=&amp;apos;yemen&amp;apos; continent=&amp;apos;asia&amp;apos; iso=&amp;apos;887&amp;apos;&amp;gt;Yemen&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;yu&amp;apos; handle=&amp;apos;yugoslavia&amp;apos; continent=&amp;apos;europe&amp;apos; iso=&amp;apos;891&amp;apos;&amp;gt;Yugoslavia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;zr&amp;apos; handle=&amp;apos;zaire&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;180&amp;apos;&amp;gt;Zaire&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;zm&amp;apos; handle=&amp;apos;zambia&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;894&amp;apos;&amp;gt;Zambia&amp;lt;/country&amp;gt;
+  &amp;lt;country code=&amp;apos;zw&amp;apos; handle=&amp;apos;zimbabwe&amp;apos; continent=&amp;apos;africa&amp;apos; iso=&amp;apos;716&amp;apos;&amp;gt;Zimbabwe&amp;lt;/country&amp;gt;
+&amp;lt;/countries&amp;gt;</value>
+  </data>
+</root>
