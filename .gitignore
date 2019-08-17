@@ -24,3 +24,5 @@ Version.cpp
 *.pdb
 *.manifest
 *.cache
+/.vs/TranslationCenter/DesignTimeBuild
+/packages
