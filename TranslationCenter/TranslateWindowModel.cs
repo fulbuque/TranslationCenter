@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,25 +6,28 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Script.Serialization;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using System.Xml.Linq;
 using TranslationCenter.Services.Translation;
 using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Interfaces;
 
 namespace TranslationCenter
 {
     public partial class TranslateWindowModel : INotifyPropertyChanged
     {
-
-        private Dispatcher currentDispatcher;
+        private string _currentIso;
+        private IEnumerable<Language> _languages;
+        private ObservableCollection<ListBoxItem> _languagesToTranslate;
+        private Dictionary<EngineTypes, ITranslateResult> _searchResults;
+        private string _text;
+        private string _translatedText;
+        private Language _translateFrom;
+        private Language _translateTo;
         private Dictionary<string, Translation> _translationsDicionary;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private Dispatcher currentDispatcher;
 
         public TranslateWindowModel()
         {
@@ -33,22 +35,10 @@ namespace TranslationCenter
             PrepareUi();
         }
 
-        private async void PrepareUi()
-        {
-            IsTranslateEnabled = false;
-            await SetLanguage();
-            IsTranslateEnabled = true;
-
-        }
-
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsTranslateEnabled { get; set; }
 
-        private IEnumerable<Language> _languages;
         public IEnumerable<Language> Languages
         {
             get => _languages;
@@ -58,8 +48,6 @@ namespace TranslationCenter
                 NotifyPropertyChanged();
             }
         }
-
-        private ObservableCollection<ListBoxItem> _languagesToTranslate;
 
         public ObservableCollection<ListBoxItem> LanguagesToTranslate
         {
@@ -71,33 +59,23 @@ namespace TranslationCenter
             }
         }
 
-        public IEnumerable<TabItem> SelectedLanguages => LanguagesToTranslate?.Where(i => i.IsSelected).Select(i => new TabItem() { Tag = i.Tag, Header = i.Content });
-
-        private Language _translateTo;
-        public Language TranslateTo
+        public Dictionary<EngineTypes, ITranslateResult> SearchResults
         {
-            get => _translateTo;
-            set
+            get => _searchResults;
+            private set
             {
-                _translateTo = value;
-                Translate();
+                _searchResults = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(SourceResults));
             }
         }
 
-        private Language _translateFrom;
-        public Language TranslateFrom
-        {
-            get => _translateFrom;
-            set
-            {
-                _translateFrom = value;
-                Translate();
-                NotifyPropertyChanged();
-            }
-        }
+        public IEnumerable<TabItem> SelectedLanguages => 
+            LanguagesToTranslate?.Where(i => i.IsSelected).Select(i => new TabItem() { Tag = i.Tag, Header = i.Content });
 
-        private string _text;
+        public IEnumerable<TabItem> SourceResults => 
+            SearchResults?.Values?.Select(translateResult => new TabItem() { Tag = translateResult.Source.EngineType, Header = translateResult.Source.DisplayName });
+
         public string Text
         {
             get => _text;
@@ -111,11 +89,8 @@ namespace TranslationCenter
             }
         }
 
-        private string _translatedText;
-        private string _currentIso;
-
         public string TranslatedText
-        { 
+        {
             get =>
                 _translatedText; set
             {
@@ -124,9 +99,80 @@ namespace TranslationCenter
             }
         }
 
+        public Language TranslateFrom
+        {
+            get => _translateFrom;
+            set
+            {
+                _translateFrom = value;
+                Translate();
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Language TranslateTo
+        {
+            get => _translateTo;
+            set
+            {
+                _translateTo = value;
+                Translate();
+                NotifyPropertyChanged();
+            }
+        }
+
+        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        internal void SetTranslatedText(string iso)
+        {
+            this._currentIso = iso;
+            if (_translationsDicionary != null && _translationsDicionary.TryGetValue(iso, out var translation))
+                TranslatedText = translation.Text;
+            else
+                TranslatedText = string.Empty;
+        }
+
+        internal async void Translate()
+        {
+            if (!IsTranslateEnabled) return;
+
+            _translationsDicionary = new Dictionary<string, Translation>();
+            var isos = SelectedLanguages.Select(t => t.Tag?.ToString());
+            foreach (var iso in isos)
+            {
+                if (!_translationsDicionary.TryGetValue(iso, out var translatedText) || string.IsNullOrWhiteSpace(translatedText?.Text))
+                {
+                    var engines = new EngineTypes[]
+                    {
+                         EngineTypes.Bing,
+                         EngineTypes.Leo
+                    };
+
+                    var translateResults = await TranslationService.Instance.Translate(TranslateFrom.Iso, iso, Text, engines);
+                    this.SearchResults = translateResults.ToDictionary(tr => tr.Source.EngineType);
+                    if (translateResults?.Any() ?? false)
+                        _translationsDicionary[iso] = new Translation() { Text = translateResults.FirstOrDefault().Result };
+                }
+            }
+
+            if (string.IsNullOrEmpty(_currentIso))
+                _currentIso = isos.FirstOrDefault();
+
+            SetTranslatedText(_currentIso);
+        }
+
+        private async void PrepareUi()
+        {
+            IsTranslateEnabled = false;
+            await SetLanguage();
+            IsTranslateEnabled = true;
+        }
+
         private async Task SetLanguage()
         {
-
             IEnumerable<Country> countries;
             using (var client = new HttpClient())
             {
@@ -140,7 +186,6 @@ namespace TranslationCenter
                 countries = ser.Deserialize<IEnumerable<Country>>(response);
             }
 
-
             this.Languages = countries
                                 .SelectMany(c => c.Languages)
                                 .Where(l => !string.IsNullOrEmpty(l.Iso))
@@ -151,7 +196,8 @@ namespace TranslationCenter
             this.LanguagesToTranslate = new ObservableCollection<ListBoxItem>();
             foreach (var language in Languages)
             {
-                this.LanguagesToTranslate.Add(new ListBoxItem() {
+                this.LanguagesToTranslate.Add(new ListBoxItem()
+                {
                     Tag = language.Iso,
                     Content = language.Name,
                     IsSelected = (isoToTranslate.Contains(language.Iso))
@@ -162,44 +208,5 @@ namespace TranslationCenter
 
             NotifyPropertyChanged(nameof(SelectedLanguages));
         }
-
-        internal async void Translate()
-        {
-            if (!IsTranslateEnabled) return;
-
-            _translationsDicionary = new Dictionary<string, Translation>();
-            var isos = SelectedLanguages.Select(t => t.Tag?.ToString());
-            foreach (var iso in isos)
-            {
-                if (!_translationsDicionary.TryGetValue(iso, out var translatedText) || string.IsNullOrWhiteSpace(translatedText?.Text))
-                {
-                    var engines = new EngineTypes[] 
-                    {
-                         //EngineTypes.Bing,
-                         EngineTypes.Leo
-                    };
-
-                    var translateResults = await TranslationService.Instance.Translate(TranslateFrom.Iso, iso, Text, engines);
-                    //var translations = await TranslateInternal(TranslateFrom.Iso, Text, iso);
-                    if (translateResults?.Any() ?? false)
-                        _translationsDicionary[iso] = new Translation() { Text = translateResults.FirstOrDefault().Result };
-                }
-            }
-
-            if (string.IsNullOrEmpty(_currentIso))
-                _currentIso = isos.FirstOrDefault();
-
-            SetTranslatedText(_currentIso);
-        }
-
-        internal void SetTranslatedText(string iso)
-        {
-            this._currentIso = iso;
-            if (_translationsDicionary != null && _translationsDicionary.TryGetValue(iso, out var translation))
-                TranslatedText = translation.Text;
-            else
-                TranslatedText = string.Empty;
-        }
-
     }
 }

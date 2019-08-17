@@ -25,7 +25,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>   
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -59,16 +61,34 @@
                 </ListBox.Resources>
             </ListBox>
 
-            <Button x:Name="btnTranslate"  Grid.Row="4" Content="Translate"  Style="{StaticResource DefaultMargin}" Click="BtnTranslate_Click" Width="80" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="4" Text="Egines" />
+            <ListBox Grid.Row="5" SelectionMode="Extended" ItemsSource="{ Binding LanguagesToTranslate }" Style="{StaticResource DefaultMargin}">
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                        <Setter Property="SnapsToDevicePixels" Value="True" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <CheckBox x:Name="chkLanguage2" Margin="5,2" IsChecked="{ Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsSelected }" 
+                                              Content="{TemplateBinding Content}" Checked="ChkLanguage_Checked" Unchecked="ChkLanguage_Unchecked"  />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+            </ListBox>
+
+            <Button x:Name="btnTranslate"  Grid.Row="6" Content="Translate"  Style="{StaticResource DefaultMargin}" Click="BtnTranslate_Click" Width="80" HorizontalAlignment="Center"/>
 
         </Grid>
 
         <Grid Grid.Column="1" Margin="10,5,10,5">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="200" MinHeight="150" MaxHeight="400"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
             <Grid Grid.Row="0">
@@ -82,20 +102,26 @@
 
             <GridSplitter Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5" />
 
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" MinHeight="200">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
-                <TextBlock Grid.Row="0" VerticalAlignment="Top" Text="Results" Margin="0,5,0,5"/>
-
+                <TabControl Grid.Row="0" x:Name="tabSourceResults" 
+                            ItemsSource="{ Binding SourceResults }"  
+                            Margin="0,5,0,0" Padding="0" BorderThickness="0" SelectedIndex="0"
+                            
+                            />
+                
                 <TabControl Grid.Row="1" x:Name="tabSelectedLanguages" 
                             ItemsSource="{ Binding SelectedLanguages }"  
-                            Margin="0" Padding="0" BorderThickness="0" SelectedIndex="0"
+                            Margin="0,3,0,0" Padding="0" BorderThickness="0" SelectedIndex="0"
                             SelectionChanged="TabSelectedLanguages_SelectionChanged"  />
 
+
+                
                 <WebBrowser Grid.Row="2" x:Name="webBrowserResult" Margin="5,10,5,5" />
                 
                 <!--<TextBox Grid.Row="2" IsReadOnly="True" Text="{Binding TranslatedText, Mode=OneWay}" TextWrapping="Wrap"  VerticalScrollBarVisibility="Auto" Padding="5"/>-->

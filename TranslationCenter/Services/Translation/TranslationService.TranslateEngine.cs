@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Extensions;
 using TranslationCenter.Services.Translation.Interfaces;
 
 namespace TranslationCenter.Services.Translation
@@ -16,22 +17,15 @@ namespace TranslationCenter.Services.Translation
                 Text = text;
             }
 
+            public string DisplayName => EngineType.GetDescription();
+            public abstract EngineTypes EngineType { get; }
             public string IsoFrom { get; }
             public string IsoTo { get; }
+            public abstract string Name { get; }
+            public abstract ResultTypes ResultType { get; }
             public string Text { get; }
 
-            public abstract string Name { get; }
-
-            public abstract EngineTypes EngineType { get; }
-
-            public abstract ResultTypes ResultType { get; }
-
-            internal virtual async Task<ITranslateResult> GetTranslate()
-            {
-                return null;
-            }
-
-            internal static TranslateEngine GetEngine(EngineTypes translateEngineType, string isoFrom, string isoTo, string text) 
+            internal static TranslateEngine GetEngine(EngineTypes translateEngineType, string isoFrom, string isoTo, string text)
             {
                 Type engineType;
 
@@ -43,6 +37,11 @@ namespace TranslationCenter.Services.Translation
                     throw new ArgumentOutOfRangeException("Invalid Translate Engine");
 
                 return Activator.CreateInstance(engineType, new object[] { isoFrom, isoTo, text }) as TranslateEngine;
+            }
+
+            internal virtual async Task<ITranslateResult> GetTranslate()
+            {
+                return null;
             }
         }
     }
