@@ -12,7 +12,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="150" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0" Margin="5,10,5,10">
@@ -22,19 +22,19 @@
                 </Style>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>   
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0" Text="From" />
-            <ComboBox Grid.Row="1"  
-                      Style="{StaticResource DefaultMargin}" 
-                      ItemsSource="{ Binding Languages}" 
+            <ComboBox Grid.Row="1"
+                      Style="{StaticResource DefaultMargin}"
+                      ItemsSource="{ Binding Languages}"
                       SelectedItem="{Binding TranslateFrom, Delay=200, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -52,8 +52,8 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <CheckBox x:Name="chkLanguage" Margin="5,2" IsChecked="{ Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsSelected }" 
-                                              Content="{TemplateBinding Content}" Checked="ChkLanguage_Checked" Unchecked="ChkLanguage_Unchecked"  />
+                                    <CheckBox x:Name="chkLanguage" Margin="5,2" IsChecked="{ Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsSelected }"
+                                              Content="{TemplateBinding Content}" Checked="ChkLanguage_Checked" Unchecked="ChkLanguage_Unchecked" />
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -70,8 +70,8 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <CheckBox x:Name="chkLanguage2" Margin="5,2" IsChecked="{ Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsSelected }" 
-                                              Content="{TemplateBinding Content}" Checked="ChkLanguage_Checked" Unchecked="ChkLanguage_Unchecked"  />
+                                    <CheckBox x:Name="chkLanguage2" Margin="5,2" IsChecked="{ Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Path=IsSelected }"
+                                              Content="{TemplateBinding Content}" Checked="ChkLanguage_Checked" Unchecked="ChkLanguage_Unchecked" />
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -79,24 +79,23 @@
                 </ListBox.Resources>
             </ListBox>
 
-            <Button x:Name="btnTranslate"  Grid.Row="6" Content="Translate"  Style="{StaticResource DefaultMargin}" Click="BtnTranslate_Click" Width="80" HorizontalAlignment="Center"/>
-
+            <Button x:Name="btnTranslate"  Grid.Row="6" Content="Translate"  Style="{StaticResource DefaultMargin}" Click="BtnTranslate_Click" Width="80" HorizontalAlignment="Center" />
         </Grid>
 
         <Grid Grid.Column="1" Margin="10,5,10,5">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="200" MinHeight="150" MaxHeight="400"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="200" MinHeight="150" MaxHeight="400" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Text"/>
+                <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Text" />
                 <TextBox  Grid.Row="1" Text="{ Binding Text, Delay=300, UpdateSourceTrigger=PropertyChanged }" MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True" />
             </Grid>
 
@@ -108,27 +107,20 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                <TabControl Grid.Row="0" x:Name="tabSourceResults" 
-                            ItemsSource="{ Binding SourceResults }"  
-                            Margin="0,5,0,0" Padding="0" BorderThickness="0" SelectedIndex="0"
-                            
-                            />
-                
-                <TabControl Grid.Row="1" x:Name="tabSelectedLanguages" 
-                            ItemsSource="{ Binding SelectedLanguages }"  
+
+                <TabControl Grid.Row="0" x:Name="tabSourceResults"
+                            ItemsSource="{ Binding SourceResults }"
+                            Margin="0,5,0,0" Padding="0" BorderThickness="0" SelectedIndex="0" />
+
+                <TabControl Grid.Row="1" x:Name="tabSelectedLanguages"
+                            ItemsSource="{ Binding SelectedLanguages }"
                             Margin="0,3,0,0" Padding="0" BorderThickness="0" SelectedIndex="0"
-                            SelectionChanged="TabSelectedLanguages_SelectionChanged"  />
+                            SelectionChanged="TabSelectedLanguages_SelectionChanged" />
 
-
-                
                 <WebBrowser Grid.Row="2" x:Name="webBrowserResult" Margin="5,10,5,5" />
-                
-                <!--<TextBox Grid.Row="2" IsReadOnly="True" Text="{Binding TranslatedText, Mode=OneWay}" TextWrapping="Wrap"  VerticalScrollBarVisibility="Auto" Padding="5"/>-->
+
+                <!--<TextBox Grid.Row="2" IsReadOnly="True" Text="{Binding TranslatedText, Mode=OneWay}" TextWrapping="Wrap"  VerticalScrollBarVisibility="Auto" Padding="5" />-->
             </Grid>
-
         </Grid>
-
-
     </Grid>
 </Window>

@@ -7,7 +7,9 @@ namespace TranslationCenter.Services.Translation.Interfaces
     public interface ITranslationService
     {
         void AddEngine<EngineType>() where EngineType : Engines.TranslateEngine;
+
         void ClearEngine<EngineType>() where EngineType : Engines.TranslateEngine;
+
         Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params EngineCategory[] translateEnginesTypes);
     }
 }

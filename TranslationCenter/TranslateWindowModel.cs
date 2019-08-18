@@ -70,10 +70,10 @@ namespace TranslationCenter
             }
         }
 
-        public IEnumerable<TabItem> SelectedLanguages => 
+        public IEnumerable<TabItem> SelectedLanguages =>
             LanguagesToTranslate?.Where(i => i.IsSelected).Select(i => new TabItem() { Tag = i.Tag, Header = i.Content });
 
-        public IEnumerable<TabItem> SourceResults => 
+        public IEnumerable<TabItem> SourceResults =>
             SearchResults?.Values?.Select(translateResult => new TabItem() { Tag = translateResult.Source.EngineType, Header = translateResult.Source.DisplayName });
 
         public string Text

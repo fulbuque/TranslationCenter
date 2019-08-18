@@ -60,6 +60,7 @@ namespace TranslationCenter.Services.Translation
             if (!_engines.ContainsKey(type))
                 _engines[type] = (TranslateEngine)Activator.CreateInstance(type);
         }
+
         private void RemoveEngineInternal(Type type) => _engines.Remove(type);
     }
 }

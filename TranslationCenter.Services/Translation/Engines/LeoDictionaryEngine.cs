@@ -12,7 +12,6 @@ namespace TranslationCenter.Services.Translation.Engines
     [EngineInfo(EngineCategory.Dictionary, "Leo")]
     public class LeoDictionaryEngine : TranslateEngine
     {
-
         private string[] supportedLanguages = new string[] { "de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en" };
 
         protected override string MediaType => "text/html";

@@ -16,7 +16,5 @@ namespace TranslationCenter
                 return (obj.Iso ?? string.Empty).GetHashCode();
             }
         }
-
-
     }
 }

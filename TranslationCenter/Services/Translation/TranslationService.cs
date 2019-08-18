@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Interfaces;

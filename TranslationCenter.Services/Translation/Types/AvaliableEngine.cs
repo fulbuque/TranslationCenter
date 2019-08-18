@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using TranslationCenter.Services.Translation.Enums;
 
 namespace TranslationCenter.Services.Translation.Types
@@ -20,6 +18,5 @@ namespace TranslationCenter.Services.Translation.Types
         public EngineCategory Category { get; }
         public Type Type { get; }
         public string Name => Type.Name;
-
     }
 }

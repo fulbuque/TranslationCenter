@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
-using System.Web.Script.Serialization;
 using System.Xml.Linq;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Extensions;
@@ -17,7 +15,7 @@ namespace TranslationCenter.Services.Translation
     {
         private class LeoTranslateEngine : TranslateEngine
         {
-            private string[] supportedLanguages = new string[] {"de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en"};
+            private string[] supportedLanguages = new string[] { "de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en" };
 
             public override string Name => this.GetType().Name;
 
@@ -25,7 +23,9 @@ namespace TranslationCenter.Services.Translation
 
             public override ResultTypes ResultType => ResultTypes.Html;
 
-            public LeoTranslateEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text) { }
+            public LeoTranslateEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text)
+            {
+            }
 
             internal override async Task<ITranslateResult> GetTranslate()
             {
@@ -62,7 +62,6 @@ namespace TranslationCenter.Services.Translation
 
                 using (var client = new HttpClient())
                 {
-
                     client.BaseAddress = new Uri(baseUrl + urlDicitionary);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
@@ -123,8 +122,6 @@ namespace TranslationCenter.Services.Translation
                 }
                 return translatedText;
             }
-
-
         }
     }
 }

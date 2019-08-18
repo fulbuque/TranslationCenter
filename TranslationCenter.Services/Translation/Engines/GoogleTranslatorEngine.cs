@@ -11,7 +11,6 @@ namespace TranslationCenter.Services.Translation.Engines
     [EngineInfo(EngineCategory.Translator, "Google")]
     public class GoogleTranslatorEngine : TranslateEngine
     {
-
         protected override string MediaType => "application/json";
 
         protected override string UrlBase => "https://www.bing.com/ttranslatev3?isVertical=1&IG=504D0D4AC9C1430B92775346964CDE30&IID=translator.5026.4";

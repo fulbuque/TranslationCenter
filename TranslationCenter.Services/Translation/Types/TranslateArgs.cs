@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TranslationCenter.Services.Translation.Types
+﻿namespace TranslationCenter.Services.Translation.Types
 {
     public sealed class TranslateArgs
     {

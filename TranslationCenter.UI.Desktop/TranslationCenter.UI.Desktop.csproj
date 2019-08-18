@@ -7,13 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\EnginesConfig_Icon.png" />
+    <None Remove="Resources\Execute_Icon.png" />
+    <None Remove="Resources\Languages_Icon.png" />
     <None Remove="Resources\Translate_Icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\EnginesConfig_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Execute_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Languages_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Translate_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TranslationCenter.Services\TranslationCenter.Services.csproj" />
   </ItemGroup>
 
 </Project>

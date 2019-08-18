@@ -1,6 +1,4 @@
-﻿using TranslationCenter.Services.Translation.Enums;
-
-namespace TranslationCenter.Services.Translation.Interfaces
+﻿namespace TranslationCenter.Services.Translation.Interfaces
 {
     public interface ITranslateResult
     {

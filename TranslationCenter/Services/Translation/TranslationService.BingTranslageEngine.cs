@@ -20,7 +20,9 @@ namespace TranslationCenter.Services.Translation
 
             public override ResultTypes ResultType => ResultTypes.PlainText;
 
-            public BingTranslateEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text) { }
+            public BingTranslateEngine(string isoFrom, string isoTo, string text) : base(isoFrom, isoTo, text)
+            {
+            }
 
             internal override async Task<ITranslateResult> GetTranslate()
             {
@@ -50,7 +52,7 @@ namespace TranslationCenter.Services.Translation
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                     var dict = new Dictionary<string, string>();
-                    dict.Add("fromLang", IsoFrom );
+                    dict.Add("fromLang", IsoFrom);
                     dict.Add("text", Text);
                     dict.Add("to", IsoTo);
 
@@ -67,15 +69,14 @@ namespace TranslationCenter.Services.Translation
                             if (result != null && result.Translations != null)
                                 translatedText = result.Translations?.FirstOrDefault().Text;
                         }
-                        catch (Exception ex) {
+                        catch (Exception ex)
+                        {
                             throw ex;
                         }
                     }
                 }
                 return translatedText;
             }
-
-
         }
     }
 }

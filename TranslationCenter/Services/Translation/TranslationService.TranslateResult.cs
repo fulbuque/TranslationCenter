@@ -1,5 +1,4 @@
-﻿using TranslationCenter.Services.Translation.Enums;
-using TranslationCenter.Services.Translation.Interfaces;
+﻿using TranslationCenter.Services.Translation.Interfaces;
 
 namespace TranslationCenter.Services.Translation
 {
@@ -12,6 +11,7 @@ namespace TranslationCenter.Services.Translation
                 Source = source;
                 Result = result;
             }
+
             public ITranslateEngine Source { get; }
 
             public string Result { get; }

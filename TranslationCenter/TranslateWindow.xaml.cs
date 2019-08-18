@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TranslationCenter
 {
@@ -20,7 +9,8 @@ namespace TranslationCenter
     /// </summary>
     public partial class TranslateWindow : Window
     {
-        TranslateWindowModel model = new TranslateWindowModel();
+        private TranslateWindowModel model = new TranslateWindowModel();
+
         public TranslateWindow()
         {
             InitializeComponent();
@@ -38,6 +28,7 @@ namespace TranslationCenter
             model.NotifyPropertyChanged(nameof(model.SelectedLanguages));
             model.Translate();
         }
+
         private void ChkLanguage_Unchecked(object sender, RoutedEventArgs e)
         {
             model.NotifyPropertyChanged(nameof(model.SelectedLanguages));
@@ -64,7 +55,7 @@ namespace TranslationCenter
     <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"" integrity=""sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"" crossorigin=""anonymous"">
   </head>
   <body>
-    <section id=""section-result"">                
+    <section id=""section-result"">
         { model.TranslatedText}
     </section>
   </body>
@@ -74,6 +65,5 @@ namespace TranslationCenter
                 webBrowserResult.NavigateToString(content);
             }
         }
-
     }
 }

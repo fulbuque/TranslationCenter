@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TranslationCenter.Services.Translation;
+using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Types;
+using TranslationCenter.UI.Desktop.ViewModels;
 
 namespace TranslationCenter.UI.Desktop
 {
@@ -23,6 +15,27 @@ namespace TranslationCenter.UI.Desktop
         public TranslateWindow()
         {
             InitializeComponent();
+        }
+
+        private void MnuEngines_Click(object sender, RoutedEventArgs e)
+        {
+
+            var selectWindowModel = new SelectWindowModel<AvaliableEngine>() { 
+             Title="Avaliable Engines",
+             Message = "Select one or more Engines",
+            };
+
+            selectWindowModel.FilterOptions.Add(("All", (e) => true));
+            Func<AvaliableEngine, bool> onlyTranslators = (e) => e.Category == EngineCategory.Translator;
+            selectWindowModel.FilterOptions.Add(("Translators", onlyTranslators));
+            Func<AvaliableEngine, bool> onlyDictionaries = (e) => e.Category == EngineCategory.Dictionary;
+            selectWindowModel.FilterOptions.Add(("Dictionaries", onlyDictionaries));
+
+            var avaliableEngines = TranslationService.GetAvaliableEngines();
+            selectWindowModel.Items = avaliableEngines;
+
+            var selectWindow = new SelectWindow() { DataContext = selectWindowModel };
+            selectWindow.ShowDialog();
         }
     }
 }
