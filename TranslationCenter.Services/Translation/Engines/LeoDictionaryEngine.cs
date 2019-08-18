@@ -5,14 +5,15 @@ using System.Web;
 using System.Xml.Linq;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Extensions;
+using TranslationCenter.Services.Translation.Types;
 
 namespace TranslationCenter.Services.Translation.Engines
 {
-    public class LeoEngine : TranslateEngine
+    [EngineInfo(EngineCategory.Dictionary, "Leo")]
+    public class LeoDictionaryEngine : TranslateEngine
     {
-        private string[] supportedLanguages = new string[] { "de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en" };
 
-        public override EngineTypes EngineType => EngineTypes.Dictionary;
+        private string[] supportedLanguages = new string[] { "de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en" };
 
         protected override string MediaType => "text/html";
 
@@ -78,7 +79,7 @@ namespace TranslationCenter.Services.Translation.Engines
                     var href = link.Attribute("href")?.Value;
                     if (!string.IsNullOrEmpty(href) && !href.StartsWith("http", StringComparison.OrdinalIgnoreCase))
                         link.SetAttributeValue("href", $"{baseUrl}{href}");
-                    link.SetAttributeValue("target", this.EngineType);
+                    link.SetAttributeValue("target", this.Category);
                 }
 
                 var toRemove = resultElement.Elements().ToList();

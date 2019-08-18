@@ -8,6 +8,6 @@ namespace TranslationCenter.Services.Translation.Interfaces
     {
         void AddEngine<EngineType>() where EngineType : Engines.TranslateEngine;
         void ClearEngine<EngineType>() where EngineType : Engines.TranslateEngine;
-        Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params EngineTypes[] translateEnginesTypes);
+        Task<IEnumerable<ITranslateResult>> Translate(string isoFrom, string isoTo, string text, params EngineCategory[] translateEnginesTypes);
     }
 }

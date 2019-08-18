@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Types;
 
 namespace TranslationCenter.Services.Translation.Engines
 {
-    public class BingEngine : TranslateEngine
+    [EngineInfo(EngineCategory.Translator, "Bing")]
+    public class BingTranslatorEngine : TranslateEngine
     {
-        public override EngineTypes EngineType => EngineTypes.Translator;
 
         protected override string MediaType => "application/json";
 

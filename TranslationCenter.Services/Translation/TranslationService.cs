@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Linq;
 using TranslationCenter.Services.Translation.Engines;
 using TranslationCenter.Services.Translation.Interfaces;
 using TranslationCenter.Services.Translation.Types;
@@ -11,17 +11,29 @@ namespace TranslationCenter.Services.Translation
     {
         private Dictionary<Type, TranslateEngine> _engines = new Dictionary<Type, TranslateEngine>();
 
-        public void AddEngine<EngineType>() where EngineType : TranslateEngine
+        public static AvaliableEngine[] GetAvaliableEngines()
         {
-            var @type = typeof(EngineType);
-            if (!_engines.ContainsKey(@type))
-                _engines[@type] = Activator.CreateInstance<EngineType>();
+            var type = typeof(TranslateEngine);
+            var assemblyName = type.Assembly.GetName().Name;
+
+            var avaliableEngines = AppDomain.CurrentDomain.GetAssemblies()
+                                    .Where(s => s.GetName().Name == assemblyName)
+                                    .SelectMany(s => s.DefinedTypes)
+                                    .Where(p => type.IsAssignableFrom(p))
+                                    .Where(i => i.Name != type.Name)
+                                    .Select(i => new AvaliableEngine(i))
+                                    .ToArray();
+
+            return avaliableEngines;
         }
 
-        public void RemoveEngine<EngineType>() where EngineType : TranslateEngine
-        {
-            _engines.Remove(typeof(EngineType));
-        }
+        public void AddEngine<EngineType>() where EngineType : TranslateEngine => AddEngineInternal(typeof(EngineType));
+
+        public void AddEngine(AvaliableEngine avaliableEngine) => AddEngineInternal(avaliableEngine.Type);
+
+        public void RemoveEngine<EngineType>() where EngineType : TranslateEngine => RemoveEngineInternal(typeof(EngineType));
+
+        public void RemoveEngine(AvaliableEngine avaliableEngine) => RemoveEngineInternal(avaliableEngine.Type);
 
         public IEnumerable<ITranslateResult> Translate(TranslateArgs translateArgs)
         {
@@ -42,5 +54,12 @@ namespace TranslationCenter.Services.Translation
 
             return translateResults;
         }
+
+        private void AddEngineInternal(Type type)
+        {
+            if (!_engines.ContainsKey(type))
+                _engines[type] = (TranslateEngine)Activator.CreateInstance(type);
+        }
+        private void RemoveEngineInternal(Type type) => _engines.Remove(type);
     }
 }

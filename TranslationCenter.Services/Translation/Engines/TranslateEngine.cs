@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using TranslationCenter.Services.Translation.Enums;
@@ -9,12 +10,21 @@ namespace TranslationCenter.Services.Translation.Engines
 {
     public abstract class TranslateEngine
     {
+        private EngineInfoAttribute _engineInfo;
+
+        public TranslateEngine()
+        {
+            _engineInfo = this.GetType().GetCustomAttributes(typeof(EngineInfoAttribute), false).OfType<EngineInfoAttribute>().FirstOrDefault();
+            if (_engineInfo == null)
+                throw new NotImplementedException($"{ nameof(EngineInfoAttribute) } not implemented!");
+        }
+
         protected delegate HttpResponseMessage GetResponseMessageHandle(HttpClient httpClient);
 
         protected delegate string GetTranslatedTextHandle(string response);
 
-        public virtual string DisplayName => Name;
-        public abstract EngineTypes EngineType { get; }
+        public string DisplayName => _engineInfo.DisplayName;
+        public EngineCategory Category => _engineInfo.Category;
         public string Name => GetType().Name;
         public ResultTypes ResultType { get; }
         public TranslateArgs TranslationArgs { get; private set; }
