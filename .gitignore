@@ -8,8 +8,8 @@
 *.user
 _ReSharper.*/
 *.sdf
-bin/
-obj/
+/bin/
+/obj/
 Debug/
 Release/
 *.opensdf
@@ -26,3 +26,6 @@ Version.cpp
 *.cache
 /.vs/TranslationCenter/DesignTimeBuild
 /packages
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs

@@ -5,7 +5,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
     internal class SelectWindowModel<T> : ViewModelBase
     {
-        private List<(string filterCaption, Func<T, bool> filter)> _filterOptions;
+        private List<FilterOptionItem<T>> _filterOptions;
         private IEnumerable<T> _items;
         private string _message;
         private IEnumerable<T> _selectedItems;
@@ -13,10 +13,10 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         public SelectWindowModel()
         {
-            _filterOptions = new List<(string filterCaption, Func<T, bool> filter)>();
+            _filterOptions = new List<FilterOptionItem<T>>();
         }
 
-        public List<(string filterCaption, Func<T, bool> filter)> FilterOptions
+        public List<FilterOptionItem<T>> FilterOptions
         {
             get => _filterOptions;
             set
