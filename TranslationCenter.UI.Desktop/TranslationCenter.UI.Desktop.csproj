@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Converters\**" />
+    <EmbeddedResource Remove="Converters\**" />
+    <None Remove="Converters\**" />
+    <Page Remove="Converters\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\EnginesConfig_Icon.png" />
     <None Remove="Resources\Execute_Icon.png" />
     <None Remove="Resources\Languages_Icon.png" />
@@ -26,10 +33,6 @@
     <Content Include="Resources\Translate_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Converters\" />
   </ItemGroup>
 
   <ItemGroup>
