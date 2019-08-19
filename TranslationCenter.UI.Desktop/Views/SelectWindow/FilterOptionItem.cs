@@ -16,5 +16,6 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
         public string Text { get; set; }
         public Func<T, bool> Filter { get; set; }
         public bool IsSelected { get; set; }
+
     }
 }

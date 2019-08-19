@@ -18,7 +18,6 @@ C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCente
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\TranslationCenter.exe.config
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\TranslationCenter.exe
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\bin\Debug\TranslationCenter.pdb
-C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csprojAssemblyReference.cache
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslateWindow.g.cs
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\App.g.cs
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter_Content.g.cs

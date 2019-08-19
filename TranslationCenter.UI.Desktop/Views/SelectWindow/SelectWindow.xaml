@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.SelectWindow"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="900">
-    <Window.Resources >
-        <local:FilterOptionsConverter x:Key="FilterOptionsConverter" />
-    </Window.Resources>
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,11 +17,12 @@
 
         <TextBlock Grid.Row="0" FontSize="15" Margin="0,10,0,10" Text="{Binding Message}" />
 
-        <TabControl ItemsSource="{Binding FilterOptions, Converter={StaticResource FilterOptionsConverter}}" Grid.Row="1" BorderThickness="0,1,0,0" Padding="0">
+        <TabControl ItemsSource="{ Binding FilterOptions }" 
+                    Grid.Row="1" BorderThickness="0,1,0,0" Padding="0" DisplayMemberPath="Text">
 
         </TabControl>
 
-        <ListBox ItemsSource="{Binding FilteredItems}" 
+        <ListBox ItemsSource="{Binding FilteredItems}" DisplayMemberPath="Name"
                  Grid.Row="2" Padding="5" 
                  SelectionMode="Multiple" BorderThickness="0">
             <ListBox.Resources>
@@ -33,11 +32,11 @@
                     <Setter Property="FontSize" Value="18" />
                 </Style>
             </ListBox.Resources>
-            <ListBox.ItemTemplate>
+            <!--<ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel  />
                 </DataTemplate>
-            </ListBox.ItemTemplate>
+            </ListBox.ItemTemplate>-->
             
         </ListBox>
 

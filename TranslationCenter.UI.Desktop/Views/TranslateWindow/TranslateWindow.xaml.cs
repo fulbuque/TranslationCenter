@@ -24,11 +24,9 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
              Message = "Select one or more Engines",
             };
 
-            selectWindowModel.FilterOptions.Add(("All", (e) => true));
-            Func<AvaliableEngine, bool> onlyTranslators = (e) => e.Category == EngineCategory.Translator;
-            selectWindowModel.FilterOptions.Add(("Translators", onlyTranslators));
-            Func<AvaliableEngine, bool> onlyDictionaries = (e) => e.Category == EngineCategory.Dictionary;
-            selectWindowModel.FilterOptions.Add(("Dictionaries", onlyDictionaries));
+            selectWindowModel.AddFilterOption("All", (e) => true, true);
+            selectWindowModel.AddFilterOption("Translators", (e) => e.Category == EngineCategory.Translator);
+            selectWindowModel.AddFilterOption("Dictionaries", (e) => e.Category == EngineCategory.Dictionary);
 
             var avaliableEngines = TranslationService.GetAvaliableEngines();
             selectWindowModel.Items = avaliableEngines;

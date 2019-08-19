@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {}
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {}
   },
   "projects": {
-    "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
         "projectName": "TranslationCenter.Services",
-        "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
         "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
-        "outputPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\obj\\",
+        "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

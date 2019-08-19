@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj": {}
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj": {}
   },
   "projects": {
-    "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj": {
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj",
+        "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj",
         "projectName": "TranslationCenter.Services.Tests",
-        "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj",
+        "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services.Tests\\TranslationCenter.Services.Tests.csproj",
         "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
-        "outputPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services.Tests\\obj\\",
+        "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
-                "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
+              "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+                "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
         "projectName": "TranslationCenter.Services",
-        "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
         "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
-        "outputPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\obj\\",
+        "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

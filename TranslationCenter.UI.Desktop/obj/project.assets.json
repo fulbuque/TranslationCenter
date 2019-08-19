@@ -75,11 +75,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\_Projects\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
+      "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
       "projectName": "TranslationCenter.UI.Desktop",
-      "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
+      "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
       "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
-      "outputPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.UI.Desktop\\obj\\",
+      "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -98,8 +98,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
-              "projectPath": "C:\\_Projects\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
+            "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+              "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
             }
           }
         }

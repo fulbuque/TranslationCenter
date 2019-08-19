@@ -5,7 +5,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
     internal class SelectWindowModel<T> : ViewModelBase
     {
-        private List<FilterOptionItem<T>> _filterOptions;
+        private Dictionary<string, FilterOptionItem<T>> _filterOptions;
         private IEnumerable<T> _items;
         private string _message;
         private IEnumerable<T> _selectedItems;
@@ -13,18 +13,10 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         public SelectWindowModel()
         {
-            _filterOptions = new List<FilterOptionItem<T>>();
+            _filterOptions = new Dictionary<string, FilterOptionItem<T>>();
         }
 
-        public List<FilterOptionItem<T>> FilterOptions
-        {
-            get => _filterOptions;
-            set
-            {
-                _filterOptions = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public IEnumerable<FilterOptionItem<T>> FilterOptions=> _filterOptions.Values;
 
         public IEnumerable<T> Items
         {
@@ -66,6 +58,11 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 _title = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public void AddFilterOption(string text, Func<T, bool> filter, bool isSelected = false)
+        {
+            _filterOptions[text] = new FilterOptionItem<T>(text, filter, isSelected);
         }
     }
 }
