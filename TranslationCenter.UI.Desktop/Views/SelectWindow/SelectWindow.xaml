@@ -63,7 +63,7 @@
 
 
 
-        <ListBox ItemsSource="{Binding FilteredItems}" DisplayMemberPath="DisplayName" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ListBox x:Name="lstItems" ItemsSource="{Binding FilteredItems}" DisplayMemberPath="DisplayMemberName" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Grid.Row="2" Padding="5" 
                  SelectionMode="Multiple" BorderThickness="0,1,0,1" Margin="0,0,0,0">
             <ListBox.Resources>
@@ -90,8 +90,8 @@
                     <Setter Property="MinWidth" Value="100" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="Cancel" />
-            <Button Content="Ok" />
+            <Button x:Name="btnCancel" Content="Cancel" Click="BtnCancel_Click" />
+            <Button x:Name="btnOk" Content="Ok" Click="BtnOk_Click" />
         </StackPanel>
 
     </Grid>

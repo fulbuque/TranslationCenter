@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TranslationCenter.Services.Translation.Engines;
-using TranslationCenter.Services.Translation.Interfaces;
 using TranslationCenter.Services.Translation.Types;
 
 namespace TranslationCenter.Services.Translation
@@ -11,7 +10,7 @@ namespace TranslationCenter.Services.Translation
     {
         private Dictionary<Type, TranslateEngine> _engines = new Dictionary<Type, TranslateEngine>();
 
-        public static AvaliableEngine[] GetAvaliableEngines()
+        public static IAvaliableEngine[] GetAvaliableEngines()
         {
             var type = typeof(TranslateEngine);
             var assemblyName = type.Assembly.GetName().Name;
@@ -29,11 +28,11 @@ namespace TranslationCenter.Services.Translation
 
         public void AddEngine<EngineType>() where EngineType : TranslateEngine => AddEngineInternal(typeof(EngineType));
 
-        public void AddEngine(AvaliableEngine avaliableEngine) => AddEngineInternal(avaliableEngine.Type);
+        public void AddEngine(IAvaliableEngine avaliableEngine) => AddEngineInternal(avaliableEngine.Type);
 
         public void RemoveEngine<EngineType>() where EngineType : TranslateEngine => RemoveEngineInternal(typeof(EngineType));
 
-        public void RemoveEngine(AvaliableEngine avaliableEngine) => RemoveEngineInternal(avaliableEngine.Type);
+        public void RemoveEngine(IAvaliableEngine avaliableEngine) => RemoveEngineInternal(avaliableEngine.Type);
 
         public IEnumerable<ITranslateResult> Translate(TranslateArgs translateArgs)
         {

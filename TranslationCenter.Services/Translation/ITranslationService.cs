@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using TranslationCenter.Services.Translation.Enums;
+using TranslationCenter.Services.Translation.Types;
 
-namespace TranslationCenter.Services.Translation.Interfaces
+namespace TranslationCenter.Services.Translation
 {
     public interface ITranslationService
     {

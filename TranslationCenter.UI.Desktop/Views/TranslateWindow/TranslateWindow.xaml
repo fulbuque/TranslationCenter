@@ -3,12 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TranslationCenter.UI.Desktop"
+        xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.TranslateWindow"
         mc:Ignorable="d"
         Title="Translation Center" Height="450" Width="800" WindowState="Maximized">
     <Window.Icon>
         <BitmapImage UriSource="../../Resources/Translate_Icon.png"></BitmapImage>
     </Window.Icon>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.SelectLanguageCommand }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.TranslateCommand }" Executed="CommandBinding_Executed" />
+    </Window.CommandBindings>
     <Grid>
 
         <Grid.RowDefinitions>
@@ -19,85 +24,39 @@
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" >
-            <!--<Menu Padding="3,3,3,3" Background="Transparent">
-                <Menu.Resources>
-                    <Style x:Key="menuSeparatorStyle" TargetType="{x:Type Separator}">
-                        <Setter Property="Margin" Value="0,3,0,3" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type Separator}">
-                                    <Grid>
-                                        <Rectangle  Stroke="DarkGray"  />
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Menu.Resources>
-                <Menu.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                        </Grid>
-                    </ItemsPanelTemplate>
-                </Menu.ItemsPanel>
-                <MenuItem Grid.Column="0" Name="mnuEngines" Click="MnuEngines_Click">
-                    <MenuItem.Header>
-                        <TextBlock Padding="0,2,0,0">Engines</TextBlock>
-                    </MenuItem.Header>
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/EnginesConfig_Icon.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Grid.Column="1" Name="mnuLanguages" Click="MnuLanguages_Click">
-                    <MenuItem.Header>
-                        <TextBlock Padding="0,2,0,0">Languages</TextBlock>
-                    </MenuItem.Header>
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/Languages_Icon.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <Separator Grid.Column="2" Style="{StaticResource menuSeparatorStyle}" />
-                <MenuItem Grid.Column="3">
-                    <MenuItem.Header>
-                        <TextBlock Padding="0,2,0,0">Translate</TextBlock>
-                    </MenuItem.Header>
-                    <MenuItem.Icon>
-                        <Image Source="/Resources/Execute_Icon.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-            </Menu>-->
-            <MenuItem Grid.Column="0" Name="mnuEngines" Click="MnuEngines_Click">
-                <MenuItem.Header>
-                    <TextBlock Padding="0,2,0,0">Engines</TextBlock>
-                </MenuItem.Header>
-                <MenuItem.Icon>
+            <ToolBar.Resources>
+                <Style TargetType="Image">
+                    <Setter Property="Height" Value="24" />
+                    <Setter Property="Margin" Value="2" />
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="5,5,0,0" />
+                </Style>
+            </ToolBar.Resources>
+            <Button Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/EnginesConfig_Icon.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Grid.Column="1" Name="mnuLanguages" Click="MnuLanguages_Click">
-                <MenuItem.Header>
-                    <TextBlock Padding="0,2,0,0">Languages</TextBlock>
-                </MenuItem.Header>
-                <MenuItem.Icon>
+                    <TextBlock>Engines</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Command="{x:Static local:TranslateWindowCommands.SelectLanguageCommand }">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Languages_Icon.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
+                    <TextBlock>Languages</TextBlock>
+                </StackPanel>
+            </Button>
             <Separator />
-            <MenuItem Grid.Column="3">
-                <MenuItem.Header>
-                    <TextBlock Padding="0,2,0,0">Translate</TextBlock>
-                </MenuItem.Header>
-                <MenuItem.Icon>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="8">From Language</TextBlock>
+                <ComboBox Margin="0,0,8,0" ItemsSource="{Binding AllLanguages }" DisplayMemberPath="Name"></ComboBox>
+            </StackPanel>
+            <!--<Separator />-->
+            <Button Command="{x:Static local:TranslateWindowCommands.TranslateCommand }">
+                <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Execute_Icon.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-
+                    <TextBlock>Translate</TextBlock>
+                </StackPanel>
+            </Button>
         </ToolBar>
 
         <Grid Grid.Row="1" Margin="5,5,5,0">
@@ -109,47 +68,93 @@
             <TextBox  Grid.Row="1" Text="{ Binding Text, Delay=300, UpdateSourceTrigger=PropertyChanged }" MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True" />
         </Grid>
 
-        <!--<Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <GridSplitter Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5" />
 
-            -->
-        <!--menu-->
-        <!--
+        <Grid Grid.Row="3" Margin="5,5,5,0">
 
-            <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TabControl Grid.Column="0" Grid.RowSpan="3" x:Name="tabEngines"
+                            ItemsSource="{ Binding SelectedEngines }" DisplayMemberPath="DisplayName" SelectedItem="{Binding CurrentEngine, Mode=TwoWay}"
+                            Margin="0,31,0,0" Padding="0" BorderThickness="1,0,0,0" SelectedIndex="0"  TabStripPlacement="Left" >
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate></DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <ContentPresenter Content="{Binding DisplayName}">
+                                        <ContentPresenter.LayoutTransform>
+                                            <RotateTransform Angle="270" />
+                                        </ContentPresenter.LayoutTransform>
+                                    </ContentPresenter>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Padding" Value="7" />
+                    </Style>
+                </TabControl.Resources>
+            </TabControl>
+
+            <Grid Grid.Column="1" MinHeight="600" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Search Text" />
-                <TextBox  Grid.Row="1" Text="{ Binding Text, Delay=300, UpdateSourceTrigger=PropertyChanged }" MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True" />
+
+                <TabControl Grid.Row="0" x:Name="tabLanguages"
+                            ItemsSource="{ Binding SelectedLanguages }" DisplayMemberPath="Name" SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}"
+                            Margin="0,3,0,0" Padding="0" BorderThickness="0,1,0,0" SelectedIndex="0">
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate></DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </TabControl.Resources>
+                </TabControl>
+
+                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="5,10,5,5" />
+
             </Grid>
-
-        </Grid>-->
-
-        <GridSplitter Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5" />
-
-        <Grid Grid.Row="3" MinHeight="200" Margin="5,5,5,0">
+        </Grid>
+        
+        <!--
+        
+        <Grid Grid.Column="1" MinHeight="200" Margin="5,5,5,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <TabControl Grid.Row="0" x:Name="tabSourceResults"
-                            ItemsSource="{ Binding SourceResults }"
-                            Margin="0,5,0,0" Padding="0" BorderThickness="0" SelectedIndex="0" />
+             <TabControl Grid.Row="0" x:Name="tabLanguages"
+                            ItemsSource="{ Binding SelectedLanguages }" DisplayMemberPath="Name" SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}"
+                            Margin="0,3,0,0" Padding="0" BorderThickness="0,1,0,0" SelectedIndex="0">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate></DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+            </TabControl>
 
-            <TabControl Grid.Row="1" x:Name="tabSelectedLanguages"
-                            ItemsSource="{ Binding SelectedLanguages }"
-                            Margin="0,3,0,0" Padding="0" BorderThickness="0" SelectedIndex="0" />
-
-            <WebBrowser Grid.Row="2" x:Name="webBrowserResult" Margin="5,10,5,5" />
+            <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="5,10,5,5" />
 
         </Grid>
+        
+        -->
 
     </Grid>
 </Window>

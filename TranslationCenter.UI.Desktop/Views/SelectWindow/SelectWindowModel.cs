@@ -4,9 +4,11 @@ using System.Linq;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    internal class SelectWindowModel<T> : ViewModelBase where T : class
+    internal class SelectWindowModel<T> : ViewModelBase, ISelectWindowModel
     {
+        private string _displayName;
         private Dictionary<string, FilterOptionItem<T>> _filterOptions;
+        private FilterOptionItem<T> _filterOptionSelected;
         private IEnumerable<SelectWindowItem> _items;
         private string _message;
         private IEnumerable<T> _selectedItems;
@@ -16,54 +18,12 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
         {
             _filterOptions = new Dictionary<string, FilterOptionItem<T>>();
         }
-
-        private FilterOptionItem<T> _filterOptionSelected;
-        public FilterOptionItem<T> FilterOptionSelected
+        public string DisplayMemberName
         {
-            get => _filterOptionSelected;
+            get => _displayName;
             set
             {
-                _filterOptionSelected = value;
-                NotifyPropertyChanged();
-                NotifyPropertyChanged(nameof(FilteredItems));
-            }
-        }
-        public class SelectWindowItem
-        {
-
-            private string _displayNameProperty;
-
-            public SelectWindowItem(T data, string displayName)
-            {
-                Data = data;
-                _displayNameProperty = displayName;
-            }
-            public T Data { get; }
-
-            public string DisplayName
-            {
-                get
-                {
-                    var prop = Data.GetType().GetProperty(_displayNameProperty);
-                    if (prop != null)
-                        return prop.GetValue(Data)?.ToString();
-
-                    return default;
-                }
-            }
-
-        }
-
-        public FilterOptionItem<T>[] FilterOptions=> _filterOptions.Values.ToArray();
-
-        public bool HasFilterOptions => FilterOptions.Any();
-
-        public IEnumerable<T> Items
-        {
-            get => _items.Select(i => i.Data);
-            set
-            {
-                _items = value.Select(i => new SelectWindowItem(i, DisplayName));
+                _displayName = value;
                 NotifyPropertyChanged();
             }
         }
@@ -75,6 +35,30 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 if (FilterOptionSelected != null)
                     return _items.Where(i => FilterOptionSelected.Filter(i.Data));
                 return _items;
+            }
+        }
+
+        public FilterOptionItem<T>[] FilterOptions => _filterOptions.Values.ToArray();
+
+        public FilterOptionItem<T> FilterOptionSelected
+        {
+            get => _filterOptionSelected;
+            set
+            {
+                _filterOptionSelected = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(FilteredItems));
+            }
+        }
+        public bool HasFilterOptions => FilterOptions.Any();
+
+        public IEnumerable<T> Items
+        {
+            get => _items.Select(i => i.Data);
+            set
+            {
+                _items = value.Select(i => new SelectWindowItem(i, DisplayMemberName));
+                NotifyPropertyChanged();
             }
         }
 
@@ -110,23 +94,44 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         public void AddFilterOption(string text, Func<T, bool> filter, bool isSelected = false)
         {
-            _filterOptions[text] = new FilterOptionItem<T>(text, filter);
-            if (isSelected)
-                FilterOptionSelected = _filterOptions[text];
+            AddFilterOption(new FilterOptionItem<T>(text, filter, isSelected));
         }
 
-        private string _displayName;
-
-        public string DisplayName
+        internal void AddFilterOption(FilterOptionItem<T> filterOptionItem)
         {
-            get => _displayName;
-            set
+            _filterOptions[filterOptionItem.Text] = filterOptionItem;
+            if (filterOptionItem.IsSelected)
+                FilterOptionSelected = _filterOptions[filterOptionItem.Text];
+        }
+
+        public class SelectWindowItem
+        {
+
+            private string _displayMemberName;
+
+            public SelectWindowItem(T data, string displayMemberName)
             {
-                _displayName = value;
-                NotifyPropertyChanged();
+                Data = data;
+                _displayMemberName = displayMemberName;
+            }
+            public T Data { get; }
+
+            public string DisplayMemberName
+            {
+                get
+                {
+                    var prop = Data.GetType().GetProperty(_displayMemberName);
+                    if (prop != null)
+                        return prop.GetValue(Data)?.ToString();
+
+                    return default;
+                }
             }
         }
 
-
+        public void SetSelectedItems(System.Collections.IList list)
+        {
+            SelectedItems = list.Cast<SelectWindowItem>().Select(i => i.Data);
+        }
     }
 }

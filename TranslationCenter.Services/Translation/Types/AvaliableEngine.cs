@@ -5,9 +5,9 @@ using TranslationCenter.Services.Translation.Enums;
 
 namespace TranslationCenter.Services.Translation.Types
 {
-    public class AvaliableEngine
+    internal class AvaliableEngine : IAvaliableEngine
     {
-         public AvaliableEngine(TypeInfo typeInfo)
+        public AvaliableEngine(TypeInfo typeInfo)
         {
             var engineInfo = typeInfo.GetCustomAttributes(false).OfType<EngineInfoAttribute>().FirstOrDefault();
             Category = engineInfo.Category;

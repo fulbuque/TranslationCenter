@@ -1,6 +1,6 @@
 ﻿using TranslationCenter.Services.Translation.Engines;
 
-namespace TranslationCenter.Services.Translation.Interfaces
+namespace TranslationCenter.Services.Translation.Types
 {
     public interface ITranslateResult
     {
