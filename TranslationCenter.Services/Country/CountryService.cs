@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using TranslationCenter.Services.Country.Types;
 using TranslationCenter.Services.Country.Types.Interfaces;
 
 namespace TranslationCenter.Services.Country
@@ -12,6 +13,7 @@ namespace TranslationCenter.Services.Country
     public class CountryService
     {
         private static ICountry[] _countries = new ICountry[] { };
+        private static LanguageComparer _languageComparer = new LanguageComparer();
 
         public ICountry[] GetCountries()
         {
@@ -38,6 +40,11 @@ namespace TranslationCenter.Services.Country
 
                 return _countries;
             }
+        }
+
+        public ILanguage[] GetLanguages()
+        {
+            return GetCountries().SelectMany(c => c.Languages).ToHashSet(_languageComparer).OrderBy(l => l.Name).ToArray();
         }
     }
 }

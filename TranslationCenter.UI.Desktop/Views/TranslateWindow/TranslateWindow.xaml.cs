@@ -32,6 +32,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
             var avaliableEngines = TranslationService.GetAvaliableEngines();
             selectWindowModel.Items = avaliableEngines;
+            selectWindowModel.DisplayName = nameof(AvaliableEngine.DisplayName);
 
             var selectWindow = new SelectWindow.SelectWindow() { DataContext = selectWindowModel };
             selectWindow.Owner = this;
@@ -40,19 +41,15 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
         private void MnuLanguages_Click(object sender, RoutedEventArgs e)
         {
-            var selectWindowModel = new SelectWindow.SelectWindowModel<ICountry>()
+            var selectWindowModel = new SelectWindow.SelectWindowModel<ILanguage>()
             {
                 Title = "Languages",
                 Message = "Select one or more languages",
             };
 
-            //selectWindowModel.AddFilterOption("All", (e) => true);
-            //selectWindowModel.AddFilterOption("Translators", (e) => e.Category == EngineCategory.Translator, true);
-            //selectWindowModel.AddFilterOption("Dictionaries", (e) => e.Category == EngineCategory.Dictionary);
-
-            var countries = new CountryService().GetCountries();
-            selectWindowModel.Items = countries;
-            selectWindowModel.DisplayName = nameof(ICountry.Name);
+            var languages = new CountryService().GetLanguages();
+            selectWindowModel.DisplayName = nameof(ILanguage.Name);
+            selectWindowModel.Items = languages;
 
             var selectWindow = new SelectWindow.SelectWindow() { DataContext = selectWindowModel };
             selectWindow.Owner = this;

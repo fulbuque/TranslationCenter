@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    internal class SelectWindowModel<T> : ViewModelBase
+    internal class SelectWindowModel<T> : ViewModelBase where T : class
     {
         private Dictionary<string, FilterOptionItem<T>> _filterOptions;
-        private IEnumerable<T> _items;
+        private IEnumerable<SelectWindowItem> _items;
         private string _message;
         private IEnumerable<T> _selectedItems;
         private string _title;
@@ -28,26 +28,53 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 NotifyPropertyChanged(nameof(FilteredItems));
             }
         }
+        public class SelectWindowItem
+        {
 
-        public IEnumerable<FilterOptionItem<T>> FilterOptions=> _filterOptions.Values;
+            private string _displayNameProperty;
+
+            public SelectWindowItem(T data, string displayName)
+            {
+                Data = data;
+                _displayNameProperty = displayName;
+            }
+            public T Data { get; }
+
+            public string DisplayName
+            {
+                get
+                {
+                    var prop = Data.GetType().GetProperty(_displayNameProperty);
+                    if (prop != null)
+                        return prop.GetValue(Data)?.ToString();
+
+                    return default;
+                }
+            }
+
+        }
+
+        public FilterOptionItem<T>[] FilterOptions=> _filterOptions.Values.ToArray();
+
+        public bool HasFilterOptions => FilterOptions.Any();
 
         public IEnumerable<T> Items
         {
-            get => _items;
+            get => _items.Select(i => i.Data);
             set
             {
-                _items = value;
+                _items = value.Select(i => new SelectWindowItem(i, DisplayName));
                 NotifyPropertyChanged();
             }
         }
 
-        public IEnumerable<T> FilteredItems
+        public IEnumerable<SelectWindowItem> FilteredItems
         {
             get
             {
                 if (FilterOptionSelected != null)
-                    return Items.Where(FilterOptionSelected?.Filter);
-                return Items;
+                    return _items.Where(i => FilterOptionSelected.Filter(i.Data));
+                return _items;
             }
         }
 
@@ -88,7 +115,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 FilterOptionSelected = _filterOptions[text];
         }
 
-        private string _displayName = "DisplayName";
+        private string _displayName;
 
         public string DisplayName
         {

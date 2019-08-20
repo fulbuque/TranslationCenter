@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.SelectWindow"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="450" Width="900" 
+        Title="{Binding Title}" Height="768" Width="1507" 
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip">
 
-    <Grid Margin="10">
+    <Grid Margin="0,0,0,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -18,9 +18,18 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" FontSize="12" Margin="0,10,0,15" Text="{Binding Message}" />
+        <TextBlock Grid.Row="0" FontSize="18" Margin="0,10,0,0" Text="{Binding Message}" Background="#f4f4f4"  Padding="20" />
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding FilterOptions}"  SelectedItem="{Binding FilterOptionSelected}" BorderThickness="0">
+        <ListBox Grid.Row="1" ItemsSource="{Binding FilterOptions}"  SelectedItem="{Binding FilterOptionSelected}" BorderThickness="0" Margin="10">
+            <ListBox.Style>
+                <Style TargetType="ListBox">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding HasFilterOptions}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.Style>
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel />
@@ -54,15 +63,16 @@
 
 
 
-        <ListBox ItemsSource="{Binding FilteredItems}" DisplayMemberPath="{Binding DisplayName}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <ListBox ItemsSource="{Binding FilteredItems}" DisplayMemberPath="DisplayName" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Grid.Row="2" Padding="5" 
-                 SelectionMode="Multiple" BorderThickness="0" Margin="0,10,0,0">
+                 SelectionMode="Multiple" BorderThickness="0,1,0,1" Margin="0,0,0,0">
             <ListBox.Resources>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="5,5,5,5" />
                     <Setter Property="Padding" Value="8" />
                     <Setter Property="FontSize" Value="18" />
-                    <Setter Property="MinWidth" Value="180" />
+                    <Setter Property="Width" Value="280" />
+                    <Setter Property="BorderBrush" Value="#ccc" />
                 </Style>
             </ListBox.Resources>
             <ListBox.ItemsPanel>
@@ -70,17 +80,15 @@
                     <WrapPanel IsItemsHost="True" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            
         </ListBox>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,20,30,0">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="10,0,0,0" />
                     <Setter Property="Padding" Value="5,8,5,8" />
                     <Setter Property="MinWidth" Value="100" />
                 </Style>
-                
             </StackPanel.Resources>
             <Button Content="Cancel" />
             <Button Content="Ok" />
