@@ -53,7 +53,7 @@
                     <Image Source="/Resources/EnginesConfig_Icon.png"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Grid.Column="1">
+            <MenuItem Grid.Column="1" Name="mnuLanguages" Click="MnuLanguages_Click">
                 <MenuItem.Header>
                     <TextBlock Padding="0,2,0,0">Languages</TextBlock>
                 </MenuItem.Header>

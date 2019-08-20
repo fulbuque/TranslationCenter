@@ -4,18 +4,17 @@ using System.Text;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    class FilterOptionItem<T>
+    class FilterOptionItem<T> : IFilterOptionItem
     {
-        public FilterOptionItem(string text, Func<T, bool> filter, bool isSelected)
+        public FilterOptionItem(string text, Func<T, bool> filter)
         {
             Text = text;
             Filter = filter;
-            IsSelected = isSelected;
         }
 
         public string Text { get; set; }
         public Func<T, bool> Filter { get; set; }
-        public bool IsSelected { get; set; }
 
+        public object GetFilter => Filter;
     }
 }

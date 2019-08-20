@@ -7,15 +7,16 @@ namespace TranslationCenter.Services.Translation.Types
 {
     public class AvaliableEngine
     {
-        private TypeInfo i;
-
-        public AvaliableEngine(TypeInfo typeInfo)
+         public AvaliableEngine(TypeInfo typeInfo)
         {
-            Category = typeInfo.GetCustomAttributes(false).OfType<EngineInfoAttribute>().FirstOrDefault().Category;
+            var engineInfo = typeInfo.GetCustomAttributes(false).OfType<EngineInfoAttribute>().FirstOrDefault();
+            Category = engineInfo.Category;
+            DisplayName = engineInfo.DisplayName;
             Type = typeInfo.UnderlyingSystemType;
         }
 
         public EngineCategory Category { get; }
+        public string DisplayName { get; }
         public Type Type { get; }
         public string Name => Type.Name;
     }
