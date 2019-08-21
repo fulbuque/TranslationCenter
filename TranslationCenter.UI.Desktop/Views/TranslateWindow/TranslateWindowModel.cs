@@ -5,6 +5,7 @@ using System.Windows;
 using TranslationCenter.Services.Country;
 using TranslationCenter.Services.Country.Types.Interfaces;
 using TranslationCenter.Services.Translation;
+using TranslationCenter.Services.Translation.Engines;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Types;
 using TranslationCenter.UI.Desktop.Views.SelectWindow;
@@ -15,14 +16,21 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
     {
         private IAvaliableEngine _currentEngine;
         private ILanguage _currentLanguage;
+        private ILanguage _currentLanguageFrom;
         private IEnumerable<ILanguage> _selectedLanguages;
         private IEnumerable<IAvaliableEngine> avaliableEngines;
+        private readonly string[] mostUsedIsos = new string[] { "cn", "es", "en", "hi", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
         CountryService countryService = new CountryService();
         TranslationService translationService = new TranslationService();
 
         public TranslateWindowModel()
         {
             AllLanguages = countryService.GetLanguages();
+            CurrentLanguageFrom = AllLanguages.FirstOrDefault(l => l.Iso == "de");
+            SelectedLanguages = AllLanguages.Where(l => mostUsedIsos.Contains( l.Iso) );
+            CurrentLanguage = SelectedLanguages.FirstOrDefault(l => l.Iso == "en");
+            SelectedEngines = TranslationService.GetAvaliableEngines();
+            CurrentEngine = SelectedEngines.FirstOrDefault(e => e.Name == nameof(BingTranslatorEngine));
         }
 
         public IAvaliableEngine CurrentEngine
@@ -41,6 +49,15 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             set
             {
                 _currentLanguage = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public ILanguage CurrentLanguageFrom
+        {
+            get => _currentLanguageFrom;
+            set
+            {
+                _currentLanguageFrom = value;
                 NotifyPropertyChanged();
             }
         }
@@ -97,7 +114,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
         internal void SelectLanguages(Window owner)
         {
-            var mostUsedIsos = new string[] { "cn", "es", "en", "hi", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
+            
             var selectedLanguages = OpenSelectWindow<ILanguage>(owner,
                                     "Languages",
                                     "Select one or more languages",

@@ -22,12 +22,26 @@ namespace TranslationCenter.Services.Country
 
             using (var client = new HttpClient())
             {
+                var ContryJsonFile = Path.Combine(Directory.GetCurrentDirectory() + @"\Resources\", "Country.json");
+                var hasCountryJsonFile = File.Exists(ContryJsonFile);
+
+                string url = "";
+                if (hasCountryJsonFile)
+                    url = ContryJsonFile;
+                else 
+                    url = "https://restcountries.eu/rest/v2/all";
+
+                //string url = "https://restcountries.eu/rest/v2/all";
+
                 client.BaseAddress = new Uri("https://restcountries.eu/rest/v2/all");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = client.GetStringAsync("");
                 response.Wait();
+
+                if (!hasCountryJsonFile) 
+                    File.WriteAllText(ContryJsonFile, response.Result);
 
                 using (var stringReader = new StringReader(response.Result))
                 using (var jsonReader = new JsonTextReader(stringReader))
@@ -41,6 +55,7 @@ namespace TranslationCenter.Services.Country
                 return _countries;
             }
         }
+
 
         public ILanguage[] GetLanguages()
         {

@@ -23,7 +23,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ToolBar Grid.Row="0" >
+        <ToolBar Grid.Row="0" ToolBarTray.IsLocked="True">
+
             <ToolBar.Resources>
                 <Style TargetType="Image">
                     <Setter Property="Height" Value="24" />
@@ -33,27 +34,27 @@
                     <Setter Property="Margin" Value="5,5,0,0" />
                 </Style>
             </ToolBar.Resources>
-            <Button Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }">
+
+            <Button Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }" HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/EnginesConfig_Icon.png"/>
+                    <Image Source="/Resources/EnginesConfig_Icon.png" />
                     <TextBlock>Engines</TextBlock>
                 </StackPanel>
             </Button>
             <Button Command="{x:Static local:TranslateWindowCommands.SelectLanguageCommand }">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Languages_Icon.png"/>
+                    <Image Source="/Resources/Languages_Icon.png" />
                     <TextBlock>Languages</TextBlock>
                 </StackPanel>
             </Button>
             <Separator />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Margin="8">From Language</TextBlock>
-                <ComboBox Margin="0,0,8,0" ItemsSource="{Binding AllLanguages }" DisplayMemberPath="Name"></ComboBox>
+                <ComboBox Margin="0,5,8,5" ItemsSource="{ Binding AllLanguages }" DisplayMemberPath="Name" SelectedValue="{Binding CurrentLanguageFrom, Mode=TwoWay}"></ComboBox>
             </StackPanel>
-            <!--<Separator />-->
             <Button Command="{x:Static local:TranslateWindowCommands.TranslateCommand }">
                 <StackPanel Orientation="Horizontal">
-                    <Image Source="/Resources/Execute_Icon.png"/>
+                    <Image Source="/Resources/Execute_Icon.png" />
                     <TextBlock>Translate</TextBlock>
                 </StackPanel>
             </Button>
@@ -76,10 +77,10 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <TabControl Grid.Column="0" Grid.RowSpan="3" x:Name="tabEngines"
-                            ItemsSource="{ Binding SelectedEngines }" DisplayMemberPath="DisplayName" SelectedItem="{Binding CurrentEngine, Mode=TwoWay}"
-                            Margin="0,31,0,0" Padding="0" BorderThickness="1,0,0,0" SelectedIndex="0"  TabStripPlacement="Left" >
+                            ItemsSource="{ Binding SelectedEngines }" DisplayMemberPath="DisplayName" SelectedValuePath="Name" SelectedItem="{Binding CurrentEngine, Mode=TwoWay}"
+                            Margin="0,31,0,0" Padding="0" BorderThickness="1,0,0,0" SelectedIndex="0"  TabStripPlacement="Left">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="ContentTemplate">
@@ -103,7 +104,7 @@
                 </TabControl.Resources>
             </TabControl>
 
-            <Grid Grid.Column="1" MinHeight="600" Margin="0,5,0,0">
+            <Grid Grid.Column="1" MinHeight="1000" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -124,37 +125,7 @@
                 </TabControl>
 
                 <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="5,10,5,5" />
-
             </Grid>
         </Grid>
-        
-        <!--
-        
-        <Grid Grid.Column="1" MinHeight="200" Margin="5,5,5,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-             <TabControl Grid.Row="0" x:Name="tabLanguages"
-                            ItemsSource="{ Binding SelectedLanguages }" DisplayMemberPath="Name" SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}"
-                            Margin="0,3,0,0" Padding="0" BorderThickness="0,1,0,0" SelectedIndex="0">
-                <TabControl.Resources>
-                    <Style TargetType="TabItem">
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate></DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </TabControl.Resources>
-            </TabControl>
-
-            <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="5,10,5,5" />
-
-        </Grid>
-        
-        -->
-
     </Grid>
 </Window>
