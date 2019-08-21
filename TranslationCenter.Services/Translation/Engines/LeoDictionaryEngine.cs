@@ -25,6 +25,9 @@ namespace TranslationCenter.Services.Translation.Engines
                 var isoFrom = TranslationArgs.IsoFrom;
                 var isoTo = TranslationArgs.IsoTo;
 
+                if (isoFrom != "de" && isoTo != "de")
+                    return string.Empty;
+
                 if (isoFrom == "pl" || isoTo == "pl")
                     return "polnisch-deutsch/";
                 else if (isoFrom == "pt" || isoTo == "pt")
@@ -46,8 +49,10 @@ namespace TranslationCenter.Services.Translation.Engines
             }
         }
 
-        protected override bool IsTranslateUnsupported => !supportedLanguages.Contains(TranslationArgs.IsoFrom) ||
-                                                                !supportedLanguages.Contains(TranslationArgs.IsoTo);
+        protected override bool IsTranslateUnsupported => (TranslationArgs.IsoFrom != "de" 
+                                                             && TranslationArgs.IsoTo != "de")
+                                                             || !supportedLanguages.Contains(TranslationArgs.IsoFrom) 
+                                                             || !supportedLanguages.Contains(TranslationArgs.IsoTo);
 
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {

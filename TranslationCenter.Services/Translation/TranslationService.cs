@@ -61,5 +61,13 @@ namespace TranslationCenter.Services.Translation
         }
 
         private void RemoveEngineInternal(Type type) => _engines.Remove(type);
+
+        public void AddEngines(IEnumerable<IAvaliableEngine> engines)
+        {
+            foreach (var engine in engines)
+            {
+                AddEngine(engine);
+            }
+        }
     }
 }

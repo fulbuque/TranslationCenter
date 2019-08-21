@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" MinHeight="150" MaxHeight="500" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <ToolBar Grid.Row="0" ToolBarTray.IsLocked="True">
@@ -65,8 +65,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Search Text" />
-            <TextBox  Grid.Row="1" Text="{ Binding Text, Delay=300, UpdateSourceTrigger=PropertyChanged }" MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True" />
+            <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Search Text"  />
+            <TextBox  Grid.Row="1" Text="{ Binding SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" 
+                      MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True"
+                      FontSize="30" />
         </Grid>
 
         <GridSplitter Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5" />
@@ -104,7 +106,7 @@
                 </TabControl.Resources>
             </TabControl>
 
-            <Grid Grid.Column="1" MinHeight="1000" Margin="0,5,0,0">
+            <Grid Grid.Column="1" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -124,7 +126,7 @@
                     </TabControl.Resources>
                 </TabControl>
 
-                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="5,10,5,5" />
+                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="15" />
             </Grid>
         </Grid>
     </Grid>

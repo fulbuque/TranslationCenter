@@ -1,10 +1,4 @@
-﻿using System;
-using System.Windows;
-using TranslationCenter.Services.Country;
-using TranslationCenter.Services.Country.Types.Interfaces;
-using TranslationCenter.Services.Translation;
-using TranslationCenter.Services.Translation.Enums;
-using TranslationCenter.Services.Translation.Types;
+﻿using System.Windows;
 
 namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 {
@@ -13,13 +7,21 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
     /// </summary>
     public partial class TranslateWindow : Window
     {
-
-        TranslateWindowModel model = new TranslateWindowModel();
+        private TranslateWindowModel model = new TranslateWindowModel();
 
         public TranslateWindow()
         {
             InitializeComponent();
             this.DataContext = model;
+            model.PropertyChanged += Model_PropertyChanged;
+        }
+
+        private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(model.CurrentResult))
+            {
+                webBrowserResult.NavigateToString(model.CurrentResult);
+            }
         }
 
         private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -30,7 +32,6 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                 model.SelectLanguages(this);
             else if (e.Command == TranslateWindowCommands.TranslateCommand)
                 model.Translate();
-
         }
     }
 }

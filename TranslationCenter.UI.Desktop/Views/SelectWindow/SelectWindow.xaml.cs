@@ -51,5 +51,10 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             if ((e.Key == Key.LeftShift || e.Key == Key.LeftCtrl) && lstItems.SelectionMode == SelectionMode.Extended)
                 lstItems.SelectionMode = SelectionMode.Multiple;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            lstItems.Focus();
+        }
     }
 }
