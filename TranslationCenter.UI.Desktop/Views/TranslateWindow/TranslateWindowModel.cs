@@ -26,10 +26,12 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         public TranslateWindowModel()
         {
             AllLanguages = countryService.GetLanguages();
+            AllAvaliableEngines = TranslationService.GetAvaliableEngines();
+
             CurrentLanguageFrom = AllLanguages.FirstOrDefault(l => l.Iso == "de");
             SelectedLanguages = AllLanguages.Where(l => mostUsedIsos.Contains( l.Iso) );
             CurrentLanguage = SelectedLanguages.FirstOrDefault(l => l.Iso == "en");
-            SelectedEngines = TranslationService.GetAvaliableEngines();
+            SelectedEngines = AllAvaliableEngines;
             CurrentEngine = SelectedEngines.FirstOrDefault(e => e.Name == nameof(BingTranslatorEngine));
         }
 
@@ -93,14 +95,24 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
+        public IAvaliableEngine[] AllAvaliableEngines { get; }
 
         internal void SelectEngines(Window owner)
         {
             var selectedEngines = OpenSelectWindow<IAvaliableEngine>(owner,
                                     "Engines",
                                     "Select one or more engines",
-                                    TranslationService.GetAvaliableEngines(),
+                                    AllAvaliableEngines,
+                                    SelectedEngines,
                                     nameof(IAvaliableEngine.DisplayName),
+                                    (selectedItems) => {
+                                        if (selectedItems.Count == 0)
+                                        {
+                                            MessageBox.Show("Select at least one search engine.", "Engines", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                            return false;
+                                        }
+                                        return true;
+                                    },
                                     new FilterOptionItem<IAvaliableEngine>[]
                                     {
                                         new FilterOptionItem<IAvaliableEngine>("All", (e) => true, true),
@@ -109,7 +121,12 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                                     });
  
             if (selectedEngines != null)
+            {
                 SelectedEngines = selectedEngines;
+                if (!SelectedEngines.Contains(CurrentEngine))
+                    CurrentEngine = SelectedEngines.FirstOrDefault();
+
+            }
         }
 
         internal void SelectLanguages(Window owner)
@@ -118,8 +135,17 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             var selectedLanguages = OpenSelectWindow<ILanguage>(owner,
                                     "Languages",
                                     "Select one or more languages",
-                                    countryService.GetLanguages(),
+                                    AllLanguages,
+                                    SelectedLanguages,
                                     nameof(ILanguage.Name),
+                                    (selectedItems) => {
+                                        if (selectedItems.Count == 0)
+                                        {
+                                            MessageBox.Show("Select at least one language.", "Languages", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                            return false;
+                                        }
+                                        return true;
+                                    },
                                     new FilterOptionItem<ILanguage>[]
                                     {
                                         new FilterOptionItem<ILanguage>("All", (e) => true),
@@ -127,7 +153,11 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                                     });
 
             if (selectedLanguages != null)
+            {
                 SelectedLanguages = selectedLanguages;
+                if (!SelectedLanguages.Contains(CurrentLanguage))
+                    CurrentLanguage = SelectedLanguages.FirstOrDefault();
+            }
         }
 
         internal void Translate()
@@ -136,7 +166,9 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         }
 
         private IEnumerable<T> OpenSelectWindow<T>(Window owner, string title, string message,
-            IEnumerable<T> items, string displayMemberName, params FilterOptionItem<T>[] filterOptionItems)
+            IEnumerable<T> items, IEnumerable<T> currentSelectedItems, string displayMemberName,
+            Func<System.Collections.IList, bool> validateSelectedItems,
+            params FilterOptionItem<T>[] filterOptionItems)
         {
 
             var selectWindowModel = new SelectWindow.SelectWindowModel<T>()
@@ -152,10 +184,14 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
 
             selectWindowModel.DisplayMemberName = displayMemberName;
+            selectWindowModel.CurrentSelectedItems = currentSelectedItems.ToHashSet();
             selectWindowModel.Items = items;
+
+            selectWindowModel.ValidateSelectedItems = validateSelectedItems;
 
             var selectWindow = new SelectWindow.SelectWindow() { DataContext = selectWindowModel };
             selectWindow.Owner = owner;
+            
             if (selectWindow.ShowDialog() ?? false)
                 return selectWindowModel.SelectedItems;
 

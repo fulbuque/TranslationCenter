@@ -4,8 +4,9 @@ using System.Linq;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    internal class SelectWindowModel<T> : ViewModelBase, ISelectWindowModel
+    internal partial class SelectWindowModel<T> : ViewModelBase, ISelectWindowModel
     {
+        private HashSet<T> _currentSelectedItems;
         private string _displayName;
         private Dictionary<string, FilterOptionItem<T>> _filterOptions;
         private FilterOptionItem<T> _filterOptionSelected;
@@ -18,6 +19,25 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
         {
             _filterOptions = new Dictionary<string, FilterOptionItem<T>>();
         }
+
+        public HashSet<T> CurrentSelectedItems
+        {
+            get => _currentSelectedItems;
+            set
+            {
+                _currentSelectedItems = value;
+                if (_items != null)
+                {
+                    foreach (var item in _items)
+                    {
+                        if (_currentSelectedItems.Contains(item.Data))
+                            item.IsSelected = true;
+                    }
+                }
+                NotifyPropertyChanged();
+            }
+        }
+
         public string DisplayMemberName
         {
             get => _displayName;
@@ -50,6 +70,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 NotifyPropertyChanged(nameof(FilteredItems));
             }
         }
+
         public bool HasFilterOptions => FilterOptions.Any();
 
         public IEnumerable<T> Items
@@ -57,7 +78,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             get => _items.Select(i => i.Data);
             set
             {
-                _items = value.Select(i => new SelectWindowItem(i, DisplayMemberName));
+                _items = value.Select(i => new SelectWindowItem(i, DisplayMemberName, CurrentSelectedItems)).ToArray();
                 NotifyPropertyChanged();
             }
         }
@@ -92,9 +113,16 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             }
         }
 
+        public Func<System.Collections.IList, bool> ValidateSelectedItems { get; set; }
+
         public void AddFilterOption(string text, Func<T, bool> filter, bool isSelected = false)
         {
             AddFilterOption(new FilterOptionItem<T>(text, filter, isSelected));
+        }
+
+        public void SetSelectedItems(System.Collections.IList list)
+        {
+            SelectedItems = list.Cast<SelectWindowItem>().Select(i => i.Data);
         }
 
         internal void AddFilterOption(FilterOptionItem<T> filterOptionItem)
@@ -102,36 +130,6 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             _filterOptions[filterOptionItem.Text] = filterOptionItem;
             if (filterOptionItem.IsSelected)
                 FilterOptionSelected = _filterOptions[filterOptionItem.Text];
-        }
-
-        public class SelectWindowItem
-        {
-
-            private string _displayMemberName;
-
-            public SelectWindowItem(T data, string displayMemberName)
-            {
-                Data = data;
-                _displayMemberName = displayMemberName;
-            }
-            public T Data { get; }
-
-            public string DisplayMemberName
-            {
-                get
-                {
-                    var prop = Data.GetType().GetProperty(_displayMemberName);
-                    if (prop != null)
-                        return prop.GetValue(Data)?.ToString();
-
-                    return default;
-                }
-            }
-        }
-
-        public void SetSelectedItems(System.Collections.IList list)
-        {
-            SelectedItems = list.Cast<SelectWindowItem>().Select(i => i.Data);
         }
     }
 }

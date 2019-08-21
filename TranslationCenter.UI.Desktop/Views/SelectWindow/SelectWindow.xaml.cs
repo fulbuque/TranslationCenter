@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
@@ -21,6 +13,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
         {
             InitializeComponent();
         }
+
         private ISelectWindowModel model
         {
             get
@@ -38,9 +31,25 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
+
+            if (!model.ValidateSelectedItems(lstItems.SelectedItems))
+                return;
+
             model.SetSelectedItems(lstItems.SelectedItems);
             this.DialogResult = true;
             this.Close();
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.LeftShift || e.Key == Key.LeftCtrl)
+                lstItems.SelectionMode = SelectionMode.Extended;
+        }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.Key == Key.LeftShift || e.Key == Key.LeftCtrl) && lstItems.SelectionMode == SelectionMode.Extended)
+                lstItems.SelectionMode = SelectionMode.Multiple;
         }
     }
 }
