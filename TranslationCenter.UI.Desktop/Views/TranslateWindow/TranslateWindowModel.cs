@@ -25,11 +25,10 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private string _searchText;
         private IEnumerable<ILanguage> _selectedLanguages;
         private IEnumerable<IAvaliableEngine> avaliableEngines;
-        private CountryService countryService = new CountryService();
         private TranslationService translationService = new TranslationService();
         public TranslateWindowModel()
         {
-            AllLanguages = countryService.GetLanguages();
+            AllLanguages = CountryService.Languages;
             AllAvaliableEngines = TranslationService.GetAvaliableEngines();
 
             CurrentLanguageFrom = AllLanguages.FirstOrDefault(l => l.Iso == "de");

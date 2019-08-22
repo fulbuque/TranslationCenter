@@ -10,23 +10,15 @@ namespace TranslationCenter.Services.Tests
         [TestMethod]
         public void TestGetAllCountries()
         {
-            CountryService countryService = new CountryService();
-
-            var countries = countryService.GetCountries();
-            countries = countryService.GetCountries();
-
+            var countries = CountryService.Countries;
             Assert.IsTrue(countries.Any());
         }
 
         [TestMethod]
         public void TestGetAllCountries2()
         {
-            CountryService countryService = new CountryService();
-
-            var countries = countryService.GetTranslatedCountryNames("de");
-            
-
-            Assert.IsTrue(countries.Any());
+            var languagesNames = new string[] { "de", "en", "pt", "es", "cn" }.Select(iso => CountryService.GetLanguageName(iso)).ToArray();
+            Assert.IsTrue(languagesNames.Any());
         }
     }
 }

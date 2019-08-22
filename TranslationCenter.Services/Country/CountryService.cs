@@ -14,8 +14,36 @@ namespace TranslationCenter.Services.Country
     {
         private static ICountry[] _countries = new ICountry[] { };
         private static LanguageComparer _languageComparer = new LanguageComparer();
+        private static ILanguage[] _languages;
 
-        public ICountry[] GetCountries()
+        static CountryService()
+        {
+            SetLanguageDictionary();
+        }
+
+        private CountryService()
+        {
+        }
+
+        public static ICountry[] Countries => GetCountries();
+
+        public static Dictionary<string, ILanguage> LanguageDicitionary { get; private set; } = new Dictionary<string, ILanguage>();
+
+        public static ILanguage[] Languages => _languages;
+
+        public static string GetLanguageName(string iso)
+        {
+            LanguageDicitionary.TryGetValue(iso, out var language);
+            return language?.Name;
+        }        
+        
+        public static ILanguage GetLanguage(string iso)
+        {
+            LanguageDicitionary.TryGetValue(iso, out var language);
+            return language;
+        }
+
+        private static ICountry[] GetCountries()
         {
             if (_countries?.Any() ?? false)
                 return _countries;
@@ -28,7 +56,7 @@ namespace TranslationCenter.Services.Country
                 string url = "";
                 if (hasCountryJsonFile)
                     url = ContryJsonFile;
-                else 
+                else
                     url = "https://restcountries.eu/rest/v2/all";
 
                 //string url = "https://restcountries.eu/rest/v2/all";
@@ -61,19 +89,10 @@ namespace TranslationCenter.Services.Country
             }
         }
 
-
-        public ILanguage[] GetLanguages()
+        private static void SetLanguageDictionary()
         {
-            return GetCountries().SelectMany(c => c.Languages).ToHashSet(_languageComparer).OrderBy(l => l.Name).ToArray();
-        }
-
-        public Dictionary<string, string> GetTranslatedCountryNames(string iso)
-        {
-            var countries = GetCountries();
-
-            var x = countries.SelectMany(c => c.Translations).Where(t => t.Key == iso).ToHashSet();
-
-            return null;
+            _languages = Countries.SelectMany(c => c.Languages).Where(l => !string.IsNullOrEmpty( l.Iso)).ToHashSet(_languageComparer).ToArray();
+            LanguageDicitionary = _languages.ToDictionary(language => language.Iso);
         }
     }
 }
