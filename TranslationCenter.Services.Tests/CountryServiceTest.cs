@@ -17,5 +17,16 @@ namespace TranslationCenter.Services.Tests
 
             Assert.IsTrue(countries.Any());
         }
+
+        [TestMethod]
+        public void TestGetAllCountries2()
+        {
+            CountryService countryService = new CountryService();
+
+            var countries = countryService.GetTranslatedCountryNames("de");
+            
+
+            Assert.IsTrue(countries.Any());
+        }
     }
 }

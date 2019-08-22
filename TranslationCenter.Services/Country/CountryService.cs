@@ -40,8 +40,13 @@ namespace TranslationCenter.Services.Country
                 var response = client.GetStringAsync("");
                 response.Wait();
 
-                if (!hasCountryJsonFile) 
+                if (!hasCountryJsonFile)
+                {
+                    var fileInfo = new FileInfo(ContryJsonFile);
+                    if (!fileInfo.Directory.Exists)
+                        fileInfo.Directory.Create();
                     File.WriteAllText(ContryJsonFile, response.Result);
+                }
 
                 using (var stringReader = new StringReader(response.Result))
                 using (var jsonReader = new JsonTextReader(stringReader))
@@ -60,6 +65,15 @@ namespace TranslationCenter.Services.Country
         public ILanguage[] GetLanguages()
         {
             return GetCountries().SelectMany(c => c.Languages).ToHashSet(_languageComparer).OrderBy(l => l.Name).ToArray();
+        }
+
+        public Dictionary<string, string> GetTranslatedCountryNames(string iso)
+        {
+            var countries = GetCountries();
+
+            var x = countries.SelectMany(c => c.Translations).Where(t => t.Key == iso).ToHashSet();
+
+            return null;
         }
     }
 }
