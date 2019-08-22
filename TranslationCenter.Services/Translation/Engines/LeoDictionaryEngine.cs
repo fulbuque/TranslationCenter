@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
 using System.Web;
@@ -14,6 +13,11 @@ namespace TranslationCenter.Services.Translation.Engines
     public class LeoDictionaryEngine : TranslateEngine
     {
         private string[] supportedLanguages = new string[] { "de", "pl", "pt", "ru", "ch", "it", "es", "fr", "en" };
+
+        protected override bool IsTranslateUnsupported => (TranslationArgs.IsoFrom != "de"
+                                                             && TranslationArgs.IsoTo != "de")
+                                                             || !supportedLanguages.Contains(TranslationArgs.IsoFrom)
+                                                             || !supportedLanguages.Contains(TranslationArgs.IsoTo);
 
         protected override string MediaType => "text/html";
 
@@ -49,12 +53,6 @@ namespace TranslationCenter.Services.Translation.Engines
                 return string.Empty;
             }
         }
-
-        protected override bool IsTranslateUnsupported => (TranslationArgs.IsoFrom != "de" 
-                                                             && TranslationArgs.IsoTo != "de")
-                                                             || !supportedLanguages.Contains(TranslationArgs.IsoFrom) 
-                                                             || !supportedLanguages.Contains(TranslationArgs.IsoTo);
-
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync(HttpUtility.UrlEncode(TranslationArgs.Text));
@@ -64,91 +62,48 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected override string GetTranslatedText(string response)
         {
-            //var document = XDocument.Parse(response);
-            //return CleanUp(UrlBase, document);
-
-            HtmlDocument html = new HtmlDocument();
-            html.LoadHtml(response?.Trim());
-            return CleanUp(UrlBase, html);
+            var document = XDocument.Parse(response);
+            return CleanUp(UrlBase, document);
         }
 
-        private string CleanUp(string baseUrl, HtmlDocument document)
+        private string CleanUp(string baseUrl, XDocument document)
         {
+            string translatedText;
+            var resultElement = document.Root
+               .Element("body")
+               ?.GetElement("id", "mainContent")
+               ?.GetElement("id", "centerColumn")
+               ?.GetElement("data-dz-search", "result");
 
-            string translatedText = string.Empty;
-            var links = document.DocumentNode.SelectNodes("//a").ToList();
-            if (links != null)
+            if (resultElement != null)
             {
-                foreach (var link in links)
+                foreach (var link in resultElement.Descendants("a"))
                 {
-                    var href = link.Attributes["href"];
-                    if (href != null && !(href.Value ?? string.Empty).StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                        link.SetAttributeValue("href", $"{baseUrl}{href.Value}");
+                    var href = link.Attribute("href")?.Value;
+                    if (!string.IsNullOrEmpty(href) && !href.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+                        link.SetAttributeValue("href", $"{baseUrl}{href}");
+                    link.SetAttributeValue("target", this.Category);
+                }
 
-                    link.SetAttributeValue("target", this.Category.ToString());
+                var toRemove = resultElement.Elements().ToList();
+                foreach (var element in toRemove)
+                {
+                    var data_dz_name = element.Attribute("data-dz-name");
+                    if (data_dz_name == null)
+                        element.Remove();
+                }
+
+                translatedText = @"<link rel=""stylesheet"" href=""https://dict.leo.org/js/dist/dict.webpack-ef27251d.css"">"
+                                    + resultElement.ToString();
+            }
+            else
+            {
+                using (var reader = document.Root.Element("body").CreateReader())
+                {
+                    reader.MoveToContent();
+                    translatedText = reader.ReadInnerXml();
                 }
             }
-
-            links = document.DocumentNode.SelectNodes("//link").ToList();
-            if (links != null)
-            {
-                foreach (var link in links)
-                {
-                    var href = link.Attributes["href"];
-                    if (href != null && !(href.Value ?? string.Empty).StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                        link.SetAttributeValue("href", $"{baseUrl}{href.Value}");
-                }
-            }
-
-            links = document.DocumentNode.SelectNodes("//img").ToList();
-            if (links != null)
-            {
-                foreach (var link in links)
-                {
-                    var href = link.Attributes["src"];
-                    if (href != null && !(href.Value ?? string.Empty).StartsWith("http", StringComparison.OrdinalIgnoreCase))
-                        link.SetAttributeValue("src", $"{baseUrl}{href.Value}");
-                }
-            }
-
-            translatedText = document.DocumentNode.OuterHtml;
-
-            //string translatedText;
-            //var resultElement = document.Root
-            //   .Element("body")
-            //   ?.GetElement("id", "mainContent")
-            //   ?.GetElement("id", "centerColumn")
-            //   ?.GetElement("data-dz-search", "result");
-
-            //if (resultElement != null)
-            //{
-            //    foreach (var link in resultElement.Descendants("a"))
-            //    {
-            //        var href = link.Attribute("href")?.Value;
-            //        if (!string.IsNullOrEmpty(href) && !href.StartsWith("http", StringComparison.OrdinalIgnoreCase))
-            //            link.SetAttributeValue("href", $"{baseUrl}{href}");
-            //        link.SetAttributeValue("target", this.Category);
-            //    }
-
-            //    var toRemove = resultElement.Elements().ToList();
-            //    foreach (var element in toRemove)
-            //    {
-            //        var data_dz_name = element.Attribute("data-dz-name");
-            //        if (data_dz_name == null)
-            //            element.Remove();
-            //    }
-
-            //    translatedText = @"<link rel=""stylesheet"" href=""https://dict.leo.org/js/dist/dict.webpack-ef27251d.css"">" 
-            //                        + resultElement.ToString();
-            //}
-            //else
-            //{
-            //    using (var reader = document.Root.Element("body").CreateReader())
-            //    {
-            //        reader.MoveToContent();
-            //        translatedText = reader.ReadInnerXml();
-            //    }
-            //}
 
             return translatedText;
         }

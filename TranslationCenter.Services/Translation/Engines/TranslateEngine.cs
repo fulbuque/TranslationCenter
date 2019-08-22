@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
+using HtmlAgilityPack;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Types;
 
@@ -62,6 +65,7 @@ namespace TranslationCenter.Services.Translation.Engines
                 client.BaseAddress = new Uri(UrlBase + UrlBaseAdditional);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(MediaType));
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
                 var response = getResponseMessage(client);
 
@@ -83,6 +87,34 @@ namespace TranslationCenter.Services.Translation.Engines
             }
 
             return translatedText;
+        }
+
+        internal void UpdateUrlElements(HtmlNodeCollection htmlNodes, string attributeName, string urlBase, Action<HtmlNode> additionalAction = null)
+        {
+            if (htmlNodes != null)
+            {
+                foreach (var node in htmlNodes)
+                {
+                    var href = node.Attributes[attributeName];
+                    var value = href?.Value ?? string.Empty;
+                    if (value.StartsWith("javascript")) continue;
+                    if (value.StartsWith("about:")) continue;
+                    if (!string.IsNullOrWhiteSpace(value) && !value.StartsWith("http", StringComparison.OrdinalIgnoreCase) && !value.StartsWith("//"))
+                        node.SetAttributeValue(attributeName, $"{urlBase}{href.Value}");
+                    additionalAction?.Invoke(node);
+                }
+            }
+        }
+
+        internal void RemoveElements(HtmlNodeCollection htmlNodeCollection)
+        {
+            if (htmlNodeCollection != null)
+            {
+                foreach (var node in htmlNodeCollection)
+                {
+                    node.Remove();
+                }
+            }
         }
     }
 }

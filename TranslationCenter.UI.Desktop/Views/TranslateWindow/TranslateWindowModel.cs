@@ -89,8 +89,8 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             get => _currentResult;
             set
             {
-                _currentResult = value;
-                //_currentResult = GetFormattedResult(value);
+                //_currentResult = value;
+                _currentResult = GetFormattedResult(value);
                 NotifyPropertyChanged();
             }
         }
@@ -232,7 +232,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
     <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"" integrity=""sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"" crossorigin=""anonymous"">
     <!--  <link rel=""stylesheet"" href=""https://dict.leo.org/js/dist/dict.webpack-ef27251d.css"">  -->
   </head>
-  <body>
+  <body style=""overflow: auto !important; height: auto !important"">
     <section id=""section-result"">
         { contentResult }
     </section>
