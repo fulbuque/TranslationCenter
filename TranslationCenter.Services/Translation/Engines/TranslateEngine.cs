@@ -75,7 +75,7 @@ namespace TranslationCenter.Services.Translation.Engines
                     {
                         translatedText = getTranslatedText(responseText);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         translatedText = "!Error!";
                     }

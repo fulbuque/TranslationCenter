@@ -7,7 +7,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
     internal partial class SelectWindowModel<T> : ViewModelBase, ISelectWindowModel
     {
         private HashSet<T> _currentSelectedItems;
-        private string _displayName;
+        private string _displayMemberName;
         private Dictionary<string, FilterOptionItem<T>> _filterOptions;
         private FilterOptionItem<T> _filterOptionSelected;
         private IEnumerable<SelectWindowItem> _items;
@@ -40,13 +40,15 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         public string DisplayMemberName
         {
-            get => _displayName;
+            get => _displayMemberName;
             set
             {
-                _displayName = value;
+                _displayMemberName = value;
                 NotifyPropertyChanged();
             }
         }
+
+        public Func<T, string> Tooltip { get; set; }
 
         public IEnumerable<SelectWindowItem> FilteredItems
         {
@@ -78,7 +80,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             get => _items.Select(i => i.Data);
             set
             {
-                _items = value.Select(i => new SelectWindowItem(i, DisplayMemberName, CurrentSelectedItems)).ToArray();
+                _items = value.Select(i => new SelectWindowItem(i, DisplayMemberName, CurrentSelectedItems, Tooltip?.Invoke(i))).ToArray();
                 NotifyPropertyChanged();
             }
         }

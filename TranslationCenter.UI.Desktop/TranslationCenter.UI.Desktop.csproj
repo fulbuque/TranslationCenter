@@ -39,4 +39,10 @@
     <ProjectReference Include="..\TranslationCenter.Services\TranslationCenter.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\Country.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

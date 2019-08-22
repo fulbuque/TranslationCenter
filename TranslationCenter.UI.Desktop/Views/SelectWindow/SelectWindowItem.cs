@@ -10,9 +10,10 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             private string _displayMemberName;
             private bool _isSelected;
 
-            public SelectWindowItem(T data, string displayMemberName, HashSet<T> currentSelectedItems)
+            public SelectWindowItem(T data, string displayMemberName, HashSet<T> currentSelectedItems, string tooltip = null)
             {
                 Data = data;
+                Tooltip = tooltip;
                 _displayMemberName = displayMemberName;
                 if(currentSelectedItems != null)
                 {
@@ -23,6 +24,7 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
             }
             public T Data { get; }
 
+            public string Tooltip { get; }
 
             public bool IsSelected
             {

@@ -14,7 +14,8 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 {
     internal class TranslateWindowModel : ViewModelBase
     {
-        private readonly string[] mostUsedIsos = new string[] {"cn", "es", "en", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
+        //private readonly string[] mostUsedIsos = new string[] {"cn", "es", "en", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
+        private readonly string[] mostUsedIsos = new string[] {"en" };
         private IEnumerable<ILanguage> _allLanguages;
         private IAvaliableEngine _currentEngine;
         private ILanguage _currentLanguage;
@@ -28,7 +29,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private TranslationService translationService = new TranslationService();
         public TranslateWindowModel()
         {
-            AllLanguages = CountryService.Languages;
+            AllLanguages = CountryService.Languages.OrderBy(l => l.Name);
             AllAvaliableEngines = TranslationService.GetAvaliableEngines();
 
             CurrentLanguageFrom = AllLanguages.FirstOrDefault(l => l.Iso == "de");
@@ -88,7 +89,8 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             get => _currentResult;
             set
             {
-                _currentResult = GetFormattedResult(value);
+                _currentResult = value;
+                //_currentResult = GetFormattedResult(value);
                 NotifyPropertyChanged();
             }
         }
@@ -131,6 +133,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                                     AllAvaliableEngines,
                                     SelectedEngines,
                                     nameof(IAvaliableEngine.DisplayName),
+                                    null,
                                     (selectedItems) =>
                                     {
                                         if (selectedItems.Count == 0)
@@ -163,6 +166,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                                     AllLanguages,
                                     SelectedLanguages,
                                     nameof(ILanguage.Name),
+                                    (lang) => lang.Iso,
                                     (selectedItems) =>
                                     {
                                         if (selectedItems.Count == 0)
@@ -226,7 +230,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
     <meta name=""viewport"" content=""width=device-width, initial-scale=1, shrink-to-fit=no"">
     <!-- Bootstrap CSS -->
     <link rel=""stylesheet"" href=""https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"" integrity=""sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"" crossorigin=""anonymous"">
-    <link rel=""stylesheet"" href=""https://dict.leo.org/js/dist/dict.webpack-ef27251d.css"">
+    <!--  <link rel=""stylesheet"" href=""https://dict.leo.org/js/dist/dict.webpack-ef27251d.css"">  -->
   </head>
   <body>
     <section id=""section-result"">
@@ -237,7 +241,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                           ";
         }
         private IEnumerable<T> OpenSelectWindow<T>(Window owner, string title, string message,
-            IEnumerable<T> items, IEnumerable<T> currentSelectedItems, string displayMemberName,
+            IEnumerable<T> items, IEnumerable<T> currentSelectedItems, string displayMemberName, Func<T, string> tooltip,
             Func<System.Collections.IList, bool> validateSelectedItems,
             params FilterOptionItem<T>[] filterOptionItems)
         {
@@ -256,6 +260,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
 
             selectWindowModel.DisplayMemberName = displayMemberName;
+            selectWindowModel.Tooltip = tooltip;
             selectWindowModel.CurrentSelectedItems = currentSelectedItems.ToHashSet();
             selectWindowModel.Items = items;
 

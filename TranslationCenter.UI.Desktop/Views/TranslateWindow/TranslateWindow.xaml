@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.TranslateWindow"
         mc:Ignorable="d"
-        Title="Translation Center" Height="450" Width="800" WindowState="Maximized">
+        Title="Translation Center" Height="450" Width="800" WindowState="Maximized" Closed="Window_Closed">
     <Window.Icon>
         <BitmapImage UriSource="../../Resources/Translate_Icon.png"></BitmapImage>
     </Window.Icon>
@@ -126,7 +126,7 @@
                     </TabControl.Resources>
                 </TabControl>
 
-                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="15" />
+                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="15" Navigated="WebBrowserResult_Navigated"  />
             </Grid>
         </Grid>
     </Grid>
