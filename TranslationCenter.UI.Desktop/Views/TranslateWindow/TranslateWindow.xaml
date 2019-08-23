@@ -65,8 +65,8 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Search Text"  />
-            <TextBox  Grid.Row="1" Text="{ Binding SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }" 
+            <TextBlock Grid.Row="0" Height="20" VerticalAlignment="Top" Text="Search Text" />
+            <TextBox  Grid.Row="1" Text="{ Binding SearchText, Delay=300, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
                       MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True"
                       FontSize="30" />
         </Grid>
@@ -126,7 +126,7 @@
                     </TabControl.Resources>
                 </TabControl>
 
-                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="15" Navigated="WebBrowserResult_Navigated"  />
+                <WebBrowser Grid.Row="1" x:Name="webBrowserResult" Margin="15" Navigated="WebBrowserResult_Navigated" />
             </Grid>
         </Grid>
     </Grid>

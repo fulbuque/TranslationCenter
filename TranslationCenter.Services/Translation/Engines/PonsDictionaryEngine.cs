@@ -1,6 +1,4 @@
 ﻿using HtmlAgilityPack;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Web;
@@ -19,6 +17,7 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected override string UrlBaseAdditional =>
             $"/translate?q={HttpUtility.UrlEncode(TranslationArgs.Text)}&l={TranslationArgs.IsoFrom}{TranslationArgs.IsoTo}&in=&lf=en&qnac=";
+
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync("");
@@ -47,8 +46,9 @@ namespace TranslationCenter.Services.Translation.Engines
                 base.RemoveElements(divResult.SelectNodes("//script"));
 
                 links = divResult.SelectNodes("//link");
-                base.UpdateUrlElements(links, "href", baseUrl, 
-                    (node) => {
+                base.UpdateUrlElements(links, "href", baseUrl,
+                    (node) =>
+                    {
                         var href = node.Attributes["href"]?.Value ?? string.Empty;
                         if (href.EndsWith(".css"))
                             translatedText.AppendLine(node.OuterHtml);

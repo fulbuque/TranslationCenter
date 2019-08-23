@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using HtmlAgilityPack;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using HtmlAgilityPack;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Types;
 

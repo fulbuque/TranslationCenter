@@ -1,6 +1,5 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Web;
 using TranslationCenter.Services.Translation.Enums;
@@ -18,6 +17,7 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected override string UrlBaseAdditional =>
             $"{TranslationArgs.LanguageFrom.Name.Trim().ToLower() }-{TranslationArgs.LanguageTo.Name.Trim().ToLower()}/";
+
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync(HttpUtility.UrlEncode(TranslationArgs.Text));

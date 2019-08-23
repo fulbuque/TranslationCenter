@@ -15,13 +15,14 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
                 Data = data;
                 Tooltip = tooltip;
                 _displayMemberName = displayMemberName;
-                if(currentSelectedItems != null)
+                if (currentSelectedItems != null)
                 {
                     _selectedItems = currentSelectedItems;
                     if (_selectedItems.Contains(Data))
                         IsSelected = true;
                 }
             }
+
             public T Data { get; }
 
             public string Tooltip { get; }

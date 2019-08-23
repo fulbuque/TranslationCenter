@@ -1,5 +1,4 @@
 ﻿using HtmlAgilityPack;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -19,6 +18,7 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected override string UrlBaseAdditional =>
             $"/?s={HttpUtility.UrlEncode(TranslationArgs.Text)}";
+
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync("");
@@ -39,15 +39,11 @@ namespace TranslationCenter.Services.Translation.Engines
 
             var divResult = document.DocumentNode.SelectSingleNode("//div[@id='maincontent']");
 
-
-
             if (divResult != null)
             {
-
                 var tables = divResult.Elements("table");
                 if (tables.Count() >= 1)
                     divResult = tables.ElementAt(1);
-
 
                 var links = document.DocumentNode.SelectNodes("//a");
                 base.UpdateUrlElements(links, "href", baseUrl, (node) => node.SetAttributeValue("target", this.Category.ToString()));
@@ -55,7 +51,7 @@ namespace TranslationCenter.Services.Translation.Engines
                 base.RemoveElements(divResult.SelectNodes("//script"));
 
                 //links = divResult.SelectNodes("//link");
-                //base.UpdateUrlElements(links, "href", baseUrl, 
+                //base.UpdateUrlElements(links, "href", baseUrl,
                 //    (node) => {
                 //        var href = node.Attributes["href"]?.Value ?? string.Empty;
                 //        if (href.EndsWith(".css"))

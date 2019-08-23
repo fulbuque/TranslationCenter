@@ -31,7 +31,6 @@ namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 
         private void BtnOk_Click(object sender, RoutedEventArgs e)
         {
-
             if (!model.ValidateSelectedItems(lstItems.SelectedItems))
                 return;
 

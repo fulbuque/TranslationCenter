@@ -35,8 +35,8 @@ namespace TranslationCenter.Services.Country
         {
             LanguageDicitionary.TryGetValue(iso, out var language);
             return language?.Name;
-        }        
-        
+        }
+
         public static ILanguage GetLanguage(string iso)
         {
             LanguageDicitionary.TryGetValue(iso, out var language);
@@ -91,7 +91,7 @@ namespace TranslationCenter.Services.Country
 
         private static void SetLanguageDictionary()
         {
-            _languages = Countries.SelectMany(c => c.Languages).Where(l => !string.IsNullOrEmpty( l.Iso)).ToHashSet(_languageComparer).ToArray();
+            _languages = Countries.SelectMany(c => c.Languages).Where(l => !string.IsNullOrEmpty(l.Iso)).ToHashSet(_languageComparer).ToArray();
             LanguageDicitionary = _languages.ToDictionary(language => language.Iso);
         }
     }

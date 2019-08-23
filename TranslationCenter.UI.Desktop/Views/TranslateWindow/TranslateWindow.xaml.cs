@@ -52,7 +52,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         public void HideJsScriptErrors(WebBrowser wb)
         {
             // IWebBrowser2 interface
-            // Exposes methods that are implemented by the WebBrowser control  
+            // Exposes methods that are implemented by the WebBrowser control
             // Searches for the specified field, using the specified binding constraints.
             FieldInfo fld = typeof(WebBrowser).GetField("_axIWebBrowser2", BindingFlags.Instance | BindingFlags.NonPublic);
             if (fld == null)

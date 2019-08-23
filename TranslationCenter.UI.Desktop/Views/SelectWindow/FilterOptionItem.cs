@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    class FilterOptionItem<T> : IFilterOptionItem
+    internal class FilterOptionItem<T> : IFilterOptionItem
     {
         public FilterOptionItem(string text, Func<T, bool> filter, bool isSelected = false, bool isDefault = false)
         {

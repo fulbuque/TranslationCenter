@@ -53,6 +53,7 @@ namespace TranslationCenter.Services.Translation.Engines
                 return string.Empty;
             }
         }
+
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync(HttpUtility.UrlEncode(TranslationArgs.Text));

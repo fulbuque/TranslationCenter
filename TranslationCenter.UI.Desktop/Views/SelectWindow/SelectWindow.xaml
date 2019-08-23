@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.SelectWindow"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="598" Width="923" 
+        Title="{Binding Title}" Height="598" Width="923"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResizeWithGrip" KeyDown="Window_KeyDown" KeyUp="Window_KeyUp" Loaded="Window_Loaded">
@@ -60,8 +60,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-
-
         <ListBox x:Name="lstItems" ItemsSource="{Binding FilteredItems}" DisplayMemberPath="DisplayMemberName" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  Grid.Row="2" Padding="5"
                  SelectionMode="Multiple" BorderThickness="0,1,0,1" Margin="0,0,0,0">
@@ -94,6 +92,5 @@
             <Button x:Name="btnCancel" Content="Cancel" Click="BtnCancel_Click" />
             <Button x:Name="btnOk" Content="Ok" Click="BtnOk_Click" />
         </StackPanel>
-
     </Grid>
 </Window>

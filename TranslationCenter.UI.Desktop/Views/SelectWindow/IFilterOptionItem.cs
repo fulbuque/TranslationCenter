@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace TranslationCenter.UI.Desktop.Views.SelectWindow
+﻿namespace TranslationCenter.UI.Desktop.Views.SelectWindow
 {
-    interface IFilterOptionItem
+    internal interface IFilterOptionItem
     {
-        object GetFilter { get;  }
+        object GetFilter { get; }
         string Text { get; }
     }
 }
