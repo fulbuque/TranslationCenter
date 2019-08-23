@@ -50,15 +50,16 @@ namespace TranslationCenter.Services.Translation.Engines
 
                 base.RemoveElements(divResult.SelectNodes("//script"));
 
-                //links = divResult.SelectNodes("//link");
-                //base.UpdateUrlElements(links, "href", baseUrl,
-                //    (node) => {
-                //        var href = node.Attributes["href"]?.Value ?? string.Empty;
-                //        if (href.EndsWith(".css"))
-                //            translatedText.AppendLine(node.OuterHtml);
-                //    });
+                links = divResult.SelectNodes("//link");
+                base.UpdateUrlElements(links, "href", baseUrl,
+                    (node) =>
+                    {
+                        var href = node.Attributes["href"]?.Value ?? string.Empty;
+                        if (href.Contains(".css"))
+                            translatedText.AppendLine(node.OuterHtml);
+                    });
 
-                translatedText.AppendLine(divResult?.OuterHtml);
+                translatedText.AppendLine(base.GetContentWithHierarchy(divResult));
             }
 
             return translatedText.ToString();

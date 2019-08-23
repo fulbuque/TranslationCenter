@@ -55,22 +55,7 @@ namespace TranslationCenter.Services.Translation.Engines
                             translatedText.AppendLine(node.OuterHtml);
                     });
 
-                var content = @$"
-    <main style=""overflow: auto !important; height: auto !important; width: auto !important;"">
-        <div class=""dictionary"" style=""overflow: auto !important; height: auto !important; width: auto !important;"">
-            <div class=""res_cell_center"" style=""overflow: auto !important; height: auto !important; width: auto !important;"">
-
-                <div class=""dc res_cell_center_content"" style=""overflow: auto !important; height: auto !important; width: auto !important;"">
-                    <div class=""he"">
-                        { divResult?.OuterHtml }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-";
-
-                translatedText.AppendLine(content);
+                translatedText.AppendLine(base.GetContentWithHierarchy(divResult));
             }
 
             return translatedText.ToString();

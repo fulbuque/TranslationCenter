@@ -50,11 +50,11 @@ namespace TranslationCenter.Services.Translation.Engines
                     (node) =>
                     {
                         var href = node.Attributes["href"]?.Value ?? string.Empty;
-                        if (href.EndsWith(".css"))
+                        if (href.Contains(".css"))
                             translatedText.AppendLine(node.OuterHtml);
                     });
 
-                translatedText.AppendLine(divResult?.InnerHtml);
+                translatedText.AppendLine(base.GetContentWithHierarchy(divResult));
             }
 
             return translatedText.ToString();

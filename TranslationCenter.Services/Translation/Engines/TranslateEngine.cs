@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -88,6 +89,26 @@ namespace TranslationCenter.Services.Translation.Engines
             return translatedText;
         }
 
+        internal string GetContentWithHierarchy(HtmlNode node)
+        {
+            var content = node.OuterHtml;
+
+            node = node.ParentNode;
+
+            while (node != null)
+            {
+                var nodeName = node.Name;
+                var idValue = node.Attributes["id"]?.Value;
+                var classValue = node.Attributes["class"]?.Value;
+                if (nodeName.Equals("body", StringComparison.OrdinalIgnoreCase) || nodeName.Equals("html", StringComparison.OrdinalIgnoreCase))
+                    break;
+                content = @$"<{nodeName} id=""{idValue}"" class=""{ classValue }"" style=""overflow: auto !important; height: auto !important; width: auto !important;"">{content}</{nodeName}>";
+                node = node.ParentNode;
+            }
+
+            return content;
+        }
+
         internal void UpdateUrlElements(HtmlNodeCollection htmlNodes, string attributeName, string urlBase, Action<HtmlNode> additionalAction = null)
         {
             if (htmlNodes != null)
@@ -97,9 +118,14 @@ namespace TranslationCenter.Services.Translation.Engines
                     var href = node.Attributes[attributeName];
                     var value = href?.Value ?? string.Empty;
                     if (value.StartsWith("javascript")) continue;
-                    if (value.StartsWith("about:")) continue;
-                    if (!string.IsNullOrWhiteSpace(value) && !value.StartsWith("http", StringComparison.OrdinalIgnoreCase) && !value.StartsWith("//"))
-                        node.SetAttributeValue(attributeName, $"{urlBase}{href.Value}");
+                    if (value.StartsWith("//www."))
+                    {
+                        node.SetAttributeValue(attributeName, $"http://{value.Substring(2)}");
+                    }
+                    else if (!string.IsNullOrWhiteSpace(value) && !value.StartsWith("http", StringComparison.OrdinalIgnoreCase) && !value.StartsWith("//"))
+                    {
+                        node.SetAttributeValue(attributeName, $"{urlBase}{value}");
+                    }
                     additionalAction?.Invoke(node);
                 }
             }
