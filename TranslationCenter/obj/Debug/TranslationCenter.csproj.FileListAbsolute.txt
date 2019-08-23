@@ -46,5 +46,4 @@ C:\_Projects\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csp
 C:\_Projects\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csproj.CoreCompileInputs.cache
 C:\_Projects\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.exe
 C:\_Projects\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.pdb
-C:\Users\fla\Source\Repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csprojAssemblyReference.cache
 C:\Users\fulvi\source\repos\TranslationCenter\TranslationCenter\TranslationCenter\obj\Debug\TranslationCenter.csprojAssemblyReference.cache

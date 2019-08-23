@@ -17,6 +17,7 @@
     <None Remove="Resources\EnginesConfig_Icon.png" />
     <None Remove="Resources\Execute_Icon.png" />
     <None Remove="Resources\Languages_Icon.png" />
+    <None Remove="Resources\translate_icon.ico" />
     <None Remove="Resources\Translate_Icon.png" />
   </ItemGroup>
 
@@ -28,6 +29,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Languages_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\translate_icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Translate_Icon.png">

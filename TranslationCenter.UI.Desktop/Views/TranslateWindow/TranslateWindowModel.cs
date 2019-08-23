@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using TranslationCenter.Services.Country;
 using TranslationCenter.Services.Country.Types.Interfaces;
 using TranslationCenter.Services.Translation;
@@ -14,7 +15,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 {
     internal class TranslateWindowModel : ViewModelBase
     {
-        private readonly string[] mostUsedIsos = new string[] {"cn", "es", "en", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
+        private readonly string[] mostUsedIsos = new string[] { "cn", "es", "en", "ar", "pt", "nl", "ru", "jp", "fr", "tr", "it" };
         //private readonly string[] mostUsedIsos = new string[] { "en" };
 
         private IEnumerable<ILanguage> _allLanguages;
@@ -22,10 +23,11 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private ILanguage _currentLanguage;
         private ILanguage _currentLanguageFrom;
         private string _currentResult;
+        private bool _isAutoTranslateOnChange = false;
+        private SearchProtocol _lastSearchProtocol;
         private Dictionary<string, Dictionary<string, string>> _resultsDictionary;
-        private string _lastSearchText;
-        private string _searchText;
         private IEnumerable<ILanguage> _selectedLanguages;
+        private string _textSearch;
         private IEnumerable<IAvaliableEngine> avaliableEngines;
         private TranslationService translationService = new TranslationService();
 
@@ -97,12 +99,12 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
-        public string SearchText
+        public bool IsAutoTranslateOnChange
         {
-            get => _searchText;
+            get => _isAutoTranslateOnChange;
             set
             {
-                _searchText = value;
+                _isAutoTranslateOnChange = value;
                 NotifyPropertyChanged();
             }
         }
@@ -127,6 +129,18 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
+        public string TextSearch
+        {
+            get => _textSearch;
+            set
+            {
+                _textSearch = value;
+                NotifyPropertyChanged();
+                if (IsAutoTranslateOnChange)
+                    Translate();
+                    //Dispatcher.CurrentDispatcher.BeginInvoke(() => Translate(), DispatcherPriority.Background);
+            }
+        }
         internal void SelectEngines(Window owner)
         {
             var selectedEngines = OpenSelectWindow<IAvaliableEngine>(owner,
@@ -192,22 +206,52 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
+        private class SearchProtocol
+        {
+            private string textSearch;
+            private string currentLanguageFrom;
+            private string selectedEngines;
+            private string selectedLanguages;
+
+            public SearchProtocol(string textSearch, ILanguage currentLanguageFrom, IEnumerable<IAvaliableEngine> selectedEngines, IEnumerable<ILanguage> selectedLanguages)
+            {
+                this.textSearch = textSearch;
+                this.currentLanguageFrom = currentLanguageFrom.Iso;
+                this.selectedEngines = string.Join(", ", selectedEngines.OrderBy(e => e.Name).Select(e => e.Name).ToArray());
+                this.selectedLanguages = string.Join(", ", selectedLanguages.OrderBy(e => e.Iso).Select(e => e.Iso).ToArray());
+            }
+
+            public string TextSearch { get => textSearch; }
+
+            public bool Equals(SearchProtocol searchProtocol)
+            {
+                return searchProtocol != null 
+                        && TextSearch == searchProtocol.TextSearch
+                        && selectedEngines == searchProtocol.selectedEngines
+                        && selectedLanguages == searchProtocol.selectedLanguages;
+
+            }
+
+        }
+
         internal void Translate()
         {
+
             translationService.AddEngines(SelectedEngines);
 
-            var keySearch = $"{CurrentLanguageFrom.Iso}:{SearchText}";
-            if (_lastSearchText == null || _lastSearchText != keySearch)
+            var searchProtocol = new SearchProtocol(TextSearch, CurrentLanguageFrom, SelectedEngines, SelectedLanguages);
+            if (!searchProtocol.Equals(_lastSearchProtocol))
+            {
                 _resultsDictionary = new Dictionary<string, Dictionary<string, string>>();
-
-            _lastSearchText = keySearch;
+                _lastSearchProtocol = searchProtocol;
+            }
 
             foreach (var language in SelectedLanguages)
             {
                 if (_resultsDictionary.Values.Any(i => i.ContainsKey(language.Iso)))
                     continue;
 
-                var translateResults = translationService.Translate(new TranslateArgs(CurrentLanguageFrom.Iso, language.Iso, SearchText));
+                var translateResults = translationService.Translate(new TranslateArgs(CurrentLanguageFrom.Iso, language.Iso, TextSearch));
                 foreach (var result in translateResults)
                 {
                     if (!_resultsDictionary.TryGetValue(result.Source.Name, out var isoTextDic))
@@ -220,6 +264,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
 
             SetCurrentResult();
+
         }
 
         private string GetFormattedResult(string contentResult)
