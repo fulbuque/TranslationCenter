@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using TranslationCenter.Services.Translation.Enums;
 using TranslationCenter.Services.Translation.Types;
@@ -34,7 +35,7 @@ namespace TranslationCenter.Services.Translation.Engines
 
         private string CleanUp(string baseUrl, HtmlDocument document)
         {
-            string translatedText = string.Empty;
+            StringBuilder translatedText = new StringBuilder();
 
             var divResult = document.DocumentNode.SelectSingleNode("//div[@class='results-found']");
 
@@ -71,10 +72,19 @@ namespace TranslationCenter.Services.Translation.Engines
                         node.Remove();
                 }
 
-                translatedText = divResult?.InnerHtml;
+                links = divResult.SelectNodes("//link");
+                base.UpdateUrlElements(links, "href", baseUrl,
+                    (node) =>
+                    {
+                        var href = node.Attributes["href"]?.Value ?? string.Empty;
+                        if (href.Contains(".css"))
+                            translatedText.AppendLine(node.OuterHtml);
+                    });
+
+                translatedText.AppendLine(divResult?.OuterHtml);
             }
 
-            return translatedText;
+            return translatedText.ToString();
         }
     }
 }
