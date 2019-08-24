@@ -50,5 +50,18 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             nameof(PreviousEngine),
             typeof(TranslateWindowCommands),
             new InputGestureCollection() { new KeyGesture(Key.Up, ModifierKeys.Alt) });
+
+        public static readonly RoutedUICommand SelectLanguageFrom =
+            new RoutedUICommand("SelectLanguageFrom",
+            nameof(SelectLanguageFrom),
+            typeof(TranslateWindowCommands),
+            new InputGestureCollection() { new KeyGesture(Key.F2) });
+
+
+        public static readonly RoutedUICommand SwitchLanguages =
+            new RoutedUICommand("SwitchLanguages",
+            nameof(SwitchLanguages),
+            typeof(TranslateWindowCommands),
+            new InputGestureCollection() { new KeyGesture(Key.F6) });
     }
 }

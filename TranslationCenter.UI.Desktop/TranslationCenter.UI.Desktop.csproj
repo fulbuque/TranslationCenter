@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>translate_icon.ico</ApplicationIcon>
+    <Win32Resource />
+    <AssemblyName>TranslationCenter</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,21 +17,38 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Custom_Icon.png" />
     <None Remove="Resources\EnginesConfig_Icon.png" />
     <None Remove="Resources\Execute_Icon.png" />
+    <None Remove="Resources\Iso_Icon.png" />
     <None Remove="Resources\Languages_Icon.png" />
+    <None Remove="Resources\Refresh_Icon.png" />
+    <None Remove="Resources\Sort_Asc_Icon.png" />
+    <None Remove="Resources\Switch_Icon.png" />
     <None Remove="Resources\translate_icon.ico" />
     <None Remove="Resources\Translate_Icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Custom_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\EnginesConfig_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Execute_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Iso_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Languages_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Sort_Asc_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Switch_Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\translate_icon.ico">
@@ -41,6 +61,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TranslationCenter.Services\TranslationCenter.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Refresh_Icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using TranslationCenter.Services.Country;
 using TranslationCenter.Services.Country.Types.Interfaces;
 using TranslationCenter.Services.Translation;
@@ -24,7 +23,6 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private ILanguage _currentLanguage;
         private ILanguage _currentLanguageFrom;
         private string _currentResult;
-        private bool _isAutoTranslateOnChange = true;
         private SearchProtocol _lastSearchProtocol;
         private Dictionary<string, Dictionary<string, ITranslateResult>> _resultsDictionary;
         private IEnumerable<ILanguage> _selectedLanguages;
@@ -36,40 +34,14 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         {
             AllLanguages = CountryService.Languages.OrderBy(l => l.Name);
             AllAvaliableEngines = TranslationService.GetAvaliableEngines();
+            SaveOrdemList(AllLanguages, l => l.Name);
+            SaveOrdemList(AllAvaliableEngines, l => l.Name);
 
             CurrentLanguageFrom = AllLanguages.FirstOrDefault(l => l.Iso == "de");
             SelectedLanguages = AllLanguages.Where(l => mostUsedIsos.Contains(l.Iso));
             CurrentLanguage = SelectedLanguages.FirstOrDefault(l => l.Iso == "en");
             SelectedEngines = AllAvaliableEngines;
             CurrentEngine = SelectedEngines.FirstOrDefault(e => e.Name == nameof(BingTranslatorEngine));
-        }
-
-        internal void GoToPreviousEngine()
-        {
-            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
-            if (index - 1 >= 0)
-                CurrentEngine = SelectedEngines.ElementAt(index - 1);
-        }
-
-        internal void GoToNextEngine()
-        {
-            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
-            if (index + 1 < SelectedEngines.Count())
-                CurrentEngine = SelectedEngines.ElementAt(index + 1);
-        }
-
-        internal void GoToPreviousLanguage()
-        {
-            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
-            if (index - 1 >= 0)
-                CurrentLanguage = SelectedLanguages.ElementAt(index - 1);
-        }
-
-        internal void GoToNextLanguage()
-        {
-            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
-            if (index + 1 < SelectedLanguages.Count())
-                CurrentLanguage = SelectedLanguages.ElementAt(index + 1);
         }
 
         public IAvaliableEngine[] AllAvaliableEngines { get; }
@@ -83,6 +55,16 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
                 NotifyPropertyChanged();
             }
+        }
+
+        internal void SwitchLanguages()
+        {
+            var currentLanguageFrom = CurrentLanguageFrom;
+            var currentLanguageTo = CurrentLanguage;
+            CurrentLanguageFrom = currentLanguageTo;
+            CurrentLanguage = currentLanguageFrom;
+            SelectedLanguages = SelectedLanguages.Where(l => l != currentLanguageTo).Append(currentLanguageFrom);
+            Translate();
         }
 
         public IAvaliableEngine CurrentEngine
@@ -128,34 +110,35 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
-        public bool IsAutoTranslateOnChange
-        {
-            get => _isAutoTranslateOnChange;
-            set
-            {
-                _isAutoTranslateOnChange = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public IEnumerable<IAvaliableEngine> SelectedEngines
         {
             get => avaliableEngines;
             set
             {
-                avaliableEngines = value;
+                avaliableEngines = OrderBy<IAvaliableEngine>(value, engine=> engine.Name);
                 NotifyPropertyChanged();
             }
         }
 
         public IEnumerable<ILanguage> SelectedLanguages
         {
-            get => _selectedLanguages.OrderBy(l => l.Name);
+            get => _selectedLanguages;
             set
             {
-                _selectedLanguages = value;
+                _selectedLanguages = OrderBy<ILanguage>(value, language => language.Iso);
                 NotifyPropertyChanged();
             }
+        }
+
+        private IEnumerable<T> OrderBy<T>(IEnumerable<T> items, Func<T, string> getIndexer)
+        {
+            if (_ordemListDictionary.TryGetValue(typeof(T), out var orderList)) 
+            {
+                var list = items.Select(item => new { item, order = orderList.IndexOf( getIndexer(item)) }).OrderBy(item => item.order).Select(item => item.item);
+                return list;
+            }
+            return items;
+
         }
 
         public string TextSearch
@@ -165,10 +148,115 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             {
                 _textSearch = value;
                 NotifyPropertyChanged();
-                if (IsAutoTranslateOnChange)
-                    Task.Run(Translate);
-                    //Dispatcher.CurrentDispatcher.BeginInvoke(() => Translate(), DispatcherPriority.Background);
+                Task.Run(Translate);
             }
+        }
+
+        internal void GoToNextEngine()
+        {
+            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
+            if (index + 1 < SelectedEngines.Count())
+                CurrentEngine = SelectedEngines.ElementAt(index + 1);
+        }
+
+        internal void SortLanguagesByName()
+        {
+            SaveOrdemList(AllLanguages.OrderBy(l => l.Name), l => l.Iso);
+            SelectedLanguages = SelectedLanguages;
+        }
+
+        internal void SortLanguagesByIso()
+        {
+            SaveOrdemList(AllLanguages.OrderBy(l => l.Iso), l => l.Iso);
+            SelectedLanguages = SelectedLanguages;
+        }
+
+        internal void SortLanguagesByCustomOrder()
+        {
+            if (_ordemListDictionary.TryGetValue(typeof(ILanguage), out var list) 
+                && _ordemListCustomDictionary.TryGetValue(typeof(ILanguage), out var listCustom))
+            {
+                _ordemListDictionary[typeof(ILanguage)] = listCustom;
+            }
+            SelectedLanguages = SelectedLanguages;
+        }
+
+        internal void SortEnginesByCustomOrder()
+        {
+            if (_ordemListDictionary.TryGetValue(typeof(IAvaliableEngine), out var list)
+                && _ordemListCustomDictionary.TryGetValue(typeof(IAvaliableEngine), out var listCustom))
+            {
+                _ordemListDictionary[typeof(IAvaliableEngine)] = listCustom;
+            }
+            SelectedEngines = SelectedEngines;
+        }
+
+        internal void SortEnginesByName()
+        {
+            SaveOrdemList(AllAvaliableEngines.OrderBy(l => l.Name), l => l.Name);
+            SelectedEngines = SelectedEngines;
+        }
+
+        internal void ChangePositionItem(object target, object source)
+        {
+            if (target.GetType() != source.GetType() || target == source)
+                return;
+
+            if (target is ILanguage languageTarget && source is ILanguage languageSource)
+            {
+                SelectedLanguages = ChangePositionItem<ILanguage>(SelectedLanguages, languageTarget, languageSource, language => language.Iso);
+            }
+            else if (target is IAvaliableEngine engineTarget && source is IAvaliableEngine engineSource)
+            {
+                SelectedEngines = ChangePositionItem<IAvaliableEngine>(SelectedEngines, engineTarget, engineSource, engine => engine.Name);
+                
+            }
+        }
+
+        private Dictionary<Type, System.Collections.IList> _ordemListDictionary = new Dictionary<Type, System.Collections.IList>();
+        private Dictionary<Type, System.Collections.IList> _ordemListCustomDictionary = new Dictionary<Type, System.Collections.IList>();
+
+        private void SaveOrdemList<T>(IEnumerable<T> selectedLanguages, Func<T, string> getIndexer, Dictionary<Type, System.Collections.IList> ordemListCustomDictionary = null)
+        {
+
+            var newlist = selectedLanguages
+                                                .Select((item, index) => new { Indexer = getIndexer(item), Index = index })
+                                                .OrderBy(i => i.Index)
+                                                .Select(i => i.Indexer).ToList();
+
+
+            (ordemListCustomDictionary ?? _ordemListDictionary)[typeof(T)] = newlist;
+        }
+
+        private IEnumerable<T> ChangePositionItem<T>(IEnumerable<T> items, T  target, T source, Func<T, string> getIndexer)
+        {
+            var list = items.ToList();
+            var index = list.IndexOf(target);
+            list.Remove(source);
+            list.Insert(index, source);
+            SaveOrdemList(list, getIndexer);
+            SaveOrdemList(list, getIndexer, _ordemListCustomDictionary);
+            return list;
+        }
+
+        internal void GoToNextLanguage()
+        {
+            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
+            if (index + 1 < SelectedLanguages.Count())
+                CurrentLanguage = SelectedLanguages.ElementAt(index + 1);
+        }
+
+        internal void GoToPreviousEngine()
+        {
+            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
+            if (index - 1 >= 0)
+                CurrentEngine = SelectedEngines.ElementAt(index - 1);
+        }
+        internal void GoToPreviousLanguage()
+        {
+            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
+            if (index - 1 >= 0)
+                CurrentLanguage = SelectedLanguages.ElementAt(index - 1);
         }
         internal void SelectEngines(Window owner)
         {
@@ -237,37 +325,8 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
-        private class SearchProtocol
-        {
-            private string textSearch;
-            private string currentLanguageFrom;
-            private string selectedEngines;
-            private string selectedLanguages;
-
-            public SearchProtocol(string textSearch, ILanguage currentLanguageFrom, IEnumerable<IAvaliableEngine> selectedEngines, IEnumerable<ILanguage> selectedLanguages)
-            {
-                this.textSearch = textSearch;
-                this.currentLanguageFrom = currentLanguageFrom.Iso;
-                this.selectedEngines = string.Join(", ", selectedEngines.OrderBy(e => e.Name).Select(e => e.Name).ToArray());
-                this.selectedLanguages = string.Join(", ", selectedLanguages.OrderBy(e => e.Iso).Select(e => e.Iso).ToArray());
-            }
-
-            public string TextSearch { get => textSearch; }
-
-            public bool Equals(SearchProtocol searchProtocol)
-            {
-                return searchProtocol != null 
-                        && TextSearch == searchProtocol.TextSearch
-                        && selectedEngines == searchProtocol.selectedEngines
-                        && selectedLanguages == searchProtocol.selectedLanguages;
-
-            }
-
-        }
-
         internal void Translate()
         {
-
             translationService.AddEngines(SelectedEngines);
 
             var searchProtocol = new SearchProtocol(TextSearch, CurrentLanguageFrom, SelectedEngines, SelectedLanguages);
@@ -295,7 +354,6 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
 
             SetCurrentResult();
-
         }
 
         private string GetFormattedResult(string contentResult)
@@ -372,8 +430,32 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
             else
             {
-                //Translate();
-                //CurrentResult = string.Empty;
+                CurrentResult = string.Empty;
+            }
+        }
+
+        private class SearchProtocol
+        {
+            private string currentLanguageFrom;
+            private string selectedEngines;
+            private string selectedLanguages;
+            private string textSearch;
+            public SearchProtocol(string textSearch, ILanguage currentLanguageFrom, IEnumerable<IAvaliableEngine> selectedEngines, IEnumerable<ILanguage> selectedLanguages)
+            {
+                this.textSearch = textSearch;
+                this.currentLanguageFrom = currentLanguageFrom.Iso;
+                this.selectedEngines = string.Join(", ", selectedEngines.OrderBy(e => e.Name).Select(e => e.Name).ToArray());
+                this.selectedLanguages = string.Join(", ", selectedLanguages.OrderBy(e => e.Iso).Select(e => e.Iso).ToArray());
+            }
+
+            public string TextSearch { get => textSearch; }
+
+            public bool Equals(SearchProtocol searchProtocol)
+            {
+                return searchProtocol != null
+                        && TextSearch == searchProtocol.TextSearch
+                        && selectedEngines == searchProtocol.selectedEngines
+                        && selectedLanguages == searchProtocol.selectedLanguages;
             }
         }
     }

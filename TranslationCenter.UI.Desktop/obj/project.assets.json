@@ -3415,7 +3415,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
-      "projectName": "TranslationCenter.UI.Desktop",
+      "projectName": "TranslationCenter",
       "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
       "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\obj\\",

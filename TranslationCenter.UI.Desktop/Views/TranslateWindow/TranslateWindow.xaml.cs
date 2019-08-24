@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using TranslationCenter.Services.Country.Types.Interfaces;
+using TranslationCenter.Services.Translation.Types;
 
 namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 {
@@ -35,7 +39,9 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             if (e.Command == TranslateWindowCommands.SelectEngineCommand)
                 model.SelectEngines(this);
             else if (e.Command == TranslateWindowCommands.SelectLanguageCommand)
-                model.SelectLanguages(this);
+                model.SelectLanguages(this);     
+            else if (e.Command == TranslateWindowCommands.SelectLanguageFrom)
+                OpenLanguageFrom();
             else if (e.Command == TranslateWindowCommands.TranslateCommand)
                 model.Translate();
             else if (e.Command == TranslateWindowCommands.NextLanguage)
@@ -45,7 +51,15 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             else if (e.Command == TranslateWindowCommands.NextEngine)
                 model.GoToNextEngine();
             else if (e.Command == TranslateWindowCommands.PreviousEngine)
-                model.GoToPreviousEngine();
+                model.GoToPreviousEngine();            
+            else if (e.Command == TranslateWindowCommands.SwitchLanguages)
+                model.SwitchLanguages();
+        }
+
+        private void OpenLanguageFrom()
+        {
+            cboLanguageFrom.IsDropDownOpen = true;
+            cboLanguageFrom.Focus();
         }
 
         private void Window_Closed(object sender, System.EventArgs e)
@@ -77,6 +91,67 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private void Window_Activated(object sender, EventArgs e)
         {
             txtTextSearch.Focus();
+        }
+
+        private void CboLanguageFrom_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtTextSearch.Focus();
+        }
+
+        private void TabItem_PreviewMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.Source is TabItem tabItem && e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+            {
+                tabItem.IsSelected = true;
+                DragDrop.DoDragDrop(tabItem, tabItem, DragDropEffects.All);
+            }
+        }
+
+         private void TabItem_Drop(object sender, DragEventArgs e)
+        {
+
+            if (e.Source is TabItem tabItemTarget && e.Data.GetData(typeof(TabItem)) is TabItem tabItemSource
+                    && tabItemTarget != tabItemSource)
+            {
+                model.ChangePositionItem(tabItemTarget.DataContext, tabItemSource.DataContext);
+            }
+        }
+
+        private void TabItem_PreviewDragOver(object sender, DragEventArgs e)
+        {
+            if (e.Source is TabItem tabItemTarget && e.Data.GetData(typeof(TabItem)) is TabItem tabItemSource)
+            {
+                if (tabItemTarget == tabItemSource || tabItemTarget.DataContext.GetType() != tabItemSource.DataContext.GetType())
+                {
+                    e.Handled = true;
+                    e.Effects = DragDropEffects.None;
+                }
+            } 
+        }
+
+        private void MnuSortLanguagesByName_Click(object sender, RoutedEventArgs e)
+        {
+            model.SortLanguagesByName();
+        }
+
+        private void MnuSortLanguagesByIso_Click(object sender, RoutedEventArgs e)
+        {
+            model.SortLanguagesByIso();
+        }
+
+        private void MnuSortLanguagesByCustomOrder_Click(object sender, RoutedEventArgs e)
+        {
+            model.SortLanguagesByCustomOrder();
+        }
+
+        private void MnuSortEnginesByName_Click(object sender, RoutedEventArgs e)
+        {
+            model.SortEnginesByName();
+        }
+
+        private void MnuSortEnginesByCustomOrder_Click(object sender, RoutedEventArgs e)
+        {
+            model.SortEnginesByCustomOrder();
         }
     }
 }
