@@ -19,6 +19,8 @@ namespace TranslationCenter.Services.Translation.Engines
                                                              || !supportedLanguages.Contains(TranslationArgs.IsoFrom)
                                                              || !supportedLanguages.Contains(TranslationArgs.IsoTo);
 
+        public override TranslateArgs TranslationArgs { get; protected set; }
+
         protected override string MediaType => "text/html";
 
         protected override string UrlBase => "https://dict.leo.org/";

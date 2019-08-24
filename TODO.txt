@@ -1,0 +1,12 @@
+- Botao de Reversao de linguas
+- Translate on change sempre .. excluir checkbox
+- Guardar visoes
+- Trocar botao translate por Refresh
+- Teclas de atalho .. tooltip
+- Tecla de atalho para acessar o combo de lingua de origem.
+- Icone da aplicacao
+- Trocar o nome do executavel.
+- Botao clear
+- recurso para arrastar e ordenar as listas de lingua e engines
+
+code refactor

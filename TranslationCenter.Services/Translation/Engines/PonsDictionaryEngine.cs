@@ -17,6 +17,7 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected override string UrlBaseAdditional =>
             $"/translate?q={HttpUtility.UrlEncode(TranslationArgs.Text)}&l={TranslationArgs.IsoFrom}{TranslationArgs.IsoTo}&in=&lf=en&qnac=";
+        public override TranslateArgs TranslationArgs { get; protected set; }
 
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace TranslationCenter.Services.Translation.Engines
     public class BingTranslatorEngine : TranslateEngine
     {
         protected override string MediaType => "application/json";
+
+        public override TranslateArgs TranslationArgs { get; protected set; }
 
         protected override string UrlBase => "https://www.bing.com/ttranslatev3?isVertical=1&IG=504D0D4AC9C1430B92775346964CDE30&IID=translator.5026.4";
 
@@ -37,9 +40,14 @@ namespace TranslationCenter.Services.Translation.Engines
                 var result = new JsonSerializer().Deserialize<BingResult[]>(jsonReader)?.FirstOrDefault();
 
                 if (result != null && result.Translations != null)
-                    return result.Translations?.FirstOrDefault().Text;
+                    return CleanUp(result.Translations?.FirstOrDefault().Text);
             }
             return default;
+        }
+
+        private string CleanUp(string text)
+        {
+            return text?.Replace(Environment.NewLine, "<br />");
         }
 
         private class BingResult

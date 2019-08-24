@@ -10,7 +10,10 @@ namespace TranslationCenter.Services.Translation.Engines
     [EngineInfo(EngineCategory.Dictionary, "Collins")]
     public class CollinsDictionaryEngine : TranslateEngine
     {
+        public override TranslateArgs TranslationArgs { get; protected set; }
+
         protected override bool IsTranslateUnsupported => false;
+
         protected override string MediaType => "text/html";
 
         protected override string UrlBase => "https://www.collinsdictionary.com"; // https://www.collinsdictionary.com/dictionary/german-english/schliessen

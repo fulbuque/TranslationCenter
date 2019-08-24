@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,7 +26,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                 var content = model.CurrentResult;
                 if (string.IsNullOrWhiteSpace(content))
                     content = "<HTML />";
-                webBrowserResult.NavigateToString(content);
+                this.Dispatcher.Invoke(() => webBrowserResult.NavigateToString(content), System.Windows.Threading.DispatcherPriority.Normal);
             }
         }
 
@@ -37,6 +38,14 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                 model.SelectLanguages(this);
             else if (e.Command == TranslateWindowCommands.TranslateCommand)
                 model.Translate();
+            else if (e.Command == TranslateWindowCommands.NextLanguage)
+                model.GoToNextLanguage();          
+            else if (e.Command == TranslateWindowCommands.PreviousLanguage)
+                model.GoToPreviousLanguage();
+            else if (e.Command == TranslateWindowCommands.NextEngine)
+                model.GoToNextEngine();
+            else if (e.Command == TranslateWindowCommands.PreviousEngine)
+                model.GoToPreviousEngine();
         }
 
         private void Window_Closed(object sender, System.EventArgs e)
@@ -63,6 +72,11 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             // Silent: Sets or gets a value that indicates whether the object can display dialog boxes.
             // HRESULT IWebBrowser2::get_Silent(VARIANT_BOOL *pbSilent);HRESULT IWebBrowser2::put_Silent(VARIANT_BOOL bSilent);
             obj.GetType().InvokeMember("Silent", BindingFlags.SetProperty, null, obj, new object[] { true });
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            txtTextSearch.Focus();
         }
     }
 }

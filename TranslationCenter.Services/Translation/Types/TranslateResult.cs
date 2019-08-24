@@ -1,16 +1,38 @@
-﻿using TranslationCenter.Services.Translation.Engines;
+﻿using System;
+using TranslationCenter.Services.Translation.Engines;
 
 namespace TranslationCenter.Services.Translation.Types
 {
     internal class TranslateResult : ITranslateResult
     {
-        public TranslateResult(TranslateEngine source, string result)
+
+        private Func<string> _renderAction;
+
+        //public TranslateResult(TranslateEngine source, string result)
+        //{
+        //    Source = source;
+        //    Result = result;
+        //}
+
+        public TranslateResult(TranslateEngine source, Func<string> renderAction)
         {
             Source = source;
-            Result = result;
+            _renderAction = renderAction;
         }
 
-        public string Result { get; }
+        public string Result { get; private set; }
+
         public TranslateEngine Source { get; }
+
+        public bool IsRendered { get; private set; }
+
+        public void Render()
+        {
+            if (!IsRendered)
+            {
+                Result = _renderAction?.Invoke();
+                IsRendered = true;
+            }
+        }
     }
 }

@@ -14,6 +14,8 @@ namespace TranslationCenter.Services.Translation.Engines
         protected override bool IsTranslateUnsupported => false;
         protected override string MediaType => "text/html";
 
+        public override TranslateArgs TranslationArgs { get; protected set; }
+
         protected override string UrlBase => "https://dictionary.reverso.net/"; // https://dictionary.reverso.net/english-german/car
 
         protected override string UrlBaseAdditional =>

@@ -18,6 +18,8 @@ namespace TranslationCenter.Services.Translation.Engines
         protected override string UrlBaseAdditional =>
             $"/{TranslationArgs.LanguageFrom.Name.ToLower()}-{TranslationArgs.LanguageTo.Name.ToLower()}/search?source=auto&query={HttpUtility.UrlEncode(TranslationArgs.Text)}";
 
+        public override TranslateArgs TranslationArgs { get; protected set; }
+
         protected override HttpResponseMessage GetResponseMessage(HttpClient httpClient)
         {
             var task = httpClient.GetAsync("");

@@ -11,6 +11,8 @@ namespace TranslationCenter.Services.Translation.Engines
     [EngineInfo(EngineCategory.Dictionary, "Dict.cc")]
     public class DictCCDictionaryEngine : TranslateEngine
     {
+        public override TranslateArgs TranslationArgs { get; protected set; }
+
         protected override bool IsTranslateUnsupported => false;
         protected override string MediaType => "text/html";
 

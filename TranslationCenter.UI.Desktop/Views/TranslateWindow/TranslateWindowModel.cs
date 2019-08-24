@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using TranslationCenter.Services.Country;
@@ -23,9 +24,9 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private ILanguage _currentLanguage;
         private ILanguage _currentLanguageFrom;
         private string _currentResult;
-        private bool _isAutoTranslateOnChange = false;
+        private bool _isAutoTranslateOnChange = true;
         private SearchProtocol _lastSearchProtocol;
-        private Dictionary<string, Dictionary<string, string>> _resultsDictionary;
+        private Dictionary<string, Dictionary<string, ITranslateResult>> _resultsDictionary;
         private IEnumerable<ILanguage> _selectedLanguages;
         private string _textSearch;
         private IEnumerable<IAvaliableEngine> avaliableEngines;
@@ -41,6 +42,34 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             CurrentLanguage = SelectedLanguages.FirstOrDefault(l => l.Iso == "en");
             SelectedEngines = AllAvaliableEngines;
             CurrentEngine = SelectedEngines.FirstOrDefault(e => e.Name == nameof(BingTranslatorEngine));
+        }
+
+        internal void GoToPreviousEngine()
+        {
+            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
+            if (index - 1 >= 0)
+                CurrentEngine = SelectedEngines.ElementAt(index - 1);
+        }
+
+        internal void GoToNextEngine()
+        {
+            var index = SelectedEngines.ToList().IndexOf(CurrentEngine);
+            if (index + 1 < SelectedEngines.Count())
+                CurrentEngine = SelectedEngines.ElementAt(index + 1);
+        }
+
+        internal void GoToPreviousLanguage()
+        {
+            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
+            if (index - 1 >= 0)
+                CurrentLanguage = SelectedLanguages.ElementAt(index - 1);
+        }
+
+        internal void GoToNextLanguage()
+        {
+            var index = SelectedLanguages.ToList().IndexOf(CurrentLanguage);
+            if (index + 1 < SelectedLanguages.Count())
+                CurrentLanguage = SelectedLanguages.ElementAt(index + 1);
         }
 
         public IAvaliableEngine[] AllAvaliableEngines { get; }
@@ -137,7 +166,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                 _textSearch = value;
                 NotifyPropertyChanged();
                 if (IsAutoTranslateOnChange)
-                    Translate();
+                    Task.Run(Translate);
                     //Dispatcher.CurrentDispatcher.BeginInvoke(() => Translate(), DispatcherPriority.Background);
             }
         }
@@ -169,6 +198,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             if (selectedEngines != null)
             {
                 SelectedEngines = selectedEngines;
+                Translate();
                 if (!SelectedEngines.Contains(CurrentEngine))
                     CurrentEngine = SelectedEngines.FirstOrDefault();
             }
@@ -201,6 +231,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             if (selectedLanguages != null)
             {
                 SelectedLanguages = selectedLanguages;
+                Translate();
                 if (!SelectedLanguages.Contains(CurrentLanguage))
                     CurrentLanguage = SelectedLanguages.FirstOrDefault();
             }
@@ -242,7 +273,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             var searchProtocol = new SearchProtocol(TextSearch, CurrentLanguageFrom, SelectedEngines, SelectedLanguages);
             if (!searchProtocol.Equals(_lastSearchProtocol))
             {
-                _resultsDictionary = new Dictionary<string, Dictionary<string, string>>();
+                _resultsDictionary = new Dictionary<string, Dictionary<string, ITranslateResult>>();
                 _lastSearchProtocol = searchProtocol;
             }
 
@@ -256,10 +287,10 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                 {
                     if (!_resultsDictionary.TryGetValue(result.Source.Name, out var isoTextDic))
                     {
-                        isoTextDic = new Dictionary<string, string>();
+                        isoTextDic = new Dictionary<string, ITranslateResult>();
                         _resultsDictionary[result.Source.Name] = isoTextDic;
                     }
-                    isoTextDic[language.Iso] = result.Result;
+                    isoTextDic[language.Iso] = result;
                 }
             }
 
@@ -334,10 +365,16 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
             if (engineName != null && iso != null && _resultsDictionary != null
                 && _resultsDictionary.TryGetValue(engineName, out var isoDic)
-                && isoDic.TryGetValue(iso, out var text))
-                CurrentResult = text;
+                && isoDic.TryGetValue(iso, out var translateResult))
+            {
+                translateResult.Render();
+                CurrentResult = translateResult.Result;
+            }
             else
-                CurrentResult = string.Empty;
+            {
+                //Translate();
+                //CurrentResult = string.Empty;
+            }
         }
     }
 }

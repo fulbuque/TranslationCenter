@@ -29,7 +29,8 @@ namespace TranslationCenter.Services.Translation.Engines
         public EngineCategory Category => _engineInfo.Category;
         public string Name => GetType().Name;
         public ResultTypes ResultType { get; }
-        public TranslateArgs TranslationArgs { get; private set; }
+        
+        public abstract TranslateArgs TranslationArgs { get; protected set; }
 
         protected abstract string MediaType { get; }
 
@@ -39,26 +40,31 @@ namespace TranslationCenter.Services.Translation.Engines
 
         protected virtual bool IsTranslateUnsupported => false;
 
-        internal ITranslateResult GetTranslate(TranslateArgs args)
+        internal ITranslateResult GetTranslate(TranslateArgs translateArgs, bool renderize = false)
         {
-            TranslationArgs = args;
+            //TranslationArgs = translateArgs;
 
-            var result = GetResponse(GetResponseMessage, GetTranslatedText);
+            var translateResult = new TranslateResult(this, ()=> GetResponse(translateArgs, GetResponseMessage, GetTranslatedText));
 
-            return new TranslateResult(this, result);
+            if (renderize)
+                translateResult.Render();
+
+            return translateResult;
         }
 
         protected abstract HttpResponseMessage GetResponseMessage(HttpClient httpClient);
 
         protected abstract string GetTranslatedText(string response);
 
-        private string GetResponse(GetResponseMessageHandle getResponseMessage,
+        private string GetResponse(TranslateArgs translateArgs, GetResponseMessageHandle getResponseMessage,
                                      GetTranslatedTextHandle getTranslatedText)
         {
+            TranslationArgs = translateArgs;
+
             string translatedText = string.Empty;
 
-            if (IsTranslateUnsupported)
-                return $"Translation not Suported!";
+            //if (IsTranslateUnsupported)
+            //    return $"Translation not Suported!";
 
             using (var client = new HttpClient())
             {
@@ -78,11 +84,16 @@ namespace TranslationCenter.Services.Translation.Engines
                     try
                     {
                         translatedText = getTranslatedText(responseText);
+                        if (string.IsNullOrWhiteSpace(translatedText))
+                            translatedText = $"<strong>Sorry, no results found for {translateArgs.LanguageFrom.Name} -> {translateArgs.LanguageTo.Name}!</strong>";
                     }
                     catch
                     {
                         translatedText = "!Error!";
                     }
+                } else
+                {
+                    translatedText = $"<strong>Sorry, no results found for {translateArgs.LanguageFrom.Name} -> {translateArgs.LanguageTo.Name}!</strong>";
                 }
             }
 

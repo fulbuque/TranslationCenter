@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TranslationCenter.UI.Desktop.Views.TranslateWindow"
         mc:Ignorable="d"
-        Title="Translation Center" Height="450" Width="800" WindowState="Maximized" Closed="Window_Closed">
+        Title="Translation Center" Height="450" Width="800" WindowState="Maximized" Closed="Window_Closed" Activated="Window_Activated">
     <Window.Icon>
         <ImageSource>/Resources/translate_icon.ico</ImageSource>
     </Window.Icon>
@@ -13,6 +13,10 @@
         <CommandBinding Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }" Executed="CommandBinding_Executed" />
         <CommandBinding Command="{x:Static local:TranslateWindowCommands.SelectLanguageCommand }" Executed="CommandBinding_Executed" />
         <CommandBinding Command="{x:Static local:TranslateWindowCommands.TranslateCommand }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.NextLanguage }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.PreviousLanguage }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.NextEngine }" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="{x:Static local:TranslateWindowCommands.PreviousEngine }" Executed="CommandBinding_Executed" />
     </Window.CommandBindings>
     <Grid>
         <Grid.Resources>
@@ -22,7 +26,7 @@
                 <Setter Property="ToolBarTray.IsLocked" Value="True" />
             </Style>
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" MinHeight="150" MaxHeight="500" />
@@ -31,7 +35,7 @@
         </Grid.RowDefinitions>
 
         <DockPanel Grid.Column="0" Background="#f4f4f4" Margin="0,10,0,0">
-            
+
             <DockPanel.Resources>
 
                 <Style TargetType="Image">
@@ -50,7 +54,7 @@
                     <Setter Property="Margin" Value="5,7,8,5" />
                 </Style>
             </DockPanel.Resources>
-            
+
             <ToolBarPanel Grid.Row="0" HorizontalAlignment="Left">
 
                 <Separator Width="100" Height="0" />
@@ -67,9 +71,7 @@
                 </Button>
                 <CheckBox Content="Translate on changes" IsChecked="{Binding IsAutoTranslateOnChange, Mode=TwoWay}" />
             </ToolBarPanel>
-
         </DockPanel>
-        
 
         <Grid Grid.Row="1" Margin="5,0,5,0">
             <Grid.RowDefinitions>
@@ -79,13 +81,12 @@
 
             <Label Grid.Row="0"  VerticalAlignment="Top" HorizontalAlignment="Left" Content="Search Text" Margin="10,-30,0,0" Background="White"  Height="30" Padding="10,5,10,5" FontWeight="Bold" BorderThickness="1,1,1,0" BorderBrush="LightGray" />
 
-            <TextBox  Grid.Row="1" Text="{ Binding TextSearch, Delay=300, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+            <TextBox  Grid.Row="1" x:Name="txtTextSearch" Text="{ Binding TextSearch, Delay=300, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
                       MinLines="4" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Padding="5" AcceptsReturn="True" BorderThickness="1,0,1,1"
                       FontSize="30" />
         </Grid>
 
         <GridSplitter Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="5" />
-
 
         <Grid Grid.Row="3" Margin="5,0,5,0">
 
@@ -94,9 +95,13 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Grid.RowSpan="3">
+            <Grid Grid.Column="0" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-                <Canvas Margin="2,10,0,0">
+                <Canvas Grid.Row="0" Margin="2,10,0,0">
                     <Button Command="{x:Static local:TranslateWindowCommands.SelectEngineCommand }" Height="30" Width="30" ToolTip="Click here to modify the engine list.">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
@@ -115,13 +120,13 @@
                             <ControlTemplate TargetType="Button">
                                 <Grid>
                                     <StackPanel Orientation="Horizontal">
-                                        <Polygon Points= "0,30 30,30, 0,0" Stroke="LightGray" Fill="White" RenderTransformOrigin="0.5,0.5" >
+                                        <Polygon Points= "0,30 30,30, 0,0" Stroke="LightGray" Fill="White" RenderTransformOrigin="0.5,0.5">
                                             <Polygon.RenderTransform>
                                                 <TransformGroup>
-                                                    <ScaleTransform/>
-                                                    <SkewTransform/>
-                                                    <RotateTransform Angle="180"/>
-                                                    <TranslateTransform/>
+                                                    <ScaleTransform />
+                                                    <SkewTransform />
+                                                    <RotateTransform Angle="180" />
+                                                    <TranslateTransform />
                                                 </TransformGroup>
                                             </Polygon.RenderTransform>
                                         </Polygon>
@@ -133,35 +138,32 @@
                     </Button>
                 </Canvas>
 
-
-
-                <TabControl x:Name="tabEngines"
+                <TabControl Grid.Row="1" x:Name="tabEngines"
                             ItemsSource="{ Binding SelectedEngines }" DisplayMemberPath="DisplayName" SelectedValuePath="Name" SelectedItem="{Binding CurrentEngine, Mode=TwoWay}"
                             Margin="0,30,0,0" Padding="0" BorderThickness="1,0,0,0" SelectedIndex="0"  TabStripPlacement="Left">
-                <TabControl.Resources>
-                    <Style TargetType="TabItem">
-                        <Setter Property="ContentTemplate">
-                            <Setter.Value>
-                                <DataTemplate></DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="HeaderTemplate">
-                            <Setter.Value>
-                                <DataTemplate>
-                                    <ContentPresenter Content="{Binding DisplayName}">
-                                        <ContentPresenter.LayoutTransform>
-                                            <RotateTransform Angle="270" />
-                                        </ContentPresenter.LayoutTransform>
-                                    </ContentPresenter>
-                                </DataTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="Padding" Value="7" />
-                    </Style>
-                </TabControl.Resources>
-            </TabControl>
-                
-            </StackPanel>
+                    <TabControl.Resources>
+                        <Style TargetType="TabItem">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate></DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="HeaderTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ContentPresenter Content="{Binding DisplayName}">
+                                            <ContentPresenter.LayoutTransform>
+                                                <RotateTransform Angle="270" />
+                                            </ContentPresenter.LayoutTransform>
+                                        </ContentPresenter>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="7" />
+                        </Style>
+                    </TabControl.Resources>
+                </TabControl>
+            </Grid>
 
             <Grid Grid.Column="1" Margin="0,5,0,0">
                 <Grid.RowDefinitions>
@@ -171,7 +173,7 @@
 
                 <TabControl Grid.Row="0" x:Name="tabLanguages"
                             ItemsSource="{ Binding SelectedLanguages }" DisplayMemberPath="Name" SelectedItem="{Binding CurrentLanguage, Mode=TwoWay}"
-                            Margin="0,3,0,0" Padding="0" BorderThickness="0,1,0,0" SelectedIndex="0" >
+                            Margin="0,3,0,0" Padding="0" BorderThickness="0,1,0,0" SelectedIndex="0">
                     <TabControl.Resources>
                         <Style TargetType="TabItem">
                             <Setter Property="ContentTemplate">
