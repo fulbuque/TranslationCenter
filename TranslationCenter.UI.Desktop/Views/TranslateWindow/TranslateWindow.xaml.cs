@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
-using TranslationCenter.Services.Country.Types.Interfaces;
-using TranslationCenter.Services.Translation.Types;
 
 namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 {
@@ -21,17 +17,23 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             InitializeComponent();
             this.DataContext = model;
             model.PropertyChanged += Model_PropertyChanged;
+            NavigateToCurrentResult();
         }
 
         private void Model_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(model.CurrentResult))
             {
-                var content = model.CurrentResult;
-                if (string.IsNullOrWhiteSpace(content))
-                    content = "<HTML />";
-                this.Dispatcher.Invoke(() => webBrowserResult.NavigateToString(content), System.Windows.Threading.DispatcherPriority.Normal);
+                NavigateToCurrentResult();
             }
+        }
+
+        private void NavigateToCurrentResult()
+        {
+            var content = model.CurrentResult;
+            if (string.IsNullOrWhiteSpace(content))
+                content = "<HTML />";
+            this.Dispatcher.Invoke(() => webBrowserResult.NavigateToString(content), System.Windows.Threading.DispatcherPriority.Normal);
         }
 
         private void CommandBinding_Executed(object sender, System.Windows.Input.ExecutedRoutedEventArgs e)
@@ -39,19 +41,19 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             if (e.Command == TranslateWindowCommands.SelectEngineCommand)
                 model.SelectEngines(this);
             else if (e.Command == TranslateWindowCommands.SelectLanguageCommand)
-                model.SelectLanguages(this);     
+                model.SelectLanguages(this);
             else if (e.Command == TranslateWindowCommands.SelectLanguageFrom)
                 OpenLanguageFrom();
             else if (e.Command == TranslateWindowCommands.TranslateCommand)
                 model.Translate();
             else if (e.Command == TranslateWindowCommands.NextLanguage)
-                model.GoToNextLanguage();          
+                model.GoToNextLanguage();
             else if (e.Command == TranslateWindowCommands.PreviousLanguage)
                 model.GoToPreviousLanguage();
             else if (e.Command == TranslateWindowCommands.NextEngine)
                 model.GoToNextEngine();
             else if (e.Command == TranslateWindowCommands.PreviousEngine)
-                model.GoToPreviousEngine();            
+                model.GoToPreviousEngine();
             else if (e.Command == TranslateWindowCommands.SwitchLanguages)
                 model.SwitchLanguages();
         }
@@ -107,9 +109,8 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
             }
         }
 
-         private void TabItem_Drop(object sender, DragEventArgs e)
+        private void TabItem_Drop(object sender, DragEventArgs e)
         {
-
             if (e.Source is TabItem tabItemTarget && e.Data.GetData(typeof(TabItem)) is TabItem tabItemSource
                     && tabItemTarget != tabItemSource)
             {
@@ -126,7 +127,7 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
                     e.Handled = true;
                     e.Effects = DragDropEffects.None;
                 }
-            } 
+            }
         }
 
         private void MnuSortLanguagesByName_Click(object sender, RoutedEventArgs e)
@@ -152,6 +153,11 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
         private void MnuSortEnginesByCustomOrder_Click(object sender, RoutedEventArgs e)
         {
             model.SortEnginesByCustomOrder();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            model.SaveModelState();
         }
     }
 }

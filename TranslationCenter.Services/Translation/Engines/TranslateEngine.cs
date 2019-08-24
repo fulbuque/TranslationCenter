@@ -42,9 +42,22 @@ namespace TranslationCenter.Services.Translation.Engines
 
         internal ITranslateResult GetTranslate(TranslateArgs translateArgs, bool renderize = false)
         {
-            //TranslationArgs = translateArgs;
+            var translateResult = new TranslateResult(this, ()=> { 
 
-            var translateResult = new TranslateResult(this, ()=> GetResponse(translateArgs, GetResponseMessage, GetTranslatedText));
+                // first attempt
+                var result = GetResponse(translateArgs, GetResponseMessage, GetTranslatedText);
+                
+                if (string.IsNullOrEmpty(result)) // secound attempt
+                {
+                    var newTranslateArgs = new TranslateArgs(translateArgs.IsoTo, translateArgs.IsoFrom, translateArgs.Text);
+                    result = GetResponse(newTranslateArgs, GetResponseMessage, GetTranslatedText);
+                }
+
+                if(string.IsNullOrEmpty(result))
+                    result = $"<strong>Sorry, no results found for {translateArgs.LanguageFrom.Name} -> {translateArgs.LanguageTo.Name}!</strong>";
+
+                return result;
+            });
 
             if (renderize)
                 translateResult.Render();
@@ -84,16 +97,11 @@ namespace TranslationCenter.Services.Translation.Engines
                     try
                     {
                         translatedText = getTranslatedText(responseText);
-                        if (string.IsNullOrWhiteSpace(translatedText))
-                            translatedText = $"<strong>Sorry, no results found for {translateArgs.LanguageFrom.Name} -> {translateArgs.LanguageTo.Name}!</strong>";
                     }
                     catch
                     {
                         translatedText = "!Error!";
                     }
-                } else
-                {
-                    translatedText = $"<strong>Sorry, no results found for {translateArgs.LanguageFrom.Name} -> {translateArgs.LanguageTo.Name}!</strong>";
                 }
             }
 

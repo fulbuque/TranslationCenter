@@ -10,20 +10,38 @@ namespace TranslationCenter.Services.Translation
     {
         private Dictionary<Type, TranslateEngine> _engines = new Dictionary<Type, TranslateEngine>();
 
+
+        private static Dictionary<string, IAvaliableEngine> _avaliableEnginesDictionary;
+
         public static IAvaliableEngine[] GetAvaliableEngines()
         {
-            var type = typeof(TranslateEngine);
-            var assemblyName = type.Assembly.GetName().Name;
 
-            var avaliableEngines = AppDomain.CurrentDomain.GetAssemblies()
-                                    .Where(s => s.GetName().Name == assemblyName)
-                                    .SelectMany(s => s.DefinedTypes)
-                                    .Where(p => type.IsAssignableFrom(p))
-                                    .Where(i => i.Name != type.Name)
-                                    .Select(i => new AvaliableEngine(i))
-                                    .ToArray();
+            if (_avaliableEnginesDictionary == null)
+            {
 
-            return avaliableEngines;
+                var type = typeof(TranslateEngine);
+                var assemblyName = type.Assembly.GetName().Name;
+
+                var avaliableEngines = AppDomain.CurrentDomain.GetAssemblies()
+                                        .Where(s => s.GetName().Name == assemblyName)
+                                        .SelectMany(s => s.DefinedTypes)
+                                        .Where(p => type.IsAssignableFrom(p))
+                                        .Where(i => i.Name != type.Name)
+                                        .Select(i => new AvaliableEngine(i))
+                                        .ToArray();
+
+                _avaliableEnginesDictionary = avaliableEngines.ToDictionary(k => k.Name, v => (IAvaliableEngine)v);
+            }
+
+            return _avaliableEnginesDictionary?.Values?.ToArray() ?? new IAvaliableEngine[] { };
+
+        }
+
+        public static IAvaliableEngine GetAvaliableEngine(string name)
+        {
+            if (_avaliableEnginesDictionary == null) GetAvaliableEngines();
+            _avaliableEnginesDictionary.TryGetValue(name, out var avaliableEngine);
+            return avaliableEngine;
         }
 
         public void AddEngine<EngineType>() where EngineType : TranslateEngine => AddEngineInternal(typeof(EngineType));

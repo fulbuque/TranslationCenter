@@ -37,7 +37,7 @@ namespace TranslationCenter.Services.Translation.Engines
         {
             StringBuilder translatedText = new StringBuilder();
 
-            var divResult = document.DocumentNode.SelectSingleNode("//div[@id='results-tab-dict']");
+            var divResult = document.DocumentNode.SelectSingleNode("//div[@id='results-dict']");
 
             if (divResult != null)
             {
