@@ -299,17 +299,14 @@ namespace TranslationCenter.UI.Desktop.Views.TranslateWindow
 
         internal void SwitchLanguages()
         {
-            var newLanguageFrom = CountryService.GetLanguage(CurrentLanguage.Iso);
-            var newLanguage = CountryService.GetLanguage(CurrentLanguageFrom.Iso);
-
-            var newList = SelectedLanguages.ToList();
-            newList.Remove(CurrentLanguage);
-            newList.Add(newLanguage);
-
-            CurrentLanguageFrom = newLanguageFrom;
+             var newLanguage = CountryService.GetLanguage(CurrentLanguageFrom.Iso);
+            CurrentLanguageFrom = CountryService.GetLanguage(CurrentLanguage.Iso); ;
             CurrentLanguage = newLanguage;
 
-            SelectedLanguages = SelectedLanguages;
+            var newList = SelectedLanguages.ToList();
+            newList.Add(newLanguage);
+
+            SelectedLanguages = newList;
 
             Translate();
         }
