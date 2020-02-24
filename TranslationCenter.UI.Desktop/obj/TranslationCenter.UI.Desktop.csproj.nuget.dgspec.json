@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj": {}
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
         "projectName": "TranslationCenter.Services",
-        "projectPath": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
-        "packagesPath": "C:\\Users\\fla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\obj\\",
+        "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj",
+        "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\fla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fulvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,20 +83,20 @@
         }
       }
     },
-    "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj": {
+    "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
+        "projectUniqueName": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
         "projectName": "TranslationCenter",
-        "projectPath": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
-        "packagesPath": "C:\\Users\\fla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\obj\\",
+        "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\TranslationCenter.UI.Desktop.csproj",
+        "packagesPath": "C:\\Users\\fulvi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.UI.Desktop\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\fla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\fulvi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -109,8 +109,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
-                "projectPath": "C:\\Users\\fla\\Source\\Repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
+              "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj": {
+                "projectPath": "C:\\Users\\fulvi\\source\\repos\\TranslationCenter\\TranslationCenter\\TranslationCenter.Services\\TranslationCenter.Services.csproj"
               }
             }
           }
